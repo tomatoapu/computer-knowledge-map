@@ -1,0 +1,2187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script>window.__errs=[];window.addEventListener('error',function(e){window.__errs.push((e.message||'?')+' @line '+(e.lineno||0))});</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>计算机工科知识地图 · 图 / 板块 / 课程 / 知识点 四层联动</title>
+<style>
+:root{
+  --bg:#f5f7fb;--panel:#fff;--ink:#1f2937;--muted:#667085;--line:#e5eaf2;
+  --accent:#3659a8;--accent-soft:#eaf0ff;--side:#17233f;--side2:#223456;
+  --green:#dff5e8;--yellow:#fff1c9;--purple:#eee7ff;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif;line-height:1.7}
+button,input,select,textarea{font:inherit}
+a{color:var(--accent)}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.brand{font-size:16.5px;font-weight:800;letter-spacing:.2px;cursor:pointer}.brand span{color:var(--accent);font-weight:700}
+.top-actions{display:flex;gap:8px;align-items:center}
+.search-wrap{position:relative}
+.search{width:min(360px,42vw);border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:#fafbfe;outline:none}
+.search:focus{border-color:var(--accent);box-shadow:0 0 0 3px #3659a81a}
+.search-results{position:absolute;top:calc(100% + 6px);right:0;width:min(520px,86vw);max-height:62vh;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 40px #16264a22;padding:6px;z-index:30}
+.sr-group{font-size:11px;color:var(--muted);padding:7px 10px 3px;letter-spacing:1px}
+.sr-item{display:block;width:100%;text-align:left;border:0;background:transparent;border-radius:9px;padding:8px 10px;cursor:pointer}
+.sr-item:hover{background:var(--accent-soft)}
+.sr-item b{font-weight:700}.sr-item small{display:block;color:var(--muted);font-size:12px}
+.btn{border:1px solid var(--line);background:white;border-radius:9px;padding:8px 12px;cursor:pointer;color:var(--ink)}
+.btn:hover{background:var(--accent-soft);border-color:#cad6f8}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:#2c4b91}
+.btn.tiny{padding:4px 9px;font-size:12px;border-radius:7px}
+.layout{display:grid;grid-template-columns:310px minmax(0,1fr);min-height:calc(100vh - 60px)}
+.sidebar{background:var(--side);color:#edf2ff;padding:18px 12px 40px;position:sticky;top:59px;height:calc(100vh - 59px);overflow:auto}
+.side-intro{padding:2px 12px 13px;border-bottom:1px solid #ffffff20;margin-bottom:10px}
+.side-intro strong{display:block;font-size:15.5px}.side-intro small{color:#b9c6e4}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:0 4px 14px}
+.quick button{border:1px solid #ffffff22;background:#ffffff0d;color:#e6edff;border-radius:9px;padding:7px 8px;cursor:pointer;font-size:12.5px;text-align:left}
+.quick button:hover{background:#3659a8}
+.tree{font-size:13px}
+.tree .band-title{font-size:11px;letter-spacing:1.2px;color:#8fa3cd;padding:12px 10px 5px;font-weight:700}
+.tree details{margin:2px 0}
+.tree summary{list-style:none;cursor:pointer;padding:6px 9px;border-radius:8px;display:flex;gap:7px;align-items:center;color:#e8eeff}
+.tree summary::-webkit-details-marker{display:none}
+.tree summary::before{content:"▸";color:#a9bceb;display:inline-block;transition:transform .15s;flex:none}
+.tree details[open]>summary::before{transform:rotate(90deg)}
+.tree summary:hover{background:var(--side2)}
+.tree .children{padding-left:13px;border-left:1px solid #ffffff24;margin-left:14px}
+.tree .leaf,.tree .slink{display:block;width:100%;text-align:left;border:0;background:transparent;color:#cbd6ef;padding:5px 9px;border-radius:7px;cursor:pointer;font-size:12.5px;text-decoration:none}
+.tree .leaf:hover,.tree .slink:hover{background:#2f4c86;color:#fff}
+.tree .leaf.active,.tree .slink.active{background:#3659a8;color:#fff;font-weight:700}
+.tree .done::after{content:" ✓";color:#7ee2a8;font-weight:700}
+.main{padding:26px clamp(16px,3.4vw,50px) 60px;max-width:1220px;width:100%;margin:0 auto}
+.hero{background:linear-gradient(125deg,#1d3159,#3659a8);border-radius:20px;padding:28px clamp(18px,3.6vw,38px);color:white;box-shadow:0 14px 35px #1b31551a}
+.eyebrow{font-size:11.5px;text-transform:uppercase;letter-spacing:1.8px;color:#c9d8ff;font-weight:700}
+.hero h1{font-size:clamp(23px,3.4vw,34px);line-height:1.3;margin:8px 0 12px}
+.hero p{max-width:840px;color:#e0e8ff;margin:0}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.tag{font-size:12px;border:1px solid #ffffff50;border-radius:99px;padding:4px 10px;color:#f2f5ff}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 22px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 16px}
+.stat b{display:block;font-size:21px;color:var(--accent)}.stat span{font-size:12px;color:var(--muted)}
+.content-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,2.6vw,30px);margin-top:16px;box-shadow:0 4px 18px #182b4a06}
+.kicker{font-size:11.5px;color:var(--accent);font-weight:800;letter-spacing:1px}
+h2{font-size:24px;margin:5px 0 8px;line-height:1.35}
+h3{font-size:17.5px;margin:22px 0 8px}
+h4{margin:14px 0 5px;font-size:15px}
+.lead{font-size:15.5px;color:#46536a;margin:0 0 18px}
+.note{border-left:4px solid #7192dc;background:#f2f6ff;padding:11px 14px;border-radius:0 9px 9px 0;margin:14px 0;color:#344665;font-size:14px}
+.warning{border-left-color:#d5a53c;background:#fff8e5}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mini{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fcfdff}
+.mini h3,.mini h4{margin-top:0}.mini p{margin:5px 0;color:#566176;font-size:14px}
+ul,ol{padding-left:22px}li{margin:4px 0}
+.path{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0}
+.path span{background:var(--accent-soft);color:#2f4d91;border-radius:8px;padding:6px 10px;font-size:13px;font-weight:650}
+.path i{color:#94a0b5;font-style:normal}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:10px 0}
+th,td{border-bottom:1px solid var(--line);text-align:left;padding:9px 11px;vertical-align:top}
+th{background:#f5f7fc;color:#34425b}
+.footer{font-size:12px;color:#7b8495;text-align:center;padding:26px 0}
+.hide{display:none!important}
+mark{background:#fff0b3;border-radius:3px;padding:0 2px}
+.crumb{font-size:12.5px;color:var(--muted);margin-bottom:6px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.crumb a{text-decoration:none;color:var(--accent)}
+.badge{display:inline-block;font-size:11.5px;border-radius:99px;padding:2px 9px;font-weight:700;border:1px solid transparent;white-space:nowrap}
+.badge.t-module{background:#eef3ff;color:#33518f;border-color:#cddbfa}
+.badge.t-course{background:#e9f7ef;color:#1c7a45;border-color:#c4e8d3}
+.badge.t-topic{background:#f4f0ff;color:#6440b6;border-color:#ddd2fb}
+.badge.t-domain{background:#fff3e6;color:#a35c10;border-color:#f5dcc0}
+.origin{display:inline-block;font-size:11px;border-radius:6px;padding:1px 7px;border:1px dashed #b9c3d6;color:#5c6a83;background:#f7f9fc;white-space:nowrap}
+.origin.o-orig{border-color:#9ec3a8;color:#31704a;background:#f2fbf5}
+.origin.o-infer{border-color:#dcc38c;color:#8a6520;background:#fffaf0}
+.origin.o-add{border-color:#a9bceb;color:#33518f;background:#f4f7ff}
+.rtype{display:inline-block;font-size:11.5px;border-radius:99px;padding:1px 9px;color:#fff;font-weight:700;white-space:nowrap}
+.chip{display:inline-block;background:#eef2f8;border-radius:7px;padding:3px 9px;font-size:12.5px;color:#3f4d68;margin:2px 4px 2px 0;border:1px solid #e2e8f4;text-decoration:none;cursor:pointer}
+.chip:hover{background:var(--accent-soft);border-color:#cad6f8}
+.chip.done{background:#eefbf3;border-color:#c4e8d3;color:#1c7a45}
+.rel-row{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:9px;align-items:center;border:1px solid var(--line);border-radius:11px;padding:9px 11px;background:#fcfdff;margin:7px 0}
+.rel-row .side{font-size:13.5px;font-weight:650;color:#2b3a55}
+.rel-row .side small{display:block;font-weight:400;color:var(--muted);font-size:11.5px}
+.rel-note{font-size:12.5px;color:#4c5a72;margin:2px 0 0}
+.fsvg{width:100%;height:auto;display:block;background:#fbfcff;border:1px solid var(--line);border-radius:14px}
+.fsvg .fnode{cursor:pointer}
+.fsvg .fnode rect{transition:filter .15s,stroke-width .15s}
+.fsvg .fnode:hover rect{filter:drop-shadow(0 4px 10px #1b315533);stroke-width:2.4}
+.fsvg .ft{font-size:14px;font-weight:800;fill:#1f2937;pointer-events:none}
+.fsvg .fs{font-size:11.5px;fill:#54637d;pointer-events:none}
+.fsvg .fedge{cursor:pointer}
+.fsvg .fedge path{fill:none;stroke-width:1.8}
+.fsvg .fedge:hover path{stroke-width:3}
+.fsvg .felab{font-size:11.5px;font-weight:700;pointer-events:none;paint-order:stroke;stroke:#fbfcff;stroke-width:4px;stroke-linejoin:round}
+.frame-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 16px}
+.frame-tabs button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:7px 13px;cursor:pointer;font-size:13px}
+.frame-tabs button:hover{background:var(--accent-soft)}
+.frame-tabs button.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12.5px;color:#4c5a72;margin:10px 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:22px;height:0;border-top:3px solid #999;border-radius:2px}
+.legend i.dash{border-top-style:dashed}
+.bar{height:9px;border-radius:99px;background:#e9edf6;overflow:hidden;margin:4px 0}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,#4d7ee8,#2fbf87);border-radius:99px}
+.kv{font-size:13.5px;color:#46536a;margin:3px 0}
+.kv b{color:#26344e}
+.ta{width:100%;min-height:120px;border:1px solid var(--line);border-radius:10px;padding:10px;font-family:Consolas,Monaco,monospace;font-size:12.5px;background:#fbfcff}
+.role{display:flex;gap:8px;align-items:center;font-size:12.5px;color:#4c5a72;margin:6px 0;flex-wrap:wrap}
+.section-title{display:flex;align-items:center;gap:9px;margin:22px 0 6px}
+.section-title h3{margin:0}
+.subtle{color:var(--muted);font-size:12.5px}
+.sel{display:block;width:100%;padding:10px;margin:6px 0 14px;border:1px solid var(--line);border-radius:8px;background:#fff}
+.inp{display:block;width:100%;padding:10px;margin:6px 0 14px;border:1px solid var(--line);border-radius:8px}
+pre.out{white-space:pre-wrap;background:#f5f7fc;padding:14px;border-radius:10px;min-height:45px;font-family:inherit;font-size:13.5px;margin:10px 0 0}
+.chk{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;cursor:pointer;user-select:none}
+.chk input{width:16px;height:16px}
+@media(max-width:900px){
+ .layout{grid-template-columns:1fr}.sidebar{position:relative;top:auto;height:auto;max-height:46vh}
+ .topbar{padding:10px 12px}.brand{font-size:14.5px}.search{width:52vw}
+ .main{padding:16px 12px 40px}.stats{grid-template-columns:1fr 1fr}.grid2,.grid3{grid-template-columns:1fr}
+ .rel-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand" id="brand">计算机工科知识地图 <span>· 图 / 板块 / 课程 / 知识点</span></div>
+  <div class="top-actions">
+    <div class="search-wrap">
+      <input id="search" class="search" type="search" placeholder="搜索课程 / 知识点 / 关系：编译器、DSP、傅里叶、先修…">
+      <div id="searchResults" class="search-results hide"></div>
+    </div>
+    <button class="btn" id="expandAll">展开目录</button>
+    <button class="btn" id="collapseAll">收起目录</button>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="side-intro"><strong>知识目录</strong><small>图 → 板块 → 课程 → 知识点，四层双向联动</small></div>
+    <div class="quick" id="quickNav"></div>
+    <nav id="tree" class="tree" aria-label="知识目录"></nav>
+  </aside>
+  <main class="main" id="view"></main>
+</div>
+<script>
+/* ==================================================================
+   数据区（KB-DATA）：整块可交给 AI 扩充
+   节点 type：module 板块 / course 课程 / topic 知识点 / domain 学科总节点
+   关系 type：compose 组成 · layer 层级 · prereq 先修 · impl 实现 ·
+             apply 应用 · cross 交叉 · contrast 对比
+   来源 origin：orig 原图表达 · infer 合理推断 · add 新增补充
+   ================================================================== */
+/* KB-DATA-START */
+const KB_MODULES=[
+/* ============ 基础层：两大地基 + 数学 ============ */
+{id:"m.math",type:"module",title:"数学与计算理论",short:"数学",band:"base",origin:"orig",
+ tags:["数学","理论"],
+ summary:"数学提供描述问题、分析算法、建立模型和证明结论的工具。不是每个方向都要同时精通全部数学，但离散数学与逻辑对计算机基础尤其重要。\n\n在全景图中，数学基础位于信号与系统一路的最底层（先修关系），离散数学与逻辑则位于数字逻辑、算法与编译器一路的最底层。",
+ points:["数学基础：微积分、线性代数、概率统计、数值计算——公共地基","进阶数学：复变函数、实变函数、泛函分析、调和分析——信号与系统一路的纵深","离散数学与逻辑、自动机与形式语言、算法分析与计算复杂性——计算的理论边界"]},
+{id:"m.signal",type:"module",title:"信号与系统（信息处理链）",short:"信号与系统",band:"base",origin:"add",
+ tags:["信号","数学","AI"],
+ summary:"这是全图的第二条地基：信息如何被数学地描述、变换与处理。\n\n主干来自框架图“信号与系统及其后续课程关系”：数学基础 → 信号与系统 → 数字信号处理 → 数字图像处理 / 语音与音频处理 / 现代信号处理 / 与 AI 的交叉；旁支还有随机信号分析、自动控制原理 → 现代控制理论。补充图进一步给出数学一侧的链条：微积分、线性代数 → 实变函数 → 泛函分析 → 调和分析，以及微积分 → 复变函数 → 调和分析。",
+ points:["底层：高等数学、线性代数、概率统计、复变函数等数学工具（先修关系）","主干：信号与系统（连续/离散信号、LTI 系统、傅里叶与拉普拉斯/Z 变换）→ 数字信号处理（采样、DFT/FFT、数字滤波器）","去向：图像、语音、现代信号处理、控制理论，以及与 AI 的交叉（交叉关系，不是简单的上下级）"],
+ source:"框架图《信号与系统及其后续课程关系》；补充图：Oppenheim《信号与系统》后续课程链、数学基础链"},
+{id:"m.digital",type:"module",title:"数字系统：数字逻辑与计算机硬件",short:"数字系统",band:"base",origin:"orig",
+ tags:["硬件","数字逻辑","体系结构"],
+ summary:"硬件分支关注信息如何被物理表示、数字电路如何工作，以及处理器怎样执行指令。它可以按器件—电路—逻辑—功能模块—系统逐步理解。\n\n这是全图的第一条地基：框架图给出“硬件实现层级”（器件级 → 电路级 → 逻辑级 → 功能模块级 → 系统级）与对应的课程链（数字系统 → 计算机组成原理 → 指令集架构/处理器执行 → 汇编语言/底层程序 → 操作系统/编译器/运行时 → 计算机体系结构/嵌入式系统/FPGA 与 HDL），底部还给出软件执行路径（高级语言程序 → 编译器/解释器 → 机器指令 → 处理器与运行时执行）。",
+ points:["硬件实现层级：器件级 → 电路级 → 逻辑级 → 功能模块级 → 系统级（组成关系逐级向上）","课程链：数字系统 → 计算机组成原理 → 指令集架构 → 汇编/底层程序 → 操作系统/编译器/运行时（先修关系）","软硬件接口：ISA 是软件与处理器之间的桥；CPU 之内继续向下到数字逻辑、电路、晶体管（实现关系）"],
+ source:"框架图《数字系统与计算机系统的层级关系》；补充图：计算机系统 → CPU → 功能模块 → 数字逻辑 → 电路 → 晶体管"},
+{id:"m.algo",type:"module",title:"算法与数据结构",short:"算法",band:"core",origin:"orig",
+ tags:["算法","数据结构"],
+ summary:"数据结构组织数据，算法规定解决问题的步骤。算法不是某一种编程语言的专属内容，同一个算法可以用 C、C++、Python 等语言实现。\n\n在全景图中，它与硬件、软件并列为计算机科学的三大支柱之一，向上直接支撑 AI（AI 的算法与模型就建立在这套算法基础之上），向下依赖数学与离散结构。",
+ points:["数据结构：数组、链表、栈、队列、哈希表、树、堆、图","算法设计：排序、查找、递归、分治、贪心、动态规划、图算法","代价与正确性：复杂度分析、不变量、正确性证明"]},
+{id:"m.programming",type:"module",title:"程序设计与编程语言",short:"程序设计",band:"core",origin:"orig",
+ tags:["编程","语言"],
+ summary:"程序设计关注如何把问题表达成计算步骤；编程语言则规定程序可以使用哪些语法和语义。语言之间的差别不只是语法，也包括类型、内存和执行模型。\n\n补充图把它拆成三个角度：软件层级（应用软件 / 系统软件）、软件结构（模块·类·函数 / 算法·数据）、软件实现（编译·解释 / 运行时）；再由“程序设计”向下分为编程语言（C/C++/Python）、数据结构、算法。",
+ points:["编程基础与语言机制：变量、类型、指针、作用域、类型系统、内存管理","程序组织：模块、接口、抽象、复用、依赖管理","范式与工具：过程式、面向对象、函数式；编译器、调试器、版本控制、构建工具"]},
+{id:"m.systems",type:"module",title:"操作系统、编译器与运行时",short:"系统软件",band:"core",origin:"orig",
+ tags:["操作系统","编译器","运行时"],
+ summary:"系统软件为程序提供运行环境或把程序转换为可执行形式。操作系统、编译器、解释器、虚拟机虽然有关联，但职责不同。\n\n在框架图中，这一层正好接在“汇编语言/底层程序”之上：操作系统、编译器、运行时是硬件之上第一个完整意义上的软件层，它同时依赖数字系统给出的 ISA，又为所有应用提供基础。",
+ points:["操作系统：进程与线程、调度、虚拟内存、文件系统、系统调用","编译原理：词法、语法、语义、中间表示 IR、优化、目标代码生成","运行时与工具链：解释器、虚拟机、垃圾回收、汇编/链接/加载、程序分析"]},
+/* ============ 应用与系统层 ============ */
+{id:"m.data",type:"module",title:"数据、文件与数据库",short:"数据",band:"upper",origin:"orig",
+ tags:["数据库","数据工程"],
+ summary:"数据分支研究数据如何表示、保存、组织、查询、传输和分析。数据库是数据管理的重要领域，但并不是所有数据都必须存入数据库。\n\n它与算法（索引、查询优化用到数据结构与算法）、系统软件（事务、并发、恢复依赖操作系统与存储）以及 AI（数据是模型训练的原料）都有交叉关系。"},
+{id:"m.network",type:"module",title:"计算机网络与分布式系统",short:"网络",band:"upper",origin:"orig",
+ tags:["网络","分布式"],
+ summary:"网络让独立设备交换信息；分布式系统进一步研究多个计算节点如何协作，并面对延迟、故障和数据一致性等问题。\n\n它建立在操作系统之上（进程、套接字、并发），并被云计算、分布式 AI 训练、大型软件系统普遍使用。"},
+{id:"m.engineering",type:"module",title:"软件工程、测试与安全",short:"软件工程",band:"upper",origin:"orig",
+ tags:["工程","测试","安全"],
+ summary:"软件工程关注如何可靠地构建和维护软件；测试、安全与质量不是最后才补上的装饰，而应贯穿需求、设计、编码和部署。\n\n它与程序设计和系统软件是交叉关系：工程方法用来组织代码与团队，而安全又直接建立在操作系统、编译器和网络的知识之上。"},
+{id:"m.ai",type:"module",title:"人工智能",short:"AI",band:"upper",origin:"orig",
+ tags:["AI","机器学习","深度学习"],
+ summary:"人工智能不是孤立于计算机基础之外的分支。它大量依赖数学、算法、数据、硬件和软件系统，同时又形成了自己的模型、训练和评估方法。\n\n框架图把它画成三根柱子：算法与模型（机器学习、深度学习、其他算法与模型）、软件与系统（AI 系统、模型训练系统、推理系统、AI 应用）、计算硬件（CPU、GPU、TPU/专用加速器）。它与硬件、软件、算法三者都是双向的交叉/支撑关系——这是理解 AI 的关键：AI 不是“上面一层”，而是横跨整张图的一条线。",
+ points:["算法与模型：机器学习、深度学习、其他算法与模型（依赖线性代数、概率统计、优化与算法基础）","软件与系统：AI 系统、模型训练系统、推理系统、AI 应用（属于软件与系统，不是算法本身）","计算硬件：CPU、GPU、TPU/专用加速器（AI 反过来推动硬件设计）"]},
+{id:"m.sysapp",type:"module",title:"计算机系统与应用场景",short:"系统与应用",band:"upper",origin:"orig",
+ tags:["系统","应用"],
+ summary:"“计算机系统”通常指硬件、软件、数据和接口协同工作的整体，不是排在硬件下面的一层。不同系统类型也会重叠。\n\n在全景图中，计算机系统由硬件 + 软件 + 算法协同工作构成，向上支撑计算机视觉、自然语言处理、机器人、嵌入式、高性能计算等应用领域。"},
+/* ============ 视角与规划 ============ */
+{id:"m.maps",type:"module",title:"用不同地图理解同一个概念",short:"多视角",band:"meta",origin:"orig",
+ tags:["方法论"],
+ summary:"同一个概念可以同时属于多个视角。不要强行把所有知识塞进唯一的一棵树；先判断自己正在回答哪一种问题。\n\n本页的四层导航（图 → 板块 → 课程 → 知识点）只是其中一种切法；下面六种“地图”可以套在任何节点上使用。"},
+{id:"m.levels",type:"module",title:"核心基础—核心框架—实验平台",short:"三层视角",band:"meta",origin:"orig",
+ tags:["方法论"],
+ summary:"这是一种组织学习内容的实用视角，不是唯一的学科分类标准。核心基础关注理论依据，核心框架关注专业原理与系统结构，实验平台关注实现、验证与测量。三者会反复互动，不是只能单向从上到下学习。"},
+{id:"m.personal",type:"module",title:"个人规划：学习、研究、就业",short:"个人规划",band:"meta",origin:"orig",
+ tags:["规划"],
+ summary:"个人规划要把兴趣、能力、时间、学校资源、升学目标与就业出口放在一起评估。不要只根据学科在知识地图中的位置判断性价比，也不要因为学校层次就提前排除某个方向。"}
+];
+const KB_COURSES=[
+/* ---------- 数学与计算理论 ---------- */
+{id:"c.mathbase",type:"course",title:"数学基础（高等数学 · 线性代数 · 概率统计）",short:"数学基础",parent:"m.math",origin:"orig",
+ summary:"微积分：变化率、极限、积分；线性代数：向量、矩阵、线性变换；概率统计：随机变量、分布、估计与检验；数值计算：用有限精度计算近似结果。\n\n它是整个信号与系统一路的最底层先修：框架图中“数学基础”位于信号与系统之上（先修关系），补充图进一步把它拆成微积分与线性代数两条入口。",
+ points:["微积分 → 复变函数 / 实变函数 → 泛函分析 → 调和分析（补充图的数学链）","线性代数、概率统计 → 信号与系统、数字信号处理、机器学习共同使用","数值计算关注有限精度下的近似与误差"]},
+{id:"c.complex",type:"course",title:"复变函数",short:"复变",parent:"m.math",origin:"add",
+ summary:"复变量函数的分析工具：解析函数、柯西积分、级数展开、留数。\n\n补充图把它画成微积分的一条去向：微积分 → 复变函数 → 调和分析。在信号与系统中，拉普拉斯变换与 Z 变换的分析方法直接建立在这套工具上。",
+ source:"补充图：数学基础链（B 站课程结构截图）"},
+{id:"c.real",type:"course",title:"实变函数",short:"实变",parent:"m.math",origin:"add",
+ summary:"测度与积分理论：把微积分的结论推广到更一般的函数类，回答“什么样的函数可以积分、极限何时能交换”。\n\n补充图：微积分 → 实变函数 → 泛函分析。它也是概率论严格化的基础。",
+ source:"补充图：数学基础链"},
+{id:"c.functional",type:"course",title:"泛函分析",short:"泛函",parent:"m.math",origin:"add",
+ summary:"研究函数空间与算子（内积空间、希尔伯特空间、有界算子等），是信号分析、最优化、数值方法与量子力学的共同语言。\n\n补充图：线性代数、实变函数 → 泛函分析 → 调和分析。图中的箭头是<b>先修关系</b>，不是组成关系。",
+ source:"补充图：数学基础链"},
+{id:"c.harmonic",type:"course",title:"调和分析",short:"调和分析",parent:"m.math",origin:"add",
+ summary:"傅里叶分析的现代形式：傅里叶级数与变换、时间-频率分析、小波。\n\n它与信号与系统是<b>交叉支撑</b>关系：调和分析提供数学工具，信号与系统提供工程对象与解释。补充图中，泛函分析与复变函数都汇入调和分析。",
+ source:"补充图：数学基础链"},
+{id:"c.discrete",type:"course",title:"离散数学与逻辑",short:"离散数学",parent:"m.math",origin:"orig",
+ summary:"集合、关系、函数、组合计数、图论、命题逻辑、谓词逻辑、证明方法。它们常用于算法、数据库、程序正确性和形式化方法。\n\n它是数字逻辑（布尔代数）、算法分析、自动机与编译原理的共同先修。"},
+{id:"c.automata",type:"course",title:"自动机与形式语言",short:"自动机",parent:"m.math",origin:"orig",
+ summary:"正则表达式与有限自动机、上下文无关文法、下推自动机、图灵机。它们帮助解释语言识别、编译器和可计算性的边界。"},
+{id:"c.complexity",type:"course",title:"算法分析与计算复杂性",short:"复杂性",parent:"m.math",origin:"orig",
+ summary:"时间复杂度、空间复杂度、渐近符号、可计算性、P/NP 等复杂性概念。它们回答“能不能算”以及“算起来有多贵”。"},
+/* ---------- 信号与系统（信息处理链） ---------- */
+{id:"c.signals",type:"course",title:"信号与系统",short:"信号与系统",parent:"m.signal",origin:"add",
+ summary:"连续/离散信号、线性时不变系统、傅里叶分析、拉普拉斯变换与 Z 变换等。\n\n它是信息处理链的枢纽：向上承接数学基础（先修），向下分出数字信号处理、自动控制原理等方向。框架图中，信号与系统与数字信号处理之间标注的是“交叉应用”（虚线），与后续课程之间才是先修关系。",
+ points:["信号分类：连续/离散、周期/非周期、能量/功率","LTI 系统：卷积、冲激响应、稳定性与因果性","变换工具：傅里叶级数/变换、拉普拉斯变换、Z 变换"],
+ source:"框架图《信号与系统及其后续课程关系》；Oppenheim《信号与系统》"},
+{id:"c.dsp",type:"course",title:"数字信号处理",short:"DSP",parent:"m.signal",origin:"add",
+ summary:"采样与重建、DFT/FFT、数字滤波器、频谱分析等。\n\n它是信号与系统之后的第一个专门方向，也是数字图像处理、语音与音频处理、现代信号处理、随机信号分析共同的先修课。",
+ points:["采样定理与重建、混叠","DFT / FFT 与快速卷积","FIR / IIR 数字滤波器设计、频谱分析"]},
+{id:"c.random_sig",type:"course",title:"随机信号分析",short:"随机信号",parent:"m.signal",origin:"add",
+ summary:"随机信号与随机过程、相关分析、功率谱密度。补充图把这条线画成：数字信号处理 → 随机信号分析 → 现代信号处理。\n\n本站把“随机信号”的完整内容集中在这一门课，现代信号处理课程只保留谱估计、自适应滤波等后续主题，避免同一知识点在多个目录里重复创建。",
+ source:"补充图：信号处理后续课程链"},
+{id:"c.dip",type:"course",title:"数字图像处理",short:"图像处理",parent:"m.signal",origin:"add",
+ summary:"图像增强、滤波、边缘检测、图像分割等。\n\n它由数字信号处理直接长出（先修），同时与 AI 的计算机视觉方向高度交叉：传统方法与深度学习方法常常混用。"},
+{id:"c.speech",type:"course",title:"语音与音频处理",short:"语音处理",parent:"m.signal",origin:"add",
+ summary:"音频采样、频谱分析、语音特征、语音识别等。\n\n与数字图像处理并列，是数字信号处理在“声音”这一类信号上的应用；语音识别同时又属于 AI 的语音子领域（交叉关系）。"},
+{id:"c.mordsp",type:"course",title:"现代信号处理",short:"现代信号处理",parent:"m.signal",origin:"add",
+ summary:"谱估计、自适应滤波、统计信号处理等（框架图还标出“随机信号”，本站已将其独立为随机信号分析课程）。\n\n它建立在数字信号处理与随机信号分析之上，并向阵列信号处理、雷达与通信等方向延伸。"},
+{id:"c.sig_ai",type:"course",title:"信号处理与 AI 的交叉",short:"信号 × AI",parent:"m.signal",origin:"add",
+ summary:"信号处理为机器学习提供特征、变换与预处理工具；机器学习反过来改进滤波、重建、识别等任务。框架图在这个节点下列出：机器学习、深度学习、计算机视觉等。\n\n它与本站人工智能板块的课程是<b>交叉关系</b>（虚线双向），而不是谁包含谁。",
+ points:["特征与变换：频谱、时频图、小波作为模型输入","用深度模型替代或增强传统滤波器与分割算法","语音、图像、雷达等具体任务中的结合方式"]},
+{id:"c.control",type:"course",title:"自动控制原理",short:"自控原理",parent:"m.signal",origin:"add",
+ summary:"系统建模、反馈、稳定性判据、根轨迹与频域控制器设计。\n\n补充图把自动控制原理画成信号与系统的一条去向：信号与系统 → 自动控制原理 → 现代控制理论。古典控制理论大量使用拉普拉斯变换与频域方法。",
+ source:"补充图：信号处理后续课程链"},
+{id:"c.modcontrol",type:"course",title:"现代控制理论",short:"现代控制",parent:"m.signal",origin:"add",
+ summary:"状态空间方法、能控性与能观性、极点配置、最优控制与鲁棒控制。\n\n它由自动控制原理延伸而来（先修），并与线性代数的关系比古典控制理论更紧密。"},
+{id:"c.comm",type:"course",title:"通信原理",short:"通信",parent:"m.signal",origin:"add",
+ summary:"调制与解调、信道与噪声、数字通信基础、信道编码。\n\n它是信号与系统在“传输信息”方向的直接应用（先修关系）。补充资料提示：通信类专业（电子信息工程、通信工程、信息对抗技术）比计算机类专业用到更多数学，因此这条路对数学基础的要求更深。",
+ source:"补充图：专业与学院结构参考"},
+/* ---------- 数字系统：数字逻辑与计算机硬件 ---------- */
+{id:"c.diglogic",type:"course",title:"数字逻辑与数字电路（数字系统）",short:"数字逻辑",parent:"m.digital",origin:"orig",
+ summary:"布尔代数、逻辑门、组合逻辑、时序逻辑、触发器、寄存器、计数器、有限状态机。组合逻辑主要由当前输入决定输出；时序逻辑还与状态有关。\n\n它是数字系统课程链的第一环，也对应硬件实现层级中的“逻辑级”。",
+ points:["组合逻辑：真值表、卡诺图、加法器、译码器","时序逻辑：锁存器/触发器、寄存器、计数器、有限状态机","与器件级、电路级的联系通过实现关系表达：逻辑由电路实现，电路由器件实现"]},
+{id:"c.semiconductor",type:"course",title:"半导体器件与微电子基础",short:"器件",parent:"m.digital",origin:"add",
+ summary:"半导体物理基础、PN 结、晶体管与 MOS 管、器件特性与集成电路工艺简介。\n\n它对应硬件实现层级里最底部的“器件级”（典型概念：MOS 管、晶体管），是微电子科学与工程、集成电路方向的核心内容。本站只把它放在地图的底端作为入口，不展开工艺细节。"},
+{id:"c.data_rep",type:"course",title:"数制与数据表示",short:"数据表示",parent:"m.digital",origin:"orig",
+ summary:"二进制、十六进制、整数编码、补码、浮点数、字符编码、溢出与精度。程序中的数据最终都需要某种表示方式。\n\n它同时是硬件与软件的交界知识：软件里的类型最终要落到硬件能处理的位模式上。"},
+{id:"c.comp_org",type:"course",title:"计算机组成原理",short:"组成原理",parent:"m.digital",origin:"orig",
+ summary:"CPU、控制器、运算器/ALU、寄存器、主存、缓存、总线、输入输出设备。学习数据通路和控制器如何协作完成指令。\n\n在硬件实现层级中，它对应“功能模块级 → 系统级”：ALU、控制器、寄存器是功能模块，CPU/存储器/总线/输入输出构成系统级。",
+ points:["功能模块：ALU、控制器、寄存器堆、计数器","RTL 与数据通路：模块如何连接成一条能执行指令的通路","系统级：CPU、存储器、总线、I/O 的组织"]},
+{id:"c.rtl",type:"course",title:"RTL 与数据通路",short:"RTL",parent:"m.digital",origin:"add",
+ summary:"寄存器传输级（RTL）描述与数据通路设计：把功能模块连接成可以按时序执行指令的通路。\n\n补充图把它画在“功能模块（ALU/控制器/寄存器）”和“数字逻辑（组合/时序）之间”：向上是模块级，向下是逻辑级，两者之间是组成/实现关系。",
+ source:"补充图：计算机系统 → 功能模块 → RTL/数据通路 → 数字逻辑 → 电路 → 晶体管"},
+{id:"c.isa",type:"course",title:"指令集与处理器执行（ISA）",short:"ISA",parent:"m.digital",origin:"orig",
+ summary:"指令集架构（ISA）、取指、译码、执行、访存、写回、异常、中断、流水线、并行处理。ISA 是软件与处理器之间的重要接口。\n\n它也是“连接软件和硬件的桥”的关键一层：编译器/解释器生成机器指令，机器指令由 ISA 定义，ISA 由 CPU 实现，CPU 由数字逻辑与电路实现。",
+ points:["指令格式与寻址方式","取指-译码-执行-访存-写回流程、异常与中断","流水线与并行处理"]},
+{id:"c.asm",type:"course",title:"汇编语言与底层程序",short:"汇编",parent:"m.digital",origin:"add",
+ summary:"汇编指令、寻址方式、调用约定、栈与寄存器的使用；汇编器把汇编指令翻译成机器码。\n\n框架图把它放在 ISA 之上、操作系统与编译器之下：它既是“人能读的机器指令”，也是链接器、加载器和操作系统理解程序的层次。",
+ source:"框架图《数字系统与计算机系统的层级关系》课程链"},
+{id:"c.storage",type:"course",title:"存储层次",short:"存储",parent:"m.digital",origin:"orig",
+ summary:"寄存器、缓存、主存、SSD/HDD 等在速度、容量、成本上的差异；局部性原理与缓存命中。\n\n它是硬件结构与程序性能的交汇点：算法与代码的写法会直接改变缓存命中率。"},
+{id:"c.arch",type:"course",title:"计算机体系结构",short:"体系结构",parent:"m.digital",origin:"add",
+ summary:"在组成原理之上，研究“怎样把处理器与存储系统做得更快、更省”：量化分析方法、流水线、指令级并行、存储层次优化、多核与并行体系结构。\n\n框架图把它画在课程链的最右端（计算机体系结构 / 嵌入式系统 / FPGA 与 HDL），它需要操作系统与组成原理作为先修。",
+ source:"框架图《数字系统与计算机系统的层级关系》课程链"},
+{id:"c.fpga",type:"course",title:"FPGA 与硬件描述语言",short:"FPGA",parent:"m.digital",origin:"orig",
+ summary:"FPGA 是可配置的数字硬件平台；Verilog/VHDL 用于描述电路行为或结构。它们与普通应用软件不是同一类对象。\n\n注意区分（对比关系）：写 HDL 是在描述硬件结构，写软件是在描述执行步骤；两者都可以“编程”，但不是同一类工作。"},
+{id:"c.gpu_hw",type:"course",title:"GPU、加速器与嵌入式硬件",short:"GPU/加速器",parent:"m.digital",origin:"orig",
+ summary:"GPU 擅长大量并行计算；AI 加速器针对特定计算优化；微控制器和嵌入式处理器常用于控制设备。\n\n它是 AI 三根柱子中的“计算硬件”：AI 的算法与软件最终要落到这些硬件上运行（应用关系），而 AI 的需求又反过来推动专用加速器的设计。"},
+/* ---------- 算法与数据结构 ---------- */
+{id:"c.ds",type:"course",title:"数据结构",short:"数据结构",parent:"m.algo",origin:"orig",
+ summary:"数组、链表、栈、队列、哈希表、树、堆、图。理解每种结构如何存储数据，以及查询、插入、删除的代价。\n\n它是编程语言、数据库、操作系统、编译器共同的先修：所有系统都要在某种数据结构上组织自己的信息。"},
+{id:"c.algodesign",type:"course",title:"算法设计与分析",short:"算法设计",parent:"m.algo",origin:"orig",
+ summary:"排序、查找、递归、分治、贪心、动态规划、回溯、搜索、图遍历、最短路径、最小生成树。\n\n它与数据结构互为先修（数据结构提供表示、算法提供步骤），并向下依赖离散数学与复杂度分析。"},
+{id:"c.algo_correct",type:"course",title:"复杂度与正确性",short:"复杂度与正确性",parent:"m.algo",origin:"orig",
+ summary:"时间复杂度、空间复杂度、边界情况、不变量、循环终止、正确性证明。程序能运行不等于算法一定正确或高效。"},
+{id:"c.adv_algo",type:"course",title:"进阶算法",short:"进阶算法",parent:"m.algo",origin:"orig",
+ summary:"随机算法、近似算法、在线算法、并行算法、优化算法。根据课程和研究方向逐步学习。\n\n它向上与人工智能（优化）、高性能计算（并行算法）交叉。"},
+/* ---------- 程序设计与编程语言 ---------- */
+{id:"c.cpp",type:"course",title:"高级语言程序设计（C / C++ / Python）",short:"程序设计",parent:"m.programming",origin:"orig",
+ summary:"变量、类型、表达式、条件、循环、函数、数组、指针、结构体、文件、错误处理。建议用 C/C++ 建立底层理解，再按需求学习其他语言。\n\n补充图把 C/C++/Python 画成“软件 ↔ 硬件之桥”的起点：源代码经编译器/解释器变成中间表示，再变成机器指令。",
+ points:["C/C++：贴近内存与硬件，适合理解指针、结构体、编译链接","Python：表达快、生态广，适合数据与 AI 方向","同一算法可以用不同语言实现，语言差别不只在语法"]},
+{id:"c.prog_org",type:"course",title:"程序组织与模块化",short:"程序组织",parent:"m.programming",origin:"orig",
+ summary:"模块、接口、抽象、封装、复用、依赖管理。大型程序通常由多个相互协作的模块构成。\n\n补充图把“软件结构”列为软件的一个观察角度：模块 / 类 / 函数，以及算法 / 数据。"},
+{id:"c.plt",type:"course",title:"编程语言原理（语言机制与范式）",short:"语言原理",parent:"m.programming",origin:"orig",
+ summary:"语言机制：作用域、名字绑定、类型系统、静态/动态类型、值与引用、内存管理、异常、泛型、多态、并发机制。\n\n编程范式：过程式、面向对象、函数式、声明式、事件驱动等。它们是组织和表达程序的不同方式，不一定互斥。\n\n它与编译原理是交叉关系：语言机制决定了编译器要处理什么。"},
+{id:"c.tools",type:"course",title:"开发工具链",short:"开发工具",parent:"m.programming",origin:"orig",
+ summary:"编辑器、编译器、解释器、调试器、版本控制、构建工具、包管理器、测试框架。\n\n注意区分（对比关系）：编译器/解释器属于语言实现，构建工具与版本控制属于工程协作工具，它们常被混在一起称为“工具链”。"},
+/* ---------- 操作系统、编译器与运行时 ---------- */
+{id:"c.os",type:"course",title:"操作系统",short:"操作系统",parent:"m.systems",origin:"orig",
+ summary:"进程与线程、CPU 调度、虚拟内存、文件系统、设备管理、系统调用、同步互斥、死锁、权限。操作系统协调程序与硬件资源。\n\n它是所有系统课程的枢纽：向下依赖 ISA 与存储层次，向上支撑网络、数据库、安全与所有应用程序。"},
+{id:"c.compiler",type:"course",title:"编译原理",short:"编译器",parent:"m.systems",origin:"orig",
+ summary:"词法分析、语法分析、语义分析、中间表示（IR）、优化、目标代码生成。编译器把一种程序表示转换成另一种表示。\n\n在“软件 ↔ 硬件之桥”里，编译器/解释器正是从高级语言通向机器指令的那一段。",
+ points:["前端：词法、语法、语义分析（依赖自动机与形式语言）","中端：中间表示 IR 与优化","后端：目标代码生成（依赖指令集与体系结构）"]},
+{id:"c.vm",type:"course",title:"解释器与虚拟机",short:"解释器/VM",parent:"m.systems",origin:"orig",
+ summary:"解释执行、字节码、虚拟机指令、运行时栈、对象管理、垃圾回收。解释器通常在运行时分析或执行程序表示；具体实现方式因语言而异。\n\n与编译器是<b>对比关系</b>：两者都把程序翻译成可执行形式，但翻译时机与执行方式不同，职责不能互相替代。"},
+{id:"c.toolchain",type:"course",title:"汇编、链接、加载与构建",short:"工具链",parent:"m.systems",origin:"orig",
+ summary:"汇编器把汇编指令转换成机器码；链接器组合目标文件和库；加载器把程序装入运行环境；构建系统组织整个生成流程。"},
+{id:"c.lifecycle",type:"course",title:"程序生命周期",short:"生命周期",parent:"m.systems",origin:"orig",
+ summary:"源代码 → 构建/翻译 → 可执行文件或中间代码 → 加载 → 运行 → 测试与维护。老师所说的“源码层、构建层、运行层”可理解为观察这个过程的三个角度，但具体含义应以课堂定义为准。"},
+{id:"c.proganalysis",type:"course",title:"程序分析与优化",short:"程序分析",parent:"m.systems",origin:"orig",
+ summary:"静态分析在不实际运行程序或不依赖某次运行结果的情况下分析代码性质；动态分析观察程序运行时行为；优化关注正确性约束下的效率提升。\n\n它是编译器（优化）、软件工程（质量）与安全（漏洞检测）交叉的地带。"},
+/* ---------- 数据、文件与数据库 ---------- */
+{id:"c.file",type:"course",title:"数据表示与文件",short:"文件",parent:"m.data",origin:"orig",
+ summary:"文本、图像、音频、视频、二进制文件、目录结构、文件格式、序列化、持久化。\n\n它向下与数制与数据表示相连（位模式），向上与数据工程相连（如何组织海量文件）。"},
+{id:"c.db",type:"course",title:"数据库基础",short:"数据库基础",parent:"m.data",origin:"orig",
+ summary:"关系模型、表、行、列、主键、外键、SQL、关系代数、函数依赖、规范化。\n\n它大量使用离散数学（关系代数、函数依赖），并用数据结构实现索引。"},
+{id:"c.dbsys",type:"course",title:"数据库系统",short:"数据库系统",parent:"m.data",origin:"orig",
+ summary:"索引、查询处理与优化、事务、并发控制、恢复、权限与备份。\n\n它是操作系统（并发、I/O、日志）与算法（索引结构、查询优化）的直接应用。"},
+{id:"c.dataeng",type:"course",title:"数据工程与分析",short:"数据工程",parent:"m.data",origin:"orig",
+ summary:"数据清洗、ETL、数据仓库、数据湖、分布式存储、统计分析与可视化。\n\n它向下依赖数据库与分布式系统，向 AI 提供训练数据（交叉关系）。"},
+/* ---------- 计算机网络与分布式系统 ---------- */
+{id:"c.net",type:"course",title:"网络基础",short:"网络基础",parent:"m.network",origin:"orig",
+ summary:"分层模型、局域网、交换与路由、IP 地址、子网、DNS、TCP、UDP、HTTP/HTTPS。"},
+{id:"c.netprog",type:"course",title:"网络编程",short:"网络编程",parent:"m.network",origin:"orig",
+ summary:"客户端与服务器、Socket、请求与响应、超时、重试、并发连接、协议设计。\n\n它直接建立在操作系统之上：Socket 是操作系统提供给程序的网络接口（应用关系）。"},
+{id:"c.dist",type:"course",title:"分布式系统",short:"分布式",parent:"m.network",origin:"orig",
+ summary:"节点协作、复制、一致性、容错、故障检测、分布式事务、消息队列。\n\n它是算法（共识、一致性）与网络（通信）交叉最深的领域之一。"},
+{id:"c.cloud",type:"course",title:"云计算与虚拟化",short:"云计算",parent:"m.network",origin:"orig",
+ summary:"虚拟机、容器、云服务、弹性伸缩、部署、监控。虚拟化与容器技术帮助共享和管理计算资源。\n\n它依赖操作系统（进程、隔离、资源管理）与分布式系统（调度、容错）。"},
+/* ---------- 软件工程、测试与安全 ---------- */
+{id:"c.se",type:"course",title:"软件开发过程",short:"开发过程",parent:"m.engineering",origin:"orig",
+ summary:"需求分析、系统设计、模块划分、编码规范、代码评审、版本控制、持续集成与部署、维护。"},
+{id:"c.test",type:"course",title:"测试与调试",short:"测试与调试",parent:"m.engineering",origin:"orig",
+ summary:"单元测试、集成测试、系统测试、回归测试、断言、日志、断点、最小复现、边界测试。\n\n它与程序分析（静态/动态分析）是交叉关系：很多测试工具建立在分析技术之上。"},
+{id:"c.quality",type:"course",title:"软件质量",short:"软件质量",parent:"m.engineering",origin:"orig",
+ summary:"正确性、可靠性、可用性、性能、可维护性、可扩展性、可移植性、能耗。不同目标之间可能存在权衡。"},
+{id:"c.security",type:"course",title:"计算机安全",short:"安全",parent:"m.engineering",origin:"orig",
+ summary:"身份认证、授权、密码学基础、漏洞、输入验证、内存安全、系统安全、隐私保护、威胁建模。\n\n它依赖操作系统（权限、隔离）、网络（攻击面）、编译与程序分析（漏洞检测），是典型的交叉领域。"},
+/* ---------- 人工智能 ---------- */
+{id:"c.ai_foundation",type:"course",title:"AI 的数学与算法基础",short:"AI 基础",parent:"m.ai",origin:"orig",
+ summary:"线性代数、概率统计、微积分、优化、搜索、规划、表示学习。\n\n这些内容并不是 AI 私有：它们与数学基础、算法与数据结构板块直接共享（交叉关系），此处只列出 AI 视角下的组织方式。"},
+{id:"c.ml",type:"course",title:"机器学习",short:"机器学习",parent:"m.ai",origin:"orig",
+ summary:"监督学习、无监督学习、特征、损失函数、训练/验证/测试、过拟合、泛化、模型评估。\n\n它是深度学习与 AI 应用系统的先修；同时与信号处理、数据工程、概率统计广泛交叉。"},
+{id:"c.dl",type:"course",title:"深度学习",short:"深度学习",parent:"m.ai",origin:"orig",
+ summary:"神经网络、反向传播、卷积网络、循环网络、Transformer、训练技巧、GPU 计算。\n\n它是“算法与模型”的核心内容，同时强烈依赖计算硬件（GPU/TPU）与软件系统（训练框架、推理引擎）。"},
+{id:"c.ai_sub",type:"course",title:"AI 子领域",short:"AI 子领域",parent:"m.ai",origin:"orig",
+ summary:"计算机视觉、自然语言处理、语音、多模态、强化学习、机器人与智能决策。\n\n其中计算机视觉与数字图像处理课程、语音子领域与语音与音频处理课程都是明确的交叉关系（虚线），两边的方法经常互补使用。"},
+{id:"c.llm",type:"course",title:"大模型与应用系统",short:"大模型",parent:"m.ai",origin:"orig",
+ summary:"预训练、微调、推理、检索增强生成、工具调用、智能体、评测、部署、成本与安全。\n\n它是“算法与模型 + 软件与系统 + 计算硬件”三者在工程上同时落地的典型场景。"},
+{id:"c.ai_sys",type:"course",title:"AI 软件与系统",short:"AI 系统",parent:"m.ai",origin:"add",
+ summary:"AI 系统、模型训练系统、推理系统、AI 应用。\n\n框架图特意把这一列与“算法与模型”“计算硬件”并列：它们属于<b>软件与系统</b>，不是算法本身。区分这三者是理解 AI 工程的关键。",
+ points:["训练系统：数据管线、分布式训练、检查点","推理系统：批处理、量化、缓存、服务化部署","AI 应用：面向具体场景的产品形态"]},
+/* ---------- 计算机系统与应用场景 ---------- */
+{id:"c.sys_general",type:"course",title:"通用计算系统",short:"通用系统",parent:"m.sysapp",origin:"orig",
+ summary:"个人电脑、工作站、服务器。面向多种任务，通常运行通用操作系统和多类应用。"},
+{id:"c.sys_embed",type:"course",title:"嵌入式系统",short:"嵌入式系统",parent:"m.sysapp",origin:"orig",
+ summary:"汽车控制器、家电、无人机、工业设备等。通常与具体设备和实时控制任务紧密结合。\n\n它与数字系统板块里的嵌入式硬件课程是交叉关系：一边看系统形态，一边看硬件平台。"},
+{id:"c.sys_hpc",type:"course",title:"高性能计算",short:"高性能计算",parent:"m.sysapp",origin:"orig",
+ summary:"超级计算机、GPU 集群、并行计算平台，面向科学计算、仿真和大规模模型训练等任务。"},
+{id:"c.sys_edge",type:"course",title:"移动与边缘计算",short:"边缘计算",parent:"m.sysapp",origin:"orig",
+ summary:"手机、可穿戴设备、边缘服务器。关注功耗、时延、连接性和本地处理能力。"},
+{id:"c.sys_integrated",type:"course",title:"集成系统",short:"集成系统",parent:"m.sysapp",origin:"orig",
+ summary:"机器人、自动驾驶、工业智能、数据库服务、AI 产品等，往往同时涉及硬件、软件、数据、网络与算法。\n\n它是全图关系的汇聚点：越往应用走，越难只靠单一板块的知识解决。"},
+];
+const KB_TOPICS=[
+/* ===== 数学 ===== */
+{id:"t.calculus",type:"topic",title:"微积分",parent:"c.mathbase",origin:"orig",
+ summary:"变化率、极限、积分。它是补充图数学链的起点：微积分 → 复变函数、微积分 → 实变函数 → 泛函分析 → 调和分析，同时也直接支撑信号与系统与机器学习中的连续量分析。"},
+{id:"t.linalg",type:"topic",title:"线性代数",parent:"c.mathbase",origin:"orig",
+ summary:"向量、矩阵、线性变换。它是信号与系统、泛函分析、机器学习（数据矩阵、表示学习）共同的基础工具。"},
+{id:"t.prob",type:"topic",title:"概率统计",parent:"c.mathbase",origin:"orig",
+ summary:"随机变量、分布、估计与检验。随机信号分析、通信原理、机器学习的共同先修。"},
+{id:"t.numeric",type:"topic",title:"数值计算",parent:"c.mathbase",origin:"orig",
+ summary:"用有限精度计算近似结果：误差、稳定性、迭代方法。它在工程实现里无处不在——信号处理、仿真、机器学习训练都要面对浮点误差。"},
+/* ===== 信号与系统 ===== */
+{id:"t.sig_signal",type:"topic",title:"连续与离散信号",parent:"c.signals",origin:"orig",
+ summary:"信号按时间是否连续、是否周期性、能量还是功率来分类。理解信号类型是所有变换方法的前提。"},
+{id:"t.sig_lti",type:"topic",title:"线性时不变系统（LTI）",parent:"c.signals",origin:"orig",
+ summary:"卷积、冲激响应、稳定性与因果性。LTI 是信号与系统课程的中心对象：它让“系统”可以用数学完整描述。"},
+{id:"t.sig_fourier",type:"topic",title:"傅里叶分析",parent:"c.signals",origin:"orig",
+ summary:"把信号分解为不同频率成分：傅里叶级数、傅里叶变换、频域视角。它的数学上游是调和分析（交叉关系）。"},
+{id:"t.sig_laplace",type:"topic",title:"拉普拉斯变换与 Z 变换",parent:"c.signals",origin:"orig",
+ summary:"连续系统的拉普拉斯变换与离散系统的 Z 变换，用于分析系统函数、极点零点与稳定性。它们的方法论来自复变函数。"},
+{id:"t.dsp_sample",type:"topic",title:"采样与重建",parent:"c.dsp",origin:"orig",
+ summary:"采样定理、混叠、重建滤波器。它回答“连续信号怎样变成计算机能处理的数字序列”。"},
+{id:"t.dsp_fft",type:"topic",title:"DFT 与 FFT",parent:"c.dsp",origin:"orig",
+ summary:"离散傅里叶变换及其快速算法。FFT 是工程上最常用的算法之一，也是“算法与数据结构”在信号领域的直接体现（交叉关系）。"},
+{id:"t.dsp_filter",type:"topic",title:"数字滤波器",parent:"c.dsp",origin:"orig",
+ summary:"FIR / IIR 滤波器设计、差分方程实现、稳定性与相位特性。"},
+{id:"t.dsp_spec",type:"topic",title:"频谱分析",parent:"c.dsp",origin:"orig",
+ summary:"用变换观察信号的频率成分：功率谱、加窗、分辨率权衡。它是语音、图像、通信与雷达共同的工具。"},
+{id:"t.rs_process",type:"topic",title:"随机信号与随机过程",parent:"c.random_sig",origin:"add",
+ summary:"把信号看作随机过程：均值、自相关、平稳性、各态历经性。补充图把它画在数字信号处理与现代信号处理之间的先修位置。"},
+{id:"t.rs_psd",type:"topic",title:"相关分析与功率谱密度",parent:"c.random_sig",origin:"add",
+ summary:"自相关/互相关函数与功率谱密度，用来描述随机信号的统计结构，是谱估计与检测理论的入口。"},
+{id:"t.dip_enhance",type:"topic",title:"图像增强与滤波",parent:"c.dip",origin:"orig",
+ summary:"灰度变换、直方图、平滑与锐化、频域滤波。它把一维滤波方法推广到二维图像。"},
+{id:"t.dip_edge",type:"topic",title:"边缘检测",parent:"c.dip",origin:"orig",
+ summary:"用梯度与算子提取图像中的结构边界；与计算机视觉的特征提取方法互补（交叉关系）。"},
+{id:"t.dip_seg",type:"topic",title:"图像分割",parent:"c.dip",origin:"orig",
+ summary:"阈值、区域、聚类与深度学习方法把图像分成有意义的区域；传统方法与学习方法在这里交汇。"},
+{id:"t.sp_audio",type:"topic",title:"音频采样与预处理",parent:"c.speech",origin:"orig",
+ summary:"音频的采样率、量化、分帧、加窗——把声音变成可分析的序列。"},
+{id:"t.sp_feat",type:"topic",title:"语音特征",parent:"c.speech",origin:"orig",
+ summary:"频谱包络、倒谱、梅尔特征等：把波形压缩成对识别有用的表示。"},
+{id:"t.sp_asr",type:"topic",title:"语音识别",parent:"c.speech",origin:"orig",
+ summary:"从声学特征到文字的映射；现在主流做法与深度学习高度重合（与 AI 的交叉关系）。"},
+{id:"t.mordsp_psd",type:"topic",title:"谱估计",parent:"c.mordsp",origin:"orig",
+ summary:"从有限观测数据估计功率谱：经典方法与现代参数化方法。"},
+{id:"t.mordsp_adapt",type:"topic",title:"自适应滤波",parent:"c.mordsp",origin:"orig",
+ summary:"滤波器参数随输入自动调整：回声消除、信道均衡、噪声对消等。"},
+{id:"t.mordsp_stat",type:"topic",title:"统计信号处理",parent:"c.mordsp",origin:"orig",
+ summary:"在噪声中做检测与估计：假设检验、参数估计、匹配滤波。"},
+{id:"t.ai_sig_feat",type:"topic",title:"信号特征与表示",parent:"c.sig_ai",origin:"infer",
+ summary:"把信号变换成模型友好的表示：频谱、时频图、小波、嵌入向量。这是信号处理与 AI 之间最直接的一座桥。"},
+{id:"t.ai_sig_model",type:"topic",title:"用深度学习做信号任务",parent:"c.sig_ai",origin:"infer",
+ summary:"用神经网络替代或增强传统滤波、重建、分割与识别流程；反过来也用信号处理方法解释与改进模型。"},
+{id:"t.ctrl_fb",type:"topic",title:"反馈与稳定性",parent:"c.control",origin:"add",
+ summary:"闭环反馈、稳定性判据、稳态误差。控制系统与信号系统共享同一套变换工具。"},
+{id:"t.ctrl_freq",type:"topic",title:"频域方法",parent:"c.control",origin:"add",
+ summary:"频率响应、波特图、根轨迹与频域校正设计。"},
+{id:"t.mc_state",type:"topic",title:"状态空间方法",parent:"c.modcontrol",origin:"add",
+ summary:"用状态方程描述系统，讨论能控性、能观性、极点配置与最优控制。与线性代数关系紧密。"},
+{id:"t.comm_mod",type:"topic",title:"调制与解调",parent:"c.comm",origin:"add",
+ summary:"把信息搬到适合信道传输的频段：调幅、调频、数字调制。"},
+{id:"t.comm_ch",type:"topic",title:"信道与噪声",parent:"c.comm",origin:"add",
+ summary:"信道模型、噪声与干扰、误码率与信道编码的基本概念。"},
+/* ===== 数字系统：硬件实现层级 ===== */
+{id:"t.lv_device",type:"topic",title:"器件级",parent:"m.digital",origin:"orig",
+ summary:"研究对象：晶体管等基础器件。典型概念：MOS 管、晶体管。\n\n它是硬件实现层级的最底层，由它构成电路级（组成关系）。"},
+{id:"t.lv_circuit",type:"topic",title:"电路级",parent:"m.digital",origin:"orig",
+ summary:"研究对象：电路行为（电压、电流等）。典型概念：电路图、信号。\n\n由器件构成；再向上构成逻辑级。"},
+{id:"t.lv_logic",type:"topic",title:"逻辑级",parent:"m.digital",origin:"orig",
+ summary:"研究对象：逻辑门、布尔逻辑、组合逻辑、时序逻辑。典型概念：门电路、时序图。\n\n它对应数字逻辑与数字电路课程，向上构成功能模块级。"},
+{id:"t.lv_module",type:"topic",title:"功能模块级",parent:"m.digital",origin:"orig",
+ summary:"研究对象：寄存器、计数器、运算器、控制器等。典型概念：寄存器、ALU、控制单元。\n\n它对应计算机组成原理中的模块设计与 RTL 数据通路，向上构成系统级。"},
+{id:"t.lv_system",type:"topic",title:"系统级",parent:"m.digital",origin:"orig",
+ summary:"研究对象：CPU、存储器、总线、输入输出等。典型概念：指令集、总线、内存。\n\n它是硬件实现层级的顶端，向上以 ISA 为接口交给软件（实现/接口关系）。"},
+{id:"t.rtl_datapath",type:"topic",title:"数据通路与 RTL 描述",parent:"c.rtl",origin:"add",
+ summary:"把 ALU、寄存器堆、控制器连接成一条能按节拍执行指令的通路，并用 RTL 精确描述每个时钟沿发生什么。\n\n它向上服务功能模块级，向下落到组合/时序逻辑（实现关系）。"},
+{id:"t.asm_lang",type:"topic",title:"汇编语言",parent:"c.asm",origin:"add",
+ summary:"机器指令的可读形式：助记符、寻址方式、寄存器与栈的使用、调用约定。\n\n它是“人能读的机器指令”，也是理解操作系统与编译器如何协作的必备层。"},
+{id:"t.arch_pipe",type:"topic",title:"流水线与并行",parent:"c.arch",origin:"add",
+ summary:"指令级并行、流水线冒险与解决、多核与并行体系结构：体系结构课程中最影响性能的部分。"},
+{id:"t.transistor",type:"topic",title:"晶体管与 MOS 管",parent:"c.semiconductor",origin:"add",
+ summary:"用半导体器件的开关与放大特性实现 0/1。它是“数字”这件事的物理起点——所有逻辑最终都由它实现。"},
+{id:"t.ir",type:"topic",title:"中间表示 IR",parent:"c.compiler",origin:"add",
+ summary:"编译器在拿到高级语言后，先转成与具体机器无关的中间表示（如三地址码、SSA、LLVM IR），在 IR 上做优化，再生成机器指令。\n\n补充图“软件 ↔ 硬件之桥”把 IR 单独画成一环：它是软件与硬件之间真正的分水岭——IR 以上与机器无关，IR 以下开始依赖 ISA。"},
+{id:"t.mcode",type:"topic",title:"机器指令",parent:"c.isa",origin:"add",
+ summary:"处理器真正执行的东西：由操作码、寄存器/内存操作数与寻址方式构成。\n\n它的“合法形式”由 ISA 规定，因此机器指令是软件与硬件之间的契约文本——同一个程序在不同 ISA 上要重新生成不同的机器指令。"},
+/* ===== 算法 ===== */
+{id:"t.ds_basic",type:"topic",title:"基础数据结构",parent:"c.ds",origin:"orig",
+ summary:"数组、链表、栈、队列、哈希表、树、堆、图。理解每种结构如何存储数据，以及查询、插入、删除的代价。"},
+{id:"t.algo_basic",type:"topic",title:"基本算法",parent:"c.algodesign",origin:"orig",
+ summary:"排序、查找、递归、分治、贪心、动态规划、回溯、搜索、图遍历、最短路径、最小生成树。"},
+/* ===== 程序设计与编程语言 ===== */
+{id:"t.prog_basic",type:"topic",title:"编程基础",parent:"c.cpp",origin:"orig",
+ summary:"变量、类型、表达式、条件、循环、函数、数组、指针、结构体、文件、错误处理。建议用 C/C++ 建立底层理解，再按需求学习其他语言。"},
+{id:"t.pl_mech",type:"topic",title:"语言机制",parent:"c.plt",origin:"orig",
+ summary:"作用域、名字绑定、类型系统、静态/动态类型、值与引用、内存管理、异常、泛型、多态、并发机制。"},
+{id:"t.pl_paradigm",type:"topic",title:"编程范式",parent:"c.plt",origin:"orig",
+ summary:"过程式、面向对象、函数式、声明式、事件驱动等。它们是组织和表达程序的不同方式，不一定互斥。"},
+/* ===== 操作系统、编译器与运行时 ===== */
+/* ===== 数据 ===== */
+/* ===== 网络 ===== */
+/* ===== 软件工程、测试与安全 ===== */
+/* ===== 人工智能 ===== */
+{id:"t.ai_train",type:"topic",title:"模型训练系统",parent:"c.ai_sys",origin:"orig",
+ summary:"数据管线、分布式训练、检查点与实验管理。框架图把它单列，说明它属于软件系统，而不是算法本身。"},
+{id:"t.ai_infer",type:"topic",title:"推理系统",parent:"c.ai_sys",origin:"orig",
+ summary:"把训练好的模型高效地跑起来：批处理、量化、缓存、服务化与监控。"},
+/* ===== 系统与应用场景 ===== */
+/* ===== 多视角地图 ===== */
+{id:"t.map_object",type:"topic",title:"对象地图：它是什么",parent:"m.maps",origin:"orig",
+ summary:"硬件、软件、算法、数据、系统、网络、人工智能等。\n\n先分清对象类别，再谈它属于哪个板块：本站用节点类型（板块 / 课程 / 知识点）与所属板块来表达这一点。"},
+{id:"t.map_layer",type:"topic",title:"层级地图：它在哪里",parent:"m.maps",origin:"orig",
+ summary:"从物理器件、数字电路、处理器与指令接口，到操作系统、运行环境和应用程序。不同模型的层级划分可能不同。\n\n本站用<b>层级关系</b>与两大地基（数字系统、信号与系统）表达层级位置。"},
+{id:"t.map_structure",type:"topic",title:"结构地图：它由什么组成",parent:"m.maps",origin:"orig",
+ summary:"例如软件系统可拆分成模块，模块可包含函数和数据；硬件系统可拆分成处理器、存储器和 I/O。\n\n本站用<b>组成关系</b>表达“由什么构成”。"},
+{id:"t.map_lifecycle",type:"topic",title:"生命周期地图：它如何产生和运行",parent:"m.maps",origin:"orig",
+ summary:"需求 → 设计 → 编码 → 构建/翻译 → 加载 → 执行 → 测试 → 维护。\n\n本站用程序生命周期课程与“软件 ↔ 硬件之桥”表达这条线。"},
+{id:"t.map_relation",type:"topic",title:"关系地图：它如何连接",parent:"m.maps",origin:"orig",
+ summary:"组成、依赖、调用、翻译、实现、通信、协作、竞争。\n\n本站把这些压缩成七种带类型的箭头，并在<b>关系浏览器</b>中全部列出。"},
+{id:"t.map_angle",type:"topic",title:"角度地图：我在研究什么",parent:"m.maps",origin:"orig",
+ summary:"结构、功能、实现、执行过程、性能、安全、可靠性、可维护性。\n\n同一个节点可以从不同角度研究：例如操作系统既可以从“结构”看，也可以从“性能”或“安全”看。"},
+/* ===== 三层视角 ===== */
+{id:"t.lv_core_base",type:"topic",title:"核心基础：理论依据",parent:"m.levels",origin:"orig",
+ summary:"回答“为什么成立、如何证明、怎样建模”。计算机方向常见内容包括离散数学、逻辑、算法与复杂度、概率统计、形式语言、计算模型等。不同研究方向依赖的数学并不相同。"},
+{id:"t.lv_core_frame",type:"topic",title:"核心框架：专业原理",parent:"m.levels",origin:"orig",
+ summary:"回答“如何组织成一个系统、系统怎样工作”。计算机方向包括数据结构与算法、计算机组成、操作系统、编译原理、程序语言、数据库、网络、人工智能等。它们不是单纯的应用层，而是各自的核心知识体系。"},
+{id:"t.lv_platform",type:"topic",title:"实验平台：实现与验证",parent:"m.levels",origin:"orig",
+ summary:"回答“怎样做出来、运行起来并验证”。例如 C/C++、调试器、编译器工具链、LLVM、仿真环境、测试框架、性能分析工具、FPGA 或单片机平台。平台是工具与实践载体，不等同于理论本身。"},
+{id:"t.lv_loop",type:"topic",title:"三者如何循环",parent:"m.levels",origin:"orig",
+ summary:"先用理论建立模型，再依据专业原理实现，用实验观察结果；如果结果与预期不符，就回到模型、实现或假设中排查。实践不必等到理论全部学完才开始。"},
+{id:"t.lv_bound",type:"topic",title:"这套分类的边界",parent:"m.levels",origin:"orig",
+ summary:"它适合规划学习，不是普适的严格分类。不同层次混合了理论、专业知识和工具三个维度；某些内容可能同时属于多个维度。例如 MATLAB 既是工具，也能用于数值计算实验；程序分析既有理论，也有工程工具。"},
+{id:"t.lv_major",type:"topic",title:"与你方向的对应关系",parent:"m.levels",origin:"orig",
+ summary:"核心基础：离散数学、逻辑、算法、形式语言；核心框架：编译原理、解释器、类型系统、程序分析与优化；实验平台：C/C++、LLVM、调试器、测试与性能分析。建议理论和项目同步推进。"},
+/* ===== 个人规划 ===== */
+{id:"t.pg_goal",type:"topic",title:"先确定目标与约束",parent:"m.personal",origin:"orig",
+ summary:"分别写清楚：考研目标（专业课与数学要求）、保研或竞赛需求、每周可投入时间、导师与实验室资源、毕业后偏研发还是偏应用。目标变化时，路线也可以调整。"},
+{id:"t.pg_common",type:"topic",title:"共同基础：不要过早押注",parent:"m.personal",origin:"orig",
+ summary:"C/C++、数据结构与算法、离散数学、计算机组成、操作系统、计算机网络、数据库、软件工程与 Git。它们能支撑多种岗位和研究方向。"},
+{id:"t.pg_a",type:"topic",title:"方向 A：编译器与程序语言",parent:"m.personal",origin:"orig",
+ summary:"学习编译原理、解释器、虚拟机、类型系统、静态分析和优化；做一个能运行的解释器或小型语言工具，再逐步加入类型检查、错误定位、数据流分析或优化。适合喜欢语言机制、底层原理和长期钻研的人。\n\n对应本站：程序设计与编程语言 → 操作系统、编译器与运行时，可在课程页的“关系一览”里横向跳转。"},
+{id:"t.pg_b",type:"topic",title:"方向 B：系统软件与基础设施",parent:"m.personal",origin:"orig",
+ summary:"学习 Linux、操作系统、并发、网络、性能分析、内存与调试；做系统工具、运行时组件、存储或性能优化项目。它和编译器有交集，也有较广泛的软件工程迁移能力。"},
+{id:"t.pg_c",type:"topic",title:"方向 C：AI 工程与应用",parent:"m.personal",origin:"orig",
+ summary:"补足线性代数、概率统计、优化和机器学习基础，同时训练数据处理、模型评估、部署和工程能力。应用机会多，但竞争与技术迭代也快；不能只停留在调用模型 API。\n\n对应本站：人工智能板块的算法与模型、软件与系统、计算硬件三根柱子要同时补。"},
+{id:"t.pg_d",type:"topic",title:"方向 D：软件开发与平台工程",parent:"m.personal",origin:"orig",
+ summary:"强化工程实践、后端/客户端、数据库、测试、部署、协作与项目交付。通常更容易形成可展示的项目经历，也可作为底层方向的就业备选能力。"},
+{id:"t.pg_plan",type:"topic",title:"阶段计划：未来 12 个月",parent:"m.personal",origin:"orig",
+ summary:"第 1–3 个月：巩固 C/C++、数据结构、离散数学；第 4–6 个月：学计算机组成、操作系统和编译原理入门；第 7–9 个月：完成解释器或编译器小项目；第 10–12 个月：根据进展选一个研究问题，阅读论文、复现实验，并准备考研/实习所需能力。具体节奏应结合课程与考试安排调整。"},
+{id:"t.pg_review",type:"topic",title:"每学期复盘",parent:"m.personal",origin:"orig",
+ summary:"每 8–12 周检查：学会了哪些可解释的概念？完成了什么可运行项目？是否有测试和文档？哪些课程成绩需要补强？是否仍喜欢这个方向？如果连续投入后发现不合适，可以转向相邻方向，而不是把前期学习视为浪费。"},
+{id:"t.pg_major",type:"topic",title:"专业与学院方向参考",parent:"m.personal",origin:"add",
+ summary:"补充资料里给出的相关专业分布：电子信息类（电子信息工程、通信工程、信息对抗技术、物联网工程、网络工程）；电子类（电子科学与技术、电磁场与无线技术、电波传播与天线、微电子科学与工程）；计算机类（计算机科学与技术、网络空间安全、人工智能、数据科学与大数据技术）。\n\n资料里还有一句值得记下来的话：通信类方向比计算机类方向用到的数学更多——选方向时，可以先看一眼它在全图中离数学那一边有多近（信号与系统、随机信号分析、通信原理这条线）。",
+ source:"补充图：院校与专业结构"},
+{id:"t.pg_advice",type:"topic",title:"拿这张地图去问问题",parent:"m.personal",origin:"add",
+ summary:"这张地图最有用的用法不是背，而是提问：\n\n① 我想做某个方向（比如自动驾驶），需要哪些板块的知识？——从“集成系统”节点沿关系往回走。\n② 我这门课学不动，缺什么？——打开课程页看“前置知识”。\n③ 两个都感兴趣的方向，交集在哪？——用关系浏览器筛“交叉”类型。\n④ 学的东西以后有什么用？——看“后续知识”与“应用关系”。"},
+];
+const KB_EXTRA=[
+{id:"n.cs",type:"domain",title:"计算机科学",short:"CS",origin:"orig",
+ summary:"研究对象：信息 / 数据 / 程序 / 计算系统。\n\n在全景图中，计算机科学向下分为硬件、软件、算法三大支柱；AI 与三者横向交叉；三大支柱协同工作构成计算机系统，再向上支撑各类应用领域。",
+ tags:["总览"]},
+{id:"n.cssys",type:"domain",title:"计算机系统",short:"系统",origin:"orig",
+ summary:"硬件 + 软件 + 算法 + 协同工作的整体。\n\n它不是排在硬件下面的一层，而是三者协同后形成的系统级对象。全景图中，硬件、软件、算法共同向下汇聚到计算机系统；计算机系统再向上服务于应用领域。",
+ tags:["总览"]},
+{id:"n.csapp",type:"domain",title:"应用领域",short:"应用",origin:"orig",
+ summary:"计算机视觉 / 自然语言处理 / 机器人 / 嵌入式 / 高性能计算；此外还有图像识别、语音识别、智能感知、多媒体处理等。\n\n应用领域位于全景图的最上层：它们是计算机系统能力的外在体现，同时也对下层的算法、软件与硬件提出新需求。",
+ tags:["总览"]}
+];
+const KB_EDGES=[
+/* ================= 一、数学基础链（补充图） ================= */
+{id:"e.calc.complex",from:"t.calculus",to:"c.complex",type:"prereq",label:"先修",origin:"add",
+ note:"补充图：微积分 → 复变函数。复变函数用到极限、级数、积分等微积分工具。"},
+{id:"e.calc.real",from:"t.calculus",to:"c.real",type:"prereq",label:"先修",origin:"add",
+ note:"补充图：微积分 → 实变函数。实变函数是把微积分的积分理论做严格化与推广。"},
+{id:"e.real.functional",from:"c.real",to:"c.functional",type:"prereq",label:"先修",origin:"add",
+ note:"补充图：实变函数 → 泛函分析。测度与积分是函数空间理论的基础。"},
+{id:"e.calc.functional",from:"t.calculus",to:"c.functional",type:"prereq",label:"先修",origin:"add",
+ note:"补充图：微积分 → 泛函分析（经实变函数）。"},
+{id:"e.linalg.functional",from:"t.linalg",to:"c.functional",type:"prereq",label:"先修",origin:"add",
+ note:"补充图：线性代数 → 泛函分析。函数空间本质上是“无穷维的线性空间”，线性代数提供直觉。"},
+{id:"e.functional.harmonic",from:"c.functional",to:"c.harmonic",type:"prereq",label:"先修",origin:"add",
+ note:"补充图：泛函分析 → 调和分析。傅里叶分析的现代形式建立在算子与函数空间语言上。"},
+{id:"e.complex.harmonic",from:"c.complex",to:"c.harmonic",type:"prereq",label:"先修",origin:"add",
+ note:"补充图：复变函数 → 调和分析。留数、解析函数等工具在傅里叶分析中反复使用。"},
+{id:"e.calc.signals",from:"t.calculus",to:"c.signals",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图把“数学基础”方框整体作为信号与系统的先修；本站把它拆到具体课程上，微积分是其中的连续量分析基础。"},
+{id:"e.linalg.signals",from:"t.linalg",to:"c.signals",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图“数学基础 → 信号与系统”这条先修箭头中的线性代数部分：LTI 系统的描述与求解离不开线性空间与矩阵。"},
+{id:"e.prob.signals",from:"t.prob",to:"c.signals",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图“数学基础 → 信号与系统”中的概率统计部分；到随机信号分析、通信原理时会变成主要工具。"},
+{id:"e.harmonic.signals",from:"c.harmonic",to:"c.signals",type:"cross",label:"数学支撑",origin:"infer",
+ note:"调和分析与信号与系统是交叉关系（不是先修）：一边是傅里叶分析的数学理论，一边是它的工程对象与解释。补充图把调和分析列在数学链末端，本站据其含义建立这条交叉关系。"},
+{id:"e.discrete.diglogic",from:"c.discrete",to:"c.diglogic",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：数字逻辑的核心工具是布尔代数与逻辑运算，它们属于离散数学与逻辑的内容；框架图把离散数学列入数学基础方框，本站把它与逻辑级的课程连起来。"},
+{id:"e.discrete.automata",from:"c.discrete",to:"c.automata",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：集合、关系、证明方法是自动机与形式语言课程的前置工具。"},
+{id:"e.discrete.ds",from:"c.discrete",to:"c.ds",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：图论、组合计数直接用于数据结构与算法分析。"},
+{id:"e.discrete.db",from:"c.discrete",to:"c.db",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：关系代数与函数依赖建立在集合与关系之上。"},
+/* ================= 二、信号与系统及其后续课程（主框架图） ================= */
+{id:"e.signals.dsp",from:"c.signals",to:"c.dsp",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图主链：信号与系统 → 数字信号处理。掌握连续/离散信号与变换之后才能学采样、DFT 与数字滤波器。"},
+{id:"e.signals.dsp.cross",from:"c.signals",to:"c.dsp",type:"cross",label:"交叉应用",origin:"orig",
+ note:"框架图在两者之间额外标注的“交叉应用”虚线：连续时间方法（拉普拉斯、频域分析）与离散方法（Z 变换、DFT）互相借用、互相验证。同一条线上可以同时存在先修与交叉两种关系——这也是不能把所有箭头都当成先修的原因。"},
+{id:"e.dsp.random_sig",from:"c.dsp",to:"c.random_sig",type:"prereq",label:"先修",origin:"add",
+ note:"补充图：数字信号处理 → 随机信号分析。随机信号建立在确定信号变换方法之上。"},
+{id:"e.dsp.mordsp",from:"c.dsp",to:"c.mordsp",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图：数字信号处理 → 现代信号处理（谱估计、自适应滤波、统计处理）。"},
+{id:"e.random_sig.mordsp",from:"c.random_sig",to:"c.mordsp",type:"prereq",label:"先修",origin:"add",
+ note:"补充图：随机信号分析 → 现代信号处理。统计信号处理直接依赖随机过程与功率谱的知识。"},
+{id:"e.dsp.dip",from:"c.dsp",to:"c.dip",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图：数字信号处理 → 数字图像处理。图像是二维信号，滤波、变换方法由一维推广而来。"},
+{id:"e.dsp.speech",from:"c.dsp",to:"c.speech",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图：数字信号处理 → 语音与音频处理。音频采样与频谱分析直接复用 DSP 的方法。"},
+{id:"e.dsp.sig_ai",from:"c.dsp",to:"c.sig_ai",type:"cross",label:"交叉应用",origin:"orig",
+ note:"框架图用虚线把数字信号处理与“与 AI 的交叉”连起来，标注为交叉应用：信号处理提供特征与变换，机器学习提供建模能力。"},
+{id:"e.sig_ai.ml",from:"c.sig_ai",to:"c.ml",type:"cross",label:"交叉应用",origin:"orig",
+ note:"框架图在“与 AI 的交叉”节点下列出机器学习：两边方法互相使用，不存在谁包含谁。"},
+{id:"e.sig_ai.dl",from:"c.sig_ai",to:"c.dl",type:"cross",label:"交叉应用",origin:"orig",
+ note:"框架图在“与 AI 的交叉”节点下列出深度学习；深度学习大量用于图像、语音与信号任务。"},
+{id:"e.sig_ai.ai_sub",from:"c.sig_ai",to:"c.ai_sub",type:"cross",label:"交叉应用",origin:"orig",
+ note:"框架图在“与 AI 的交叉”节点下列出计算机视觉；它与数字图像处理是同一问题的两种技术路线。"},
+{id:"e.dip.ai_sub",from:"c.dip",to:"c.ai_sub",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断（与框架图一致）：图像处理与计算机视觉互为交叉——前者偏变换与增强，后者偏理解与识别。"},
+{id:"e.speech.ai_sub",from:"c.speech",to:"c.ai_sub",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：语音特征与语音识别既属于信号处理，也属于 AI 的语音子领域。"},
+{id:"e.signals.control",from:"c.signals",to:"c.control",type:"prereq",label:"先修",origin:"add",
+ note:"补充图：信号与系统 → 自动控制原理。系统建模与稳定性分析共用拉普拉斯变换与频域方法。"},
+{id:"e.control.modcontrol",from:"c.control",to:"c.modcontrol",type:"prereq",label:"先修",origin:"add",
+ note:"补充图：自动控制原理 → 现代控制理论。古典控制理论是状态空间方法的前置。"},
+{id:"e.signals.comm",from:"c.signals",to:"c.comm",type:"prereq",label:"先修",origin:"add",
+ note:"合理推断：通信原理大量使用频谱、滤波与调制分析，是信号与系统在“传输信息”方向的应用。"},
+{id:"e.comm.random_sig",from:"c.random_sig",to:"c.comm",type:"apply",label:"应用",origin:"add",
+ note:"补充图：随机信号分析被用于通信中的噪声与信道建模（应用关系）。"},
+/* ================= 三、数字系统：硬件实现层级（主框架图） ================= */
+{id:"e.lv.device.circuit",from:"t.lv_device",to:"t.lv_circuit",type:"compose",label:"构成",origin:"orig",
+ note:"框架图硬件实现层级：器件级 → 电路级（由器件构成电路）。"},
+{id:"e.lv.circuit.logic",from:"t.lv_circuit",to:"t.lv_logic",type:"compose",label:"构成",origin:"orig",
+ note:"框架图：电路级 → 逻辑级（用电路实现逻辑门与布尔逻辑）。"},
+{id:"e.lv.logic.module",from:"t.lv_logic",to:"t.lv_module",type:"compose",label:"构成",origin:"orig",
+ note:"框架图：逻辑级 → 功能模块级（用逻辑门构成寄存器、计数器、运算器、控制器）。"},
+{id:"e.lv.module.system",from:"t.lv_module",to:"t.lv_system",type:"compose",label:"构成",origin:"orig",
+ note:"框架图：功能模块级 → 系统级（ALU、控制器、寄存器构成 CPU、存储器、总线与 I/O）。"},
+{id:"e.lv.device.semicond",from:"t.lv_device",to:"c.semiconductor",type:"layer",label:"层级对应",origin:"infer",
+ note:"合理推断：框架图“器件级”的典型概念是晶体管与 MOS 管，本站把它对应到半导体器件与微电子基础课程。"},
+{id:"e.lv.logic.diglogic",from:"t.lv_logic",to:"c.diglogic",type:"layer",label:"层级对应",origin:"orig",
+ note:"框架图把“逻辑级”与“数字系统（数字电路、数字逻辑）”并列在同一层，是同一条线的两种画法。"},
+{id:"e.lv.module.comp_org",from:"t.lv_module",to:"c.comp_org",type:"layer",label:"层级对应",origin:"orig",
+ note:"框架图“功能模块级”的典型概念（寄存器、ALU、控制单元）就是计算机组成原理课程的主要内容。"},
+{id:"e.lv.system.isa",from:"t.lv_system",to:"c.isa",type:"layer",label:"层级对应",origin:"infer",
+ note:"合理推断：硬件实现层级的“系统级”研究对象（指令集、总线、内存）正对应 ISA 这一层——它是硬件层级顶端的对外接口。"},
+{id:"e.lv.system.comp_org",from:"t.lv_system",to:"c.comp_org",type:"layer",label:"层级对应",origin:"orig",
+ note:"框架图“系统级”的典型概念（指令集、总线、内存）同样由计算机组成原理覆盖，因此本站在图上让两条线汇合。"},
+{id:"e.data_rep.diglogic",from:"c.data_rep",to:"c.diglogic",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：要理解数字逻辑处理的 0/1，先要知道数据在机器里的表示方式（数制、编码、补码）。"},
+{id:"e.diglogic.comp_org",from:"c.diglogic",to:"c.comp_org",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图课程链：数字系统 → 计算机组成原理。组合/时序逻辑是数据通路与控制器的基础。"},
+{id:"e.comp_org.isa",from:"c.comp_org",to:"c.isa",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图课程链：计算机组成原理 → 指令集架构/处理器执行。"},
+{id:"e.isa.asm",from:"c.isa",to:"c.asm",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图课程链：指令集架构 → 汇编语言/底层程序。ISA 定义了汇编语言能写什么。"},
+{id:"e.comp_org.rtl",from:"c.comp_org",to:"c.rtl",type:"impl",label:"实现",origin:"orig",
+ note:"补充图：功能模块（ALU/控制器/寄存器）通过 RTL 与数据通路实现；模块级与逻辑级之间靠 RTL 连接。"},
+{id:"e.rtl.diglogic",from:"c.rtl",to:"c.diglogic",type:"impl",label:"实现",origin:"orig",
+ note:"补充图：RTL/数据通路最终由数字逻辑（组合逻辑 + 时序逻辑）实现。"},
+{id:"e.arch.fpga",from:"c.arch",to:"c.fpga",type:"cross",label:"交叉方向",origin:"orig",
+ note:"框架图把“计算机体系结构 / 嵌入式系统 / FPGA 与 HDL”并列在同一末端方框：它们共享硬件结构知识，但研究方向不同。"},
+{id:"e.storage.os",from:"c.storage",to:"c.os",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：存储层次与操作系统的虚拟内存、页面置换是同一问题的硬件侧与软件侧。"},
+{id:"e.fpga.diglogic",from:"c.fpga",to:"c.diglogic",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：用 Verilog/VHDL 描述的逻辑最终综合成数字逻辑电路，HDL 是设计数字逻辑的一种手段。"},
+{id:"e.semicond.transistor",from:"c.semiconductor",to:"t.transistor",type:"compose",label:"包含",origin:"orig",
+ note:"框架图“器件级”的典型概念是 MOS 管与晶体管，本站把它作为半导体器件课程的入口知识点。"},
+/* ================= 四、软件 ↔ 硬件之桥（补充图） ================= */
+{id:"e.cpp.compiler",from:"c.cpp",to:"c.compiler",type:"apply",label:"被翻译",origin:"orig",
+ note:"补充图“连接软件和硬件的桥”：软件（C/C++/Python）→ 编译器/解释器。源程序是编译器的输入。"},
+{id:"e.compiler.isa",from:"c.compiler",to:"c.isa",type:"impl",label:"生成机器指令（经中间表示 IR）",origin:"orig",
+ note:"补充图：编译器/解释器 → 中间表示 IR → 机器指令 → ISA。这一层正是软件与硬件的接口所在。"},
+{id:"e.isa.comp_org",from:"c.isa",to:"c.comp_org",type:"impl",label:"由 CPU 实现",origin:"orig",
+ note:"补充图：ISA → CPU。指令集是规格，CPU 是该规格的实现。"},
+{id:"e.diglogic.circuit",from:"c.diglogic",to:"t.lv_circuit",type:"impl",label:"由电路实现",origin:"orig",
+ note:"补充图：数字逻辑 → 电路。逻辑门这一层最终要由具体电路实现。"},
+{id:"e.circuit.transistor",from:"t.lv_circuit",to:"t.transistor",type:"impl",label:"由晶体管实现",origin:"orig",
+ note:"补充图：电路 → 晶体管。到了这一层，剩下的就是半导体物理，也是本站地图的最底端。"},
+{id:"e.asm.os",from:"c.asm",to:"c.os",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图课程链：汇编语言/底层程序 → 操作系统/编译器/运行时。"},
+{id:"e.asm.compiler",from:"c.asm",to:"c.compiler",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图课程链：汇编语言/底层程序 → 操作系统/编译器/运行时（编译器方向）。"},
+{id:"e.os.arch",from:"c.os",to:"c.arch",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图课程链末端：操作系统/编译器/运行时 → 计算机体系结构/嵌入式系统/FPGA 与 HDL。"},
+{id:"e.vm.compiler",from:"c.vm",to:"c.compiler",type:"contrast",label:"对比",origin:"orig",
+ note:"原网页强调：解释器与编译器“虽然有关联，但职责不同”。两者都把程序变成可执行形式，但时机与方式不同，不能互相替代。"},
+{id:"e.os.compiler",from:"c.os",to:"c.compiler",type:"contrast",label:"对比",origin:"orig",
+ note:"原网页：操作系统、编译器、解释器、虚拟机“虽然有关联，但职责不同”。它们同属系统软件，但解决的问题不同。"},
+/* ================= 五、算法、程序设计与系统软件内部 ================= */
+{id:"e.ds.algodesign",from:"c.ds",to:"c.algodesign",type:"prereq",label:"先修",origin:"orig",
+ note:"数据结构提供表示、算法提供步骤，两者互为支撑，本站按学习顺序把它们连成先修关系（先会表示，再谈策略）。"},
+{id:"e.algodesign.correct",from:"c.algodesign",to:"c.algo_correct",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：设计算法与分析复杂度、证明正确性在实践中交替进行，属于交叉而不是前后关系。"},
+{id:"e.correct.adv",from:"c.algo_correct",to:"c.adv_algo",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：随机算法、近似算法等进阶主题都建立在复杂度与正确性分析之上。"},
+{id:"e.complexity.correct",from:"c.complexity",to:"c.algo_correct",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：数学板块的计算复杂性给出理论边界（能不能算、难到什么程度），算法板块的复杂度与正确性给出具体分析方法。"},
+{id:"e.ds.db",from:"c.ds",to:"c.db",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：数据库的索引（B+ 树、哈希）、查询计划都直接使用数据结构。"},
+{id:"e.ds.os",from:"c.ds",to:"c.os",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：进程调度、内存管理、文件系统都要用队列、树、哈希与堆。"},
+{id:"e.ds.compiler",from:"c.ds",to:"c.compiler",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：语法树、符号表、数据流分析都建立在树与图结构上。"},
+{id:"e.fft.algodesign",from:"t.dsp_fft",to:"c.algodesign",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：FFT 本身就是一个经典算法，它同时属于信号处理与算法设计两个板块。"},
+{id:"e.adv_algo.ai",from:"c.adv_algo",to:"c.ai_foundation",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：优化算法、搜索与规划同时出现在算法板块与 AI 的数学与算法基础中。"},
+{id:"e.mathbase.ai",from:"c.mathbase",to:"c.ai_foundation",type:"cross",label:"交叉应用",origin:"orig",
+ note:"原网页人工智能板块明确列出“数学与算法基础：线性代数、概率统计、微积分”，与数学板块内容共享——同一知识只创建一次，用交叉关系连接。"},
+{id:"e.cpp.ds",from:"c.cpp",to:"c.ds",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：先会用一门语言写程序（变量、函数、指针），再学数据结构更顺。"},
+{id:"e.cpp.toolchain",from:"c.cpp",to:"c.toolchain",type:"apply",label:"被构建",origin:"orig",
+ note:"框架图软件执行路径：高级语言程序 → 编译器/解释器 → 机器指令/其他执行表示。源程序是整条工具链的输入。"},
+{id:"e.progorg.se",from:"c.prog_org",to:"c.se",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：模块划分既是语言层面的组织方式，也是软件工程的设计活动。"},
+{id:"e.tools.se",from:"c.tools",to:"c.se",type:"apply",label:"应用",origin:"orig",
+ note:"原网页：版本控制、构建工具、测试框架属于开发工具，被软件工程流程使用（应用关系，而非包含关系）。"},
+{id:"e.tools.test",from:"c.tools",to:"c.test",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：调试器、日志、测试框架是测试与调试活动使用的工具。"},
+{id:"e.plt.compiler",from:"c.plt",to:"c.compiler",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：语言机制（类型系统、作用域、异常）决定了编译器与运行时需要处理什么。"},
+{id:"e.plt.vm",from:"c.plt",to:"c.vm",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：语言的内存模型与对象模型直接决定虚拟机与垃圾回收的实现方式。"},
+{id:"e.os.net",from:"c.os",to:"c.net",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：网络的分层与协议运行在操作系统之上，操作系统的并发与 I/O 模型又决定网络程序的性能。"},
+{id:"e.os.netprog",from:"c.os",to:"c.netprog",type:"apply",label:"提供接口",origin:"infer",
+ note:"合理推断：Socket 是操作系统提供给程序的网络接口（系统调用）。"},
+{id:"e.os.security",from:"c.os",to:"c.security",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：权限、隔离、内存保护是理解系统安全的前置知识。"},
+{id:"e.os.db",from:"c.os",to:"c.db",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：数据库事务、并发控制、恢复机制与操作系统的并发和 I/O 深度交叉。"},
+{id:"e.db.dbsys",from:"c.db",to:"c.dbsys",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：先掌握关系模型与 SQL，再进入索引、事务与恢复。"},
+{id:"e.file.db",from:"c.file",to:"c.db",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：数据表示与文件是持久化的第一层，数据库是更结构化的持久化方案。"},
+{id:"e.dbsys.dataeng",from:"c.dbsys",to:"c.dataeng",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：数据仓库与 ETL 建立在数据库系统的能力之上。"},
+{id:"e.dataeng.ml",from:"c.dataeng",to:"c.ml",type:"apply",label:"提供数据",origin:"infer",
+ note:"合理推断：数据清洗、特征管线是机器学习的前置工程环节。"},
+{id:"e.dist.dataeng",from:"c.dist",to:"c.dataeng",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：分布式存储与计算是数据工程处理海量数据的基础设施。"},
+{id:"e.net.netprog",from:"c.net",to:"c.netprog",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：先理解协议与分层，再写网络程序。"},
+{id:"e.net.dist",from:"c.net",to:"c.dist",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：分布式系统建立在网络通信之上，并额外处理延迟、故障与一致性。"},
+{id:"e.dist.cloud",from:"c.dist",to:"c.cloud",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：云计算把分布式系统的调度、容错、复制等能力产品化。"},
+{id:"e.se.test",from:"c.se",to:"c.test",type:"apply",label:"应用",origin:"orig",
+ note:"原网页：测试与调试贯穿需求、设计、编码和部署，是开发过程的一部分（应用关系）。"},
+{id:"e.test.proganalysis",from:"c.test",to:"c.proganalysis",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：静态与动态分析技术既用于编译器优化，也用于测试与缺陷检测。"},
+{id:"e.security.net",from:"c.security",to:"c.net",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：网络是主要攻击面之一，网络协议与安全机制互相牵制。"},
+{id:"e.security.proganalysis",from:"c.security",to:"c.proganalysis",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：静态分析被广泛用于漏洞检测与内存安全检查。"},
+{id:"e.quality.proganalysis",from:"c.quality",to:"c.proganalysis",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：可维护性、可靠性等质量目标常通过分析与测试手段度量。"},
+{id:"e.compiler.arch",from:"c.compiler",to:"c.arch",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：编译器后端要面向具体指令集与微体系结构做优化，两边互为前提。"},
+{id:"e.toolchain.lifecycle",from:"c.toolchain",to:"c.lifecycle",type:"cross",label:"交叉应用",origin:"orig",
+ note:"原网页：汇编、链接、加载与构建是程序生命周期中“构建 → 加载”那一段的具体机制。"},
+/* ================= 六、AI 三根柱子（主框架图） ================= */
+{id:"e.linalg.ml",from:"t.linalg",to:"c.ml",type:"prereq",label:"先修",origin:"orig",
+ note:"原网页人工智能板块的“数学与算法基础”明确列出线性代数；本站把它连到具体的数学知识点上，避免重复创建。"},
+{id:"e.prob.ml",from:"t.prob",to:"c.ml",type:"prereq",label:"先修",origin:"orig",
+ note:"原网页人工智能板块的“数学与算法基础”明确列出概率统计。"},
+{id:"e.calc.ml",from:"t.calculus",to:"c.ml",type:"prereq",label:"先修",origin:"orig",
+ note:"原网页人工智能板块的“数学与算法基础”明确列出微积分（用于优化与梯度方法）。"},
+{id:"e.aifound.ml",from:"c.ai_foundation",to:"c.ml",type:"prereq",label:"先修",origin:"orig",
+ note:"原网页顺序：数学与算法基础 → 机器学习。"},
+{id:"e.ml.dl",from:"c.ml",to:"c.dl",type:"prereq",label:"先修",origin:"orig",
+ note:"原网页顺序：机器学习 → 深度学习。"},
+{id:"e.dl.aisub",from:"c.dl",to:"c.ai_sub",type:"apply",label:"应用",origin:"orig",
+ note:"原网页：深度学习是计算机视觉、自然语言处理、语音等子领域的主要方法（应用关系）。"},
+{id:"e.dl.llm",from:"c.dl",to:"c.llm",type:"prereq",label:"先修",origin:"orig",
+ note:"原网页：大模型与应用系统建立在深度学习之上。"},
+{id:"e.ml.aisys",from:"c.ml",to:"c.ai_sys",type:"apply",label:"指导",origin:"orig",
+ note:"框架图：算法与模型 --指导--> 软件与系统。模型决定系统要做什么，系统把模型变成可运行、可服务的形态。"},
+{id:"e.aisys.gpu",from:"c.ai_sys",to:"c.gpu_hw",type:"impl",label:"调用 / 调度，由硬件执行",origin:"orig",
+ note:"框架图：软件与系统 --调用/调度--> 计算硬件。这里用实现关系表达：硬件是软件系统的执行载体。"},
+{id:"e.gpu.dl",from:"c.gpu_hw",to:"c.dl",type:"apply",label:"执行 / 加速",origin:"orig",
+ note:"框架图：计算硬件 --执行-->，以及人工智能节点下的“计算硬件（CPU、GPU、TPU/专用加速器）”。硬件为模型训练与推理提供算力。"},
+{id:"e.ml.gpu",from:"c.ml",to:"c.gpu_hw",type:"cross",label:"相互支撑",origin:"orig",
+ note:"框架图底部的虚线“相互支撑”：算法需求推动硬件设计，硬件能力又决定算法能做到什么。"},
+{id:"e.dl.hpc",from:"c.dl",to:"c.sys_hpc",type:"apply",label:"依赖算力",origin:"infer",
+ note:"合理推断：大规模模型训练是高性能计算最典型的应用场景之一。"},
+{id:"e.llm.aisys",from:"c.llm",to:"c.ai_sys",type:"apply",label:"落到系统",origin:"infer",
+ note:"合理推断：大模型的推理部署依赖推理系统（批处理、量化、缓存、服务化）。"},
+{id:"e.aisub.integrated",from:"c.ai_sub",to:"c.sys_integrated",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：机器人、自动驾驶等集成系统是 AI 子领域能力的落地形态。"},
+/* ================= 七、全景图：计算机科学 → 三大支柱 → 计算机系统 → 应用 ================= */
+{id:"e.cs.hw",from:"n.cs",to:"m.digital",type:"compose",label:"组成",origin:"orig",
+ note:"全景图：计算机科学向下分为硬件、软件、算法三大支柱。本站把“硬件”支柱对应到数字系统板块（含数字电路、计算机组成、处理器/存储器、嵌入式/FPGA）。"},
+{id:"e.cs.sw",from:"n.cs",to:"m.systems",type:"compose",label:"组成",origin:"orig",
+ note:"全景图“软件”支柱：操作系统、编译器/解释器、运行时/应用软件、系统编程等。"},
+{id:"e.cs.algo",from:"n.cs",to:"m.algo",type:"compose",label:"组成",origin:"orig",
+ note:"全景图“算法”支柱：数据结构、算法设计、机器学习、深度学习等。"},
+{id:"e.cs.prog",from:"n.cs",to:"m.programming",type:"compose",label:"组成（软件方向）",origin:"infer",
+ note:"合理推断：补充图把“软件”进一步拆成软件层级/结构/实现，并向下连到程序设计、编程语言、数据结构与算法；本站据此把程序设计与编程语言板块也挂在计算机科学之下。"},
+{id:"e.cs.ai.cross",from:"m.ai",to:"n.cs",type:"cross",label:"交叉（双向）",origin:"orig",
+ note:"全景图中计算机科学与 AI 之间是双向虚线：AI 既是计算机科学的一部分，又横跨硬件、软件、算法三条线。"},
+{id:"e.ai.algo.cross",from:"m.ai",to:"m.algo",type:"cross",label:"交叉",origin:"orig",
+ note:"框架图一：AI ↔ 算法与模型。机器学习的算法基础与算法板块共享同一套内容。"},
+{id:"e.ai.sw.cross",from:"m.ai",to:"m.systems",type:"cross",label:"交叉",origin:"orig",
+ note:"框架图一：AI ↔ 软件与系统。AI 系统、训练系统、推理系统都是系统软件层面的工程对象。"},
+{id:"e.ai.hw.cross",from:"m.ai",to:"m.digital",type:"cross",label:"交叉",origin:"orig",
+ note:"框架图一：AI ↔ 计算硬件。AI 依赖 GPU/TPU，也反过来推动专用加速器设计。"},
+{id:"e.ai.columns.model",from:"m.ai",to:"m.algo",type:"compose",label:"组成：算法与模型",origin:"orig",bidir:true,
+ note:"框架图把 AI 拆成三列，第一列是算法与模型（机器学习、深度学习、其他算法与模型）——它落在“算法”这一支柱的板块内。图中该箭头是双向的：AI 由算法与模型构成，同时反过来推动算法研究。"},
+{id:"e.ai.columns.soft",from:"m.ai",to:"c.ai_sys",type:"compose",label:"组成：软件与系统",origin:"orig",bidir:true,
+ note:"框架图 AI 的第二列：软件与系统（AI 系统、模型训练系统、推理系统、AI 应用）。箭头双向：AI 由它构成，也对它提出新要求。"},
+{id:"e.ai.columns.hw",from:"m.ai",to:"c.gpu_hw",type:"compose",label:"组成：计算硬件",origin:"orig",bidir:true,
+ note:"框架图 AI 的第三列：计算硬件（CPU、GPU、TPU/专用加速器、相关计算平台）。箭头双向：AI 由硬件承载，也推动专用加速器设计。"},
+{id:"e.hw.cssys",from:"m.digital",to:"n.cssys",type:"compose",label:"协同构成",origin:"orig",
+ note:"全景图：硬件、软件、算法共同向下汇聚到“计算机系统（硬件 + 软件 + 算法 + 协同工作）”。"},
+{id:"e.sw.cssys",from:"m.systems",to:"n.cssys",type:"compose",label:"协同构成",origin:"orig",
+ note:"全景图：计算机系统由软件支柱共同构成。"},
+{id:"e.algo.cssys",from:"m.algo",to:"n.cssys",type:"compose",label:"协同构成",origin:"orig",
+ note:"全景图：计算机系统由算法支柱共同构成。"},
+{id:"e.cssys.hw.loop",from:"n.cssys",to:"m.digital",type:"cross",label:"协同工作",origin:"orig",
+ note:"全景图中计算机系统与三大支柱之间的双向虚线：系统层面的问题会反过来推动硬件研究方向。"},
+{id:"e.cssys.sw.loop",from:"n.cssys",to:"m.systems",type:"cross",label:"协同工作",origin:"orig",
+ note:"全景图双向虚线：真实系统暴露的问题反过来决定系统软件要研究什么。"},
+{id:"e.cssys.algo.loop",from:"n.cssys",to:"m.algo",type:"cross",label:"协同工作",origin:"orig",
+ note:"全景图双向虚线：系统的性能与规模约束反过来推动算法研究。"},
+{id:"e.cssys.app",from:"n.cssys",to:"n.csapp",type:"apply",label:"支撑应用",origin:"orig",
+ note:"全景图：计算机系统向上支撑应用领域（计算机视觉、自然语言处理、机器人、嵌入式、高性能计算等）。"},
+{id:"e.embed.hw.cross",from:"c.sys_embed",to:"c.gpu_hw",type:"cross",label:"交叉应用",origin:"orig",
+ note:"原网页：嵌入式硬件（微控制器、嵌入式处理器）与嵌入式系统（汽车、家电、无人机等）是同一问题的硬件侧与系统侧。"},
+{id:"e.embed.os",from:"c.sys_embed",to:"c.os",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：嵌入式系统同样需要操作系统（实时调度、驱动、资源受限环境），但约束条件与通用系统不同。"},
+{id:"e.hpc.adv",from:"c.sys_hpc",to:"c.adv_algo",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：并行算法既是算法板块的进阶主题，也是高性能计算的核心手段。"},
+{id:"e.edge.net",from:"c.sys_edge",to:"c.net",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：边缘计算关注时延与连接性，与网络的协议与部署方式直接相关。"},
+{id:"e.general.os",from:"c.sys_general",to:"c.os",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：通用计算系统（PC、工作站、服务器）运行通用操作系统与多类应用。"},
+/* ================= 八、必须区分的对比关系（原网页明确强调） ================= */
+{id:"e.cssys.hw.contrast",from:"n.cssys",to:"m.digital",type:"contrast",label:"对比",origin:"orig",
+ note:"原网页强调：“计算机系统”通常指硬件、软件、数据和接口协同工作的整体，<b>不是排在硬件下面的一层</b>。请勿把计算机系统当作硬件的子节点。"},
+{id:"e.algo.lang.contrast",from:"c.algodesign",to:"c.cpp",type:"contrast",label:"对比",origin:"orig",
+ note:"原网页强调：算法不是某一种编程语言的专属内容，同一个算法可以用 C、C++、Python 等语言实现。算法与语言是不同类对象。"},
+{id:"e.fpga.soft.contrast",from:"c.fpga",to:"c.cpp",type:"contrast",label:"对比",origin:"orig",
+ note:"原网页强调：用 Verilog/VHDL 描述电路与写应用软件不是同一类对象——一个描述硬件结构，一个描述执行步骤。"},
+{id:"e.platform.theory.contrast",from:"m.levels",to:"m.math",type:"contrast",label:"对比",origin:"orig",
+ note:"原网页（第十三节）：实验平台是工具与实践载体，不等同于理论本身；但两者在图中都要出现，不能互相替代。"},
+/* ================= 九、板块级关系（把 14 个板块连成一张图） ================= */
+{id:"e.mod.math.signal",from:"m.math",to:"m.signal",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图在板块层面：数学基础 → 信号与系统。整条信息处理链都要求先建立数学工具。"},
+{id:"e.mod.math.digital",from:"m.math",to:"m.digital",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断（与框架图一致）：数字逻辑里的布尔代数、编码与证明方法来自数学板块，数字系统这条链同样以数学为地基。"},
+{id:"e.mod.math.algo",from:"m.math",to:"m.algo",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：算法与数据结构依赖离散数学、组合计数与复杂度理论。"},
+{id:"e.mod.math.prog",from:"m.math",to:"m.programming",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：逻辑与集合是程序语义、类型系统的基础。"},
+{id:"e.mod.math.ai",from:"m.math",to:"m.ai",type:"prereq",label:"先修",origin:"orig",
+ note:"原网页人工智能板块第一节就是“数学与算法基础：线性代数、概率统计、微积分、优化”。"},
+{id:"e.mod.digital.systems",from:"m.digital",to:"m.systems",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图课程链：数字系统 → … → 操作系统/编译器/运行时。系统软件建立在指令集与硬件接口之上。"},
+{id:"e.mod.digital.signal",from:"m.digital",to:"m.signal",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：两条地基并非彼此孤立——数字信号处理的实现离不开数字系统（FPGA、专用加速器、DSP 芯片），而信号处理又是硬件设计中的重要工具。"},
+{id:"e.mod.signal.ai",from:"m.signal",to:"m.ai",type:"cross",label:"交叉应用",origin:"orig",
+ note:"框架图第四张图的“与 AI 的交叉”节点：信号处理与人工智能互相提供方法与数据。"},
+{id:"e.mod.algo.ai",from:"m.algo",to:"m.ai",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图一：AI 的“算法与模型”建立在数据结构与算法设计之上。"},
+{id:"e.mod.prog.systems",from:"m.programming",to:"m.systems",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图课程链：汇编语言/底层程序 → 操作系统/编译器/运行时；同时也对应补充图“软件层级：应用软件 / 系统软件”。"},
+{id:"e.mod.prog.engineering",from:"m.programming",to:"m.engineering",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：代码组织方式与工程协作方式互相影响（模块化、接口、依赖管理）。"},
+{id:"e.mod.systems.data",from:"m.systems",to:"m.data",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：数据库的事务、并发、恢复依赖操作系统的进程、I/O 与内存管理。"},
+{id:"e.mod.systems.network",from:"m.systems",to:"m.network",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：网络协议栈运行在操作系统之上，Socket 与并发模型都属于系统知识。"},
+{id:"e.mod.systems.engineering",from:"m.systems",to:"m.engineering",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：工程实践（构建、部署、监控）直接作用于系统软件。"},
+{id:"e.mod.data.ai",from:"m.data",to:"m.ai",type:"apply",label:"提供数据",origin:"infer",
+ note:"合理推断：数据是模型训练的原料，数据工程是 AI 工程的上游。"},
+{id:"e.mod.network.sysapp",from:"m.network",to:"m.sysapp",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：云计算、边缘计算都是网络与分布式能力的产品化形态。"},
+{id:"e.mod.engineering.sysapp",from:"m.engineering",to:"m.sysapp",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：真实系统的交付依赖软件工程与测试。"},
+{id:"e.mod.ai.sysapp",from:"m.ai",to:"m.sysapp",type:"apply",label:"应用",origin:"orig",
+ note:"框架图应用领域：计算机视觉、自然语言处理、机器人 —— 它们正是 AI 能力在系统中的应用。"},
+{id:"e.mod.maps.cs",from:"m.maps",to:"n.cs",type:"cross",label:"多视角",origin:"orig",
+ note:"原网页第十一节：同一个概念可以同时属于多个视角，这张图本身就是“用不同地图理解同一个概念”的示范。"},
+{id:"e.mod.levels.cs",from:"m.levels",to:"n.cs",type:"cross",label:"三层视角",origin:"orig",
+ note:"原网页第十三节：核心基础—核心框架—实验平台是组织学习内容的实用视角，不是学科分类本身。"},
+{id:"e.mod.personal.levels",from:"m.personal",to:"m.levels",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：个人规划用的就是“核心基础—核心框架—实验平台”这套视角，再加上时间与目标约束。"},
+/* ================= 十、知识点级交叉（信号 / 数字链内部） ================= */
+{id:"e.complex.laplace",from:"c.complex",to:"t.sig_laplace",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：拉普拉斯变换与 Z 变换的分析方法（收敛域、极点零点）直接使用复变函数工具。"},
+{id:"e.fourier.harmonic",from:"t.sig_fourier",to:"c.harmonic",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：傅里叶分析在工程课上讲方法，在调和分析里讲严格理论，两边是交叉关系。"},
+{id:"e.sample.dip",from:"t.dsp_sample",to:"c.dip",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：图像采样与重建是一维采样定理的二维推广。"},
+{id:"e.filter.comm",from:"t.dsp_filter",to:"c.comm",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：数字滤波器是通信系统接收端的核心部件之一。"},
+{id:"e.spec.speech",from:"t.dsp_spec",to:"c.speech",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：语音的频谱分析是语音特征提取的第一步。"},
+{id:"e.rspsd.mordsp",from:"t.rs_psd",to:"t.mordsp_psd",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：功率谱密度的定义是谱估计课程的起点。"},
+{id:"e.mordsp.adapt",from:"t.mordsp_psd",to:"t.mordsp_adapt",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：自适应滤波常以谱/相关估计为前提。"},
+{id:"e.aifeat.ml",from:"t.ai_sig_feat",to:"c.ml",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：信号特征与表示学习是同一件事的两种说法（一边强调变换，一边强调学习）。"},
+{id:"e.aimodel.dl",from:"t.ai_sig_model",to:"c.dl",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：用深度网络做滤波、重建、识别，属于深度学习在信号任务上的应用。"},
+{id:"e.ctrlfb.mc",from:"t.ctrl_fb",to:"t.mc_state",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：反馈与稳定性的概念在状态空间方法中被重新表述。"},
+{id:"e.comm.mod.ch",from:"t.comm_mod",to:"t.comm_ch",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：调制方式的选择取决于信道与噪声特性。"},
+{id:"e.transistor.lvdevice",from:"t.transistor",to:"t.lv_device",type:"layer",label:"同一层",origin:"infer",
+ note:"合理推断：框架图“器件级”的典型概念就是晶体管与 MOS 管，两者是同一层的两种表述。"},
+{id:"e.rtl.lvmodule",from:"t.rtl_datapath",to:"t.lv_module",type:"layer",label:"相邻层级",origin:"infer",
+ note:"合理推断：RTL/数据通路处在功能模块级与逻辑级之间，是补充图给出的一层过渡。"},
+{id:"e.pipe.storage",from:"t.arch_pipe",to:"c.storage",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：流水线性能受存储层次（缓存命中、访存延迟）强烈影响。"},
+{id:"e.aitrain.gpu",from:"t.ai_train",to:"c.gpu_hw",type:"apply",label:"应用",origin:"orig",
+ note:"框架图 AI 的“软件与系统”列（含训练系统）与“计算硬件”列之间的调用/调度关系。"},
+{id:"e.aiinfer.llm",from:"t.ai_infer",to:"c.llm",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：推理系统是大模型对外提供服务的技术形态。"},
+/* ===== 软件↔硬件之桥（补充图：软件 → 编译器/解释器 → IR → 机器指令 → ISA → CPU → 数字逻辑 → 电路 → 晶体管） ===== */
+{id:"e.compiler.ir",from:"c.compiler",to:"t.ir",type:"impl",label:"产生中间表示",origin:"orig",
+ note:"补充图“软件 ↔ 硬件之桥”：编译器/解释器先把高级语言程序转成中间表示 IR，再在 IR 上做优化。"},
+{id:"e.ir.mcode",from:"t.ir",to:"t.mcode",type:"impl",label:"优化并翻译",origin:"orig",
+ note:"补充图：IR 经指令选择、寄存器分配等步骤翻译为目标机器的机器指令。IR 与机器无关，机器指令与机器相关。"},
+{id:"e.mcode.isa",from:"t.mcode",to:"c.isa",type:"impl",label:"由指令集定义",origin:"orig",
+ note:"补充图：机器指令的合法形式由 ISA 规定，ISA 是软件与硬件之间的契约。"},
+{id:"e.isa.os",from:"c.isa",to:"c.os",type:"impl",label:"处理器与运行时执行",origin:"orig",
+ note:"框架图三的“软件执行路径”最后一环：可执行的机器指令最终由处理器与运行时环境执行。"},
+/* ===== 框架图一左上：AI 内部的“指导 / 调用调度 / 执行”循环 ===== */
+{id:"e.stack.guide",from:"m.algo",to:"c.ai_sys",type:"apply",label:"指导",origin:"orig",
+ note:"框架图（AI 的组成与关系）：算法与模型 指导 软件与系统的构建。"},
+{id:"e.stack.exec",from:"c.gpu_hw",to:"m.algo",type:"apply",label:"执行",origin:"orig",
+ note:"框架图底部“计算硬件 --执行-->”一环：硬件实际执行算法与软件发出的计算，形成 算法 → 软件 → 硬件 → 回到算法的闭环；图中同时用虚线表示三者相互支撑。"},
+/* ===== 补充图：软件这一支柱的内部结构（软件 → 程序设计 → 编程语言/数据结构/算法） ===== */
+{id:"e.soft.prog",from:"m.systems",to:"m.programming",type:"layer",label:"细分为",origin:"orig",
+ note:"补充图（软件结构）：软件 → 程序设计 → 编程语言 / 数据结构 / 算法；程序设计是“软件”这一支柱的具体化。"},
+{id:"e.prog.lang",from:"m.programming",to:"c.cpp",type:"compose",label:"组成：编程语言",origin:"orig",
+ note:"补充图：程序设计的三类课程之一——编程语言（C/C++/Python 等）。"},
+{id:"e.prog.ds",from:"m.programming",to:"c.ds",type:"compose",label:"组成：数据结构",origin:"orig",
+ note:"补充图：程序设计的三类课程之一——数据结构（数组/链表等）。"},
+{id:"e.prog.algo",from:"m.programming",to:"c.algodesign",type:"compose",label:"组成：算法",origin:"orig",
+ note:"补充图：程序设计的三类课程之一——算法（排序/搜索等）。"},
+/* ===== 知识点内部的先后与交叉（让每个知识点都能在全图中被走到） ===== */
+{id:"e.numeric.dsp",from:"t.numeric",to:"c.dsp",type:"apply",label:"数值实现",origin:"infer",
+ note:"合理推断：数值计算的误差、稳定性与迭代方法是信号处理算法在工程上实现（定浮点、滤波器实现、仿真）的基础。"},
+{id:"e.sig_signal.lti",from:"t.sig_signal",to:"t.sig_lti",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图四：先分清信号类型，才能描述系统对这些信号的响应。"},
+{id:"e.sig_lti.fourier",from:"t.sig_lti",to:"t.sig_fourier",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图四：LTI 系统的响应可以由傅里叶分析给出频域描述，两者是信号与系统的中心内容。"},
+{id:"e.dsp.rsprocess",from:"c.dsp",to:"t.rs_process",type:"prereq",label:"先修",origin:"orig",
+ note:"补充图：数字信号处理 → 随机信号分析（随机过程）。实际信号多带噪声，需要随机过程的语言。"},
+{id:"e.rs_process.rspsd",from:"t.rs_process",to:"t.rs_psd",type:"prereq",label:"先修",origin:"add",
+ note:"先有随机过程的均值/自相关/平稳性，才能定义相关分析与功率谱密度。"},
+{id:"e.dip_enhance.dip_edge",from:"t.dip_enhance",to:"t.dip_edge",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图四：先会增强与滤波，再做边缘检测——边缘检测本质上也是一种滤波。"},
+{id:"e.dip_edge.dip_seg",from:"t.dip_edge",to:"t.dip_seg",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图四：边缘与区域线索是图像分割的输入。"},
+{id:"e.dipseg.sigai",from:"t.dip_seg",to:"c.sig_ai",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：传统分割方法与深度学习方法（语义分割）在“与 AI 的交叉”方向重合。"},
+{id:"e.sp_audio.sp_feat",from:"t.sp_audio",to:"t.sp_feat",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图四：先做采样、分帧、加窗，才能提取语音特征。"},
+{id:"e.sp_feat.sp_asr",from:"t.sp_feat",to:"t.sp_asr",type:"prereq",label:"先修",origin:"orig",
+ note:"框架图四：特征表示是语音识别的输入。"},
+{id:"e.sp_asr.ml",from:"t.sp_asr",to:"c.ml",type:"cross",label:"交叉应用",origin:"orig",
+ note:"框架图四：语音识别如今主流做法与机器学习 / 深度学习高度重合（本页该知识点的说明里也写了这一点）。"},
+{id:"e.mordsp_stat.adapt",from:"t.mordsp_stat",to:"t.mordsp_adapt",type:"prereq",label:"先修",origin:"infer",
+ note:"合理推断：在噪声中做检测与估计（统计信号处理）是自适应滤波的理论前提。"},
+{id:"e.ctrl_freq.fb",from:"t.ctrl_freq",to:"t.ctrl_fb",type:"cross",label:"交叉应用",origin:"orig",
+ note:"框架图四的延伸：频域方法与时域反馈是控制系统设计的两条互补路径，通常需要同时使用。"},
+{id:"e.asm_lang.compiler",from:"t.asm_lang",to:"c.compiler",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：看得懂机器指令与汇编，才能理解编译器到底生成了什么（该知识点说明中称其为必备层）。"},
+{id:"e.ds_basic.algo_basic",from:"t.ds_basic",to:"t.algo_basic",type:"prereq",label:"先修",origin:"orig",
+ note:"先理解数据如何组织（数组、链表、树、堆、图），再讨论解决问题的步骤。算法与数据结构互为支撑。"},
+{id:"e.algo_basic.complexity",from:"t.algo_basic",to:"c.complexity",type:"prereq",label:"先修",origin:"orig",
+ note:"先会写基本算法，再讨论它的代价：复杂度分析正是对基本算法的量化和比较。"},
+{id:"e.prog_basic.ds",from:"t.prog_basic",to:"c.ds",type:"prereq",label:"先修",origin:"orig",
+ note:"变量、类型、控制、函数、数组、指针是学习数据结构的前置编程能力（建议用 C/C++ 建立底层理解）。"},
+{id:"e.pl_mech.compiler",from:"t.pl_mech",to:"c.compiler",type:"apply",label:"应用",origin:"orig",
+ note:"作用域、绑定、类型系统、内存管理等语言机制，最终由编译器 / 运行时实现。"},
+{id:"e.pl_mech.paradigm",from:"t.pl_mech",to:"t.pl_paradigm",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：语言机制与编程范式互相制约——一种范式需要相应的机制支持（如函数式需要闭包与一等函数）。"},
+{id:"e.pl_paradigm.se",from:"t.pl_paradigm",to:"c.se",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：编程范式影响软件工程的组织方式（模块化、面向对象设计、声明式配置）。"},
+/* 六个提问视角：它们本身也是节点，需要能从上位节点走到 */
+{id:"e.map_object.cs",from:"t.map_object",to:"n.cs",type:"apply",label:"应用",origin:"orig",
+ note:"对象地图用来判断一个概念属于硬件 / 软件 / 算法 / AI 中的哪一类。"},
+{id:"e.map_object.layer",from:"t.map_object",to:"t.map_layer",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：六个视角通常按顺序使用——先定位对象类别，再判断它处在哪一层。"},
+{id:"e.map_layer.levels",from:"t.map_layer",to:"m.levels",type:"cross",label:"多视角",origin:"orig",
+ note:"层级地图与“三层视角”板块都在回答“它在哪里”，可以互相印证。"},
+{id:"e.map_structure.relation",from:"t.map_structure",to:"t.map_relation",type:"cross",label:"交叉应用",origin:"orig",
+ note:"结构地图（由什么组成）与关系地图（如何连接）互补：组成关系只是七种关系中的一种。"},
+{id:"e.map_lifecycle.course",from:"t.map_lifecycle",to:"c.lifecycle",type:"apply",label:"应用",origin:"orig",
+ note:"生命周期地图对应的课程线：需求 → 设计 → 编码 → 构建/翻译 → 加载 → 执行 → 测试 → 维护。"},
+{id:"e.map_angle.cs",from:"t.map_angle",to:"n.cs",type:"apply",label:"应用",origin:"orig",
+ note:"角度地图：同一个节点可以从结构、功能、性能、安全、可靠性等不同角度研究。"},
+{id:"e.lv_core_base.frame",from:"t.lv_core_base",to:"t.lv_core_frame",type:"layer",label:"相邻层级",origin:"orig",
+ note:"三层视角图：核心基础（理论依据）与核心框架（专业原理）是相邻的两层，表达位置关系而不是严格的因果。"},
+{id:"e.lv_core_frame.platform",from:"t.lv_core_frame",to:"t.lv_platform",type:"layer",label:"相邻层级",origin:"orig",
+ note:"三层视角图：专业原理要靠实验平台做出来、跑起来并验证。"},
+{id:"e.lv_loop.platform",from:"t.lv_loop",to:"t.lv_platform",type:"apply",label:"应用",origin:"orig",
+ note:"理论建模 → 实现 → 观察结果 → 回到模型排查；这个循环的落点在实验平台。"},
+{id:"e.lv_bound.levels",from:"t.lv_bound",to:"m.levels",type:"contrast",label:"对比",origin:"add",
+ note:"新增提醒：这套三层分类是为了规划学习，不是普适的严格学科分类——某些内容会同时属于多个维度。"},
+{id:"e.lv_major.compiler",from:"t.lv_major",to:"c.compiler",type:"apply",label:"应用",origin:"orig",
+ note:"按方向对应：编译器 / 程序语言方向的核心框架是编译原理、解释器、类型系统、程序分析，实验平台是 C/C++、LLVM、调试器。"},
+/* 个人规划：计划类节点之间的推进关系与方向落点 */
+{id:"e.pg_goal.plan",from:"t.pg_goal",to:"t.pg_plan",type:"apply",label:"应用",origin:"orig",
+ note:"先写清目标与约束，再排 12 个月阶段计划。"},
+{id:"e.pg_common.plan",from:"t.pg_common",to:"t.pg_plan",type:"prereq",label:"先修",origin:"orig",
+ note:"共同基础（C/C++、数据结构、离散数学、组成原理、操作系统等）是任何方向阶段计划的第一段。"},
+{id:"e.pg_plan.review",from:"t.pg_plan",to:"t.pg_review",type:"apply",label:"应用",origin:"orig",
+ note:"计划靠每 8–12 周的复盘来校正。"},
+{id:"e.pg_review.goal",from:"t.pg_review",to:"t.pg_goal",type:"apply",label:"应用",origin:"orig",
+ note:"复盘的结论会反过来修正目标与约束——包括“是否仍喜欢这个方向”。"},
+{id:"e.pg_a.compiler",from:"t.pg_a",to:"c.compiler",type:"apply",label:"应用",origin:"orig",
+ note:"方向 A（编译器与程序语言）的课程落点：编译原理、解释器、虚拟机、类型系统、静态分析与优化。"},
+{id:"e.pg_b.os",from:"t.pg_b",to:"c.os",type:"apply",label:"应用",origin:"orig",
+ note:"方向 B（系统软件与基础设施）的课程落点：操作系统、并发、网络、性能分析、内存与调试。"},
+{id:"e.pg_c.ml",from:"t.pg_c",to:"c.ml",type:"apply",label:"应用",origin:"orig",
+ note:"方向 C（AI 工程与应用）的课程落点：线性代数、概率统计、优化与机器学习基础。"},
+{id:"e.pg_c.aisys",from:"t.pg_c",to:"c.ai_sys",type:"apply",label:"应用",origin:"orig",
+ note:"方向 C 的提醒：不能只停留在调用模型 API——算法与模型、软件与系统、计算硬件三根柱子要同时补。"},
+{id:"e.pg_d.se",from:"t.pg_d",to:"c.se",type:"apply",label:"应用",origin:"orig",
+ note:"方向 D（软件开发与平台工程）的课程落点：软件工程、数据库、测试、部署与协作。"},
+{id:"e.pg_a.d",from:"t.pg_a",to:"t.pg_d",type:"cross",label:"交叉应用",origin:"infer",
+ note:"合理推断：编译器方向与软件开发方向在工具链与工程实现上有交集，可以互为备选能力。"},
+{id:"e.pg_common.ds",from:"t.pg_common",to:"c.ds",type:"apply",label:"应用",origin:"infer",
+ note:"合理推断：共同基础里最容易被低估的是数据结构与算法——它同时是后端、系统、AI 岗位的共同要求。"},
+{id:"e.pg_major.math",from:"t.pg_major",to:"m.math",type:"cross",label:"交叉应用",origin:"orig",
+ note:"补充资料的说法：通信类方向比计算机类方向用到的数学更多。选专业时可以先看它在全图中离数学那一边有多近。"},
+{id:"e.pg_advice.maps",from:"t.pg_advice",to:"m.maps",type:"apply",label:"应用",origin:"orig",
+ note:"把地图当提问工具：用对象 / 层级 / 结构 / 生命周期 / 关系 / 角度六个视角去问“我需要哪些知识”。"},
+];
+const KB_FRAMES=[
+/* ================= 主框架图 1：计算机工科全景图 ================= */
+{id:"f.panorama",tier:"main",title:"计算机工科全景图",origin:"orig",
+ source:"框架图（全景图）／补充图：计算机科学 → 硬件 / 软件 / 算法 + AI 交叉 → 计算机系统 → 应用领域",w:1000,h:560,
+ caption:"这是本页面的总结构：计算机科学由硬件、软件、算法三根支柱构成，AI 同时对三者发生关系；三根支柱通过协同工作形成计算机系统，计算机系统再向上支撑各类应用领域。",
+ nodes:[
+  {kb:"n.cs",x:330,y:14,w:340,h:58,tone:"blue",label:"计算机科学",sub:"信息 · 数据 · 程序 · 计算系统"},
+  {kb:"m.digital",x:30,y:150,w:215,h:120,tone:"teal",label:"硬件",sub:"数字电路 · 计算机组成 · 处理器与存储器 · 嵌入式 / FPGA"},
+  {kb:"m.systems",x:265,y:150,w:215,h:120,tone:"purple",label:"软件",sub:"操作系统 · 编译器 / 解释器 · 运行时与应用软件 · 系统编程"},
+  {kb:"m.algo",x:500,y:150,w:200,h:120,tone:"green",label:"算法",sub:"数据结构 · 算法设计 · 机器学习 · 深度学习"},
+  {kb:"m.ai",x:720,y:150,w:250,h:120,tone:"orange",label:"AI（人工智能）",sub:"算法与模型 · 软件与系统 · 计算硬件"},
+  {kb:"n.cssys",x:180,y:340,w:640,h:62,tone:"blue",label:"计算机系统",sub:"硬件 + 软件 + 算法 + 协同工作（不是一个新层次，而是三者的整体）"},
+  {kb:"n.csapp",x:140,y:455,w:720,h:56,tone:"gray",label:"应用领域",sub:"计算机视觉 · 自然语言处理 · 机器人 · 嵌入式 · 高性能计算"}],
+ links:[
+  {e:"e.cs.hw",fs:"b",ts:"t"},{e:"e.cs.sw",fs:"b",ts:"t"},{e:"e.cs.algo",fs:"b",ts:"t"},
+  {e:"e.cs.ai.cross",fs:"r",ts:"t",bidir:true},
+  {e:"e.ai.algo.cross",fs:"l",ts:"r",hideLabel:true},
+  {e:"e.ai.hw.cross",from:"m.digital",to:"m.ai",fs:"b",ts:"b",wp:[[137,306],[828,306]],hideLabel:true},
+  {e:"e.ai.sw.cross",from:"m.systems",to:"m.ai",fs:"b",ts:"b",wp:[[372,330],[862,330]],hideLabel:true},
+  {e:"e.hw.cssys",fs:"b",ts:"t"},{e:"e.sw.cssys",fs:"b",ts:"t"},{e:"e.algo.cssys",fs:"b",ts:"t"},
+  {e:"e.cssys.app",fs:"b",ts:"t"}]},
+
+/* ================= 主框架图 2：AI 与算法、软件、硬件的关系 ================= */
+{id:"f.stack",tier:"main",title:"AI 与算法 / 软件 / 硬件的关系",origin:"orig",
+ source:"框架图（AI 的组成与关系）：算法与模型 —指导→ 软件与系统 —调用 / 调度→ 计算硬件 —执行→ 回到算法",w:1000,h:440,
+ caption:"AI 不是一个独立于计算机的学科：它由“算法与模型、软件与系统、计算硬件”三部分构成，并且这三者之间存在方向明确的闭环——算法指导软件怎么搭，软件调用调度硬件，硬件真正执行计算并把结果交回算法；三列之间用虚线表示相互支撑。",
+ nodes:[
+  {kb:"m.ai",x:360,y:14,w:280,h:62,tone:"orange",label:"AI 人工智能"},
+  {kb:"m.algo",x:40,y:120,w:250,h:170,tone:"green",label:"算法与模型",sub:"机器学习 · 深度学习 · 其他算法与模型"},
+  {kb:"c.ai_sys",x:330,y:120,w:290,h:170,tone:"purple",label:"软件与系统",sub:"AI 系统 · 模型训练系统 · 推理系统 · AI 应用"},
+  {kb:"c.gpu_hw",x:650,y:120,w:270,h:170,tone:"teal",label:"计算硬件",sub:"CPU · GPU · TPU / 专用加速器 · 相关计算平台"},
+  {key:"a2",kb:"m.algo",x:90,y:350,w:170,h:46,tone:"green",label:"算法与模型"},
+  {key:"b2",kb:"c.ai_sys",x:380,y:350,w:180,h:46,tone:"purple",label:"软件与系统"},
+  {key:"c2",kb:"c.gpu_hw",x:690,y:350,w:190,h:46,tone:"teal",label:"计算硬件"}],
+ links:[
+  {e:"e.ai.columns.model",fs:"b",ts:"t"},{e:"e.ai.columns.soft",fs:"b",ts:"t"},{e:"e.ai.columns.hw",fs:"b",ts:"t"},
+  {e:"e.stack.guide",from:"a2",to:"b2",fs:"r",ts:"l"},
+  {e:"e.aisys.gpu",from:"b2",to:"c2",fs:"r",ts:"l"},
+  {e:"e.stack.exec",from:"c2",to:"a2",fs:"b",ts:"b",wp:[[785,415],[85,415]]},
+  {e:"e.ml.gpu",from:"a2",to:"c2",fs:"t",ts:"t",wp:[[175,325],[785,325]],hideLabel:true}]},
+
+/* ================= 主框架图 3：数字系统与计算机系统的层级关系 ================= */
+{id:"f.layers",tier:"main",title:"数字系统与计算机系统的层级关系",origin:"orig",
+ source:"框架图（层级图 + 课程链 + 软件执行路径）：器件级 → 电路级 → 逻辑级 → 功能模块级 → 系统级；数字系统 → 计算机组成原理 → 指令集架构 / 处理器执行 → 汇编语言 / 底层程序 → 操作系统 / 编译器 / 运行时 → 计算机体系结构 / 嵌入式 / FPGA 与 HDL",
+ w:1000,h:700,
+ caption:"左边是硬件实现层级（从晶体管一路向上到系统级），中间是这条线对应的课程链，底部是软件执行路径（高级语言程序 → 编译器 / 解释器 → 机器指令 → 处理器与运行时）。课程链与层级之间是“层级对应”关系，不是先修关系。",
+ nodes:[
+  {kb:"t.lv_device",x:40,y:90,w:170,h:60,tone:"teal",label:"器件级",sub:"MOS 管 · 晶体管"},
+  {kb:"t.lv_circuit",x:40,y:178,w:170,h:60,tone:"teal",label:"电路级",sub:"电路图 · 信号"},
+  {kb:"t.lv_logic",x:40,y:266,w:170,h:60,tone:"green",label:"逻辑级",sub:"门电路 · 时序图"},
+  {kb:"t.lv_module",x:40,y:354,w:170,h:60,tone:"blue",label:"功能模块级",sub:"寄存器 · ALU · 控制单元"},
+  {kb:"t.lv_system",x:40,y:442,w:170,h:60,tone:"blue",label:"系统级",sub:"指令集 · 总线 · 内存"},
+  {kb:"c.diglogic",x:380,y:80,w:240,h:58,tone:"green",label:"数字系统",sub:"数字电路 · 数字逻辑"},
+  {kb:"c.comp_org",x:380,y:168,w:240,h:58,tone:"blue",label:"计算机组成原理"},
+  {kb:"c.isa",x:380,y:256,w:240,h:58,tone:"blue",label:"指令集架构 / 处理器执行"},
+  {kb:"c.asm",x:380,y:344,w:240,h:58,tone:"purple",label:"汇编语言 / 底层程序"},
+  {kb:"c.os",x:380,y:432,w:240,h:58,tone:"purple",label:"操作系统 / 编译器 / 运行时"},
+  {kb:"c.arch",x:380,y:520,w:240,h:64,tone:"gray",label:"计算机体系结构 / 嵌入式 / FPGA 与 HDL"},
+  {key:"k1",kb:"c.cpp",x:190,y:628,w:175,h:46,tone:"yellow",label:"高级语言程序"},
+  {key:"k2",kb:"c.compiler",x:400,y:628,w:155,h:46,tone:"purple",label:"编译器 / 解释器"},
+  {key:"k3",kb:"c.isa",x:610,y:628,w:130,h:46,tone:"blue",label:"机器指令"},
+  {key:"k4",kb:"c.os",x:790,y:628,w:180,h:46,tone:"purple",label:"处理器与运行时"}],
+ links:[
+  {e:"e.lv.device.circuit",fs:"b",ts:"t"},{e:"e.lv.circuit.logic",fs:"b",ts:"t"},
+  {e:"e.lv.logic.module",fs:"b",ts:"t"},{e:"e.lv.module.system",fs:"b",ts:"t"},
+  {e:"e.lv.logic.diglogic",fs:"r",ts:"l"},
+  {e:"e.lv.module.comp_org",fs:"r",ts:"l",wp:[[280,384],[280,197]]},
+  {e:"e.lv.system.isa",fs:"r",ts:"l",wp:[[320,472],[320,285]]},
+  {e:"e.diglogic.comp_org",fs:"b",ts:"t"},{e:"e.comp_org.isa",fs:"b",ts:"t"},
+  {e:"e.isa.asm",fs:"b",ts:"t"},{e:"e.asm.os",fs:"b",ts:"t"},{e:"e.os.arch",fs:"b",ts:"t"},
+  {e:"e.cpp.compiler",from:"k1",to:"k2",fs:"r",ts:"l"},
+  {e:"e.compiler.isa",from:"k2",to:"k3",fs:"r",ts:"l"},
+  {e:"e.isa.os",from:"k3",to:"k4",fs:"r",ts:"l"}]},
+
+/* ================= 主框架图 4：信号与系统及其后续课程关系 ================= */
+{id:"f.signal",tier:"main",title:"信号与系统及其后续课程关系",origin:"orig",
+ source:"框架图（信号与系统及其后续课程关系）：数学基础 → 信号与系统 → 数字信号处理 → 数字图像处理 / 语音与音频处理 / 现代信号处理 / 与 AI 的交叉",w:1000,h:470,
+ caption:"这是“信息如何被数学地描述与处理”这条地基线：数学基础支撑信号与系统，信号与系统向上分出数字信号处理，再分成图像、语音、现代信号处理与 AI 交叉四个方向。图中同一条连线可以同时承载“先修”和“交叉应用”两种含义——所以本页把关系拆成不同类型分别记录。",
+ nodes:[
+  {kb:"m.math",x:370,y:14,w:260,h:56,tone:"purple",label:"数学基础",sub:"高等数学 · 线性代数 · 概率统计 · 复变函数"},
+  {kb:"c.signals",x:370,y:112,w:260,h:60,tone:"blue",label:"信号与系统",sub:"连续 / 离散信号 · LTI 系统 · 傅里叶分析 · 变换方法"},
+  {kb:"c.dsp",x:370,y:214,w:260,h:60,tone:"green",label:"数字信号处理",sub:"采样与重建 · DFT / FFT · 数字滤波器 · 频谱分析"},
+  {kb:"c.dip",x:30,y:322,w:215,h:110,tone:"orange",label:"数字图像处理",sub:"图像增强 · 滤波 · 边缘检测 · 图像分割"},
+  {kb:"c.speech",x:262,y:322,w:222,h:110,tone:"teal",label:"语音与音频处理",sub:"音频采样 · 频谱分析 · 语音特征 · 语音识别"},
+  {kb:"c.mordsp",x:502,y:322,w:215,h:110,tone:"pink",label:"现代信号处理",sub:"随机信号 · 谱估计 · 自适应滤波 · 统计处理"},
+  {kb:"c.sig_ai",x:735,y:322,w:235,h:110,tone:"purple",label:"与 AI 的交叉",sub:"机器学习 · 深度学习 · 计算机视觉"}],
+ links:[
+  {e:"e.mod.math.signal",to:"c.signals",fs:"b",ts:"t"},
+  {e:"e.signals.dsp",fs:"b",ts:"t"},
+  {e:"e.signals.dsp.cross",fs:"l",ts:"l",wp:[[326,142],[326,244]]},
+  {e:"e.dsp.dip",fs:"b",ts:"t"},{e:"e.dsp.speech",fs:"b",ts:"t"},
+  {e:"e.dsp.mordsp",fs:"b",ts:"t"},{e:"e.dsp.sig_ai",fs:"b",ts:"t"}]},
+
+/* ================= 补充图 1：软件 ↔ 硬件之桥 ================= */
+{id:"f.bridge",tier:"extra",title:"软件 ↔ 硬件之桥",origin:"orig",
+ source:"补充图：软件（C/C++/Python）→ 编译器 / 解释器 → 中间表示 IR → 机器指令 → ISA → CPU → RTL → 数字逻辑 → 电路 → 晶体管",w:880,h:790,
+ caption:"这张图回答“一行 Python 到底怎么变成电信号”：逐层向下的每一环都是一次翻译或一次实现。它同时是本页“实现”类关系的总览——软件靠编译器落到机器指令，机器指令由 ISA 规定，ISA 由 CPU 实现，CPU 由数字逻辑实现，逻辑由电路实现，电路由晶体管实现。",
+ nodes:[
+  {kb:"c.cpp",x:320,y:16,w:240,h:52,tone:"yellow",label:"软件：C / C++ / Python"},
+  {kb:"c.compiler",x:320,y:96,w:240,h:52,tone:"purple",label:"编译器 / 解释器"},
+  {kb:"t.ir",x:320,y:176,w:240,h:52,tone:"blue",label:"中间表示 IR"},
+  {kb:"t.mcode",x:320,y:256,w:240,h:52,tone:"blue",label:"机器指令"},
+  {kb:"c.isa",x:320,y:336,w:240,h:52,tone:"blue",label:"ISA（指令集架构）"},
+  {kb:"c.comp_org",x:320,y:416,w:240,h:52,tone:"teal",label:"CPU（ALU / 控制器 / 寄存器）"},
+  {kb:"c.rtl",x:320,y:496,w:240,h:52,tone:"green",label:"RTL / 数据通路"},
+  {kb:"c.diglogic",x:320,y:576,w:240,h:52,tone:"green",label:"数字逻辑（组合 / 时序）"},
+  {kb:"t.lv_circuit",x:320,y:656,w:240,h:52,tone:"gray",label:"电路"},
+  {kb:"t.transistor",x:320,y:736,w:240,h:52,tone:"gray",label:"晶体管 / MOS 管"}],
+ links:[
+  {e:"e.cpp.compiler",fs:"b",ts:"t"},{e:"e.compiler.ir",fs:"b",ts:"t"},
+  {e:"e.ir.mcode",fs:"b",ts:"t"},{e:"e.mcode.isa",fs:"b",ts:"t"},
+  {e:"e.isa.comp_org",fs:"b",ts:"t"},{e:"e.comp_org.rtl",fs:"b",ts:"t"},
+  {e:"e.rtl.diglogic",fs:"b",ts:"t"},{e:"e.diglogic.circuit",fs:"b",ts:"t"},
+  {e:"e.circuit.transistor",fs:"b",ts:"t"}]},
+
+/* ================= 补充图 2：软件这一支柱的内部结构 ================= */
+{id:"f.softstruct",tier:"extra",title:"“软件”这一支柱的内部结构",origin:"orig",
+ source:"补充图（软件结构）：计算机科学 → 硬件 / 软件 → 软件 → 程序设计 → 编程语言 / 数据结构 / 算法",w:1000,h:430,
+ caption:"补充图把“软件”拆到可见粒度：软件 → 程序设计 → 编程语言、数据结构、算法三类课程。它解释了为什么算法课和编程语言课既属于软件方向，又和算法板块共享内容。",
+ nodes:[
+  {kb:"n.cs",x:400,y:14,w:200,h:52,tone:"blue",label:"计算机科学"},
+  {kb:"m.digital",x:120,y:100,w:210,h:70,tone:"teal",label:"硬件",sub:"数字系统 · 处理器与存储器"},
+  {kb:"m.systems",x:400,y:100,w:230,h:70,tone:"purple",label:"软件",sub:"操作系统 · 编译器 / 解释器 · 运行时"},
+  {kb:"m.programming",x:400,y:210,w:230,h:64,tone:"green",label:"程序设计",sub:"编程语言 · 数据结构 · 算法"},
+  {kb:"c.cpp",x:110,y:320,w:190,h:64,tone:"yellow",label:"编程语言",sub:"C / C++ / Python"},
+  {kb:"c.ds",x:345,y:320,w:175,h:64,tone:"green",label:"数据结构",sub:"数组 / 链表"},
+  {kb:"c.algodesign",x:565,y:320,w:200,h:64,tone:"green",label:"算法",sub:"排序 / 搜索"}],
+ links:[
+  {e:"e.cs.hw",fs:"b",ts:"t"},{e:"e.cs.sw",fs:"b",ts:"t"},
+  {e:"e.soft.prog",fs:"b",ts:"t"},
+  {e:"e.prog.lang",fs:"b",ts:"t"},{e:"e.prog.ds",fs:"b",ts:"t"},{e:"e.prog.algo",fs:"b",ts:"t"}]},
+
+/* ================= 补充图 3：数学基础到信号与系统 ================= */
+{id:"f.mathchain",tier:"extra",title:"数学基础到信号与系统",origin:"orig",
+ source:"补充图（数学链）：线性代数 / 微积分 → 实变函数 → 泛函分析 → 调和分析；微积分 → 复变函数 → 调和分析；线性代数与微积分 → 信号与系统",w:1000,h:400,
+ caption:"这条数学链是信号与系统方向真正的先修：微积分与线性代数是起点，向上经实变函数 / 复变函数汇入泛函分析与调和分析，其中微积分与线性代数直接支撑信号与系统。计算机方向的数学要求通常少于通信方向——这也是院校专业设置的差异所在。",
+ nodes:[
+  {kb:"t.calculus",x:40,y:170,w:160,h:56,tone:"purple",label:"微积分"},
+  {kb:"t.linalg",x:40,y:300,w:160,h:56,tone:"purple",label:"线性代数"},
+  {kb:"c.real",x:250,y:90,w:160,h:56,tone:"blue",label:"实变函数"},
+  {kb:"c.complex",x:250,y:250,w:160,h:56,tone:"blue",label:"复变函数"},
+  {kb:"c.functional",x:460,y:170,w:160,h:56,tone:"green",label:"泛函分析"},
+  {kb:"c.harmonic",x:670,y:90,w:160,h:56,tone:"green",label:"调和分析"},
+  {kb:"c.signals",x:800,y:260,w:170,h:64,tone:"teal",label:"信号与系统"}],
+ links:[
+  {e:"e.calc.real",fs:"r",ts:"l"},{e:"e.calc.complex",fs:"r",ts:"l"},
+  {e:"e.calc.functional",fs:"r",ts:"l"},{e:"e.linalg.functional",fs:"r",ts:"l"},
+  {e:"e.real.functional",fs:"b",ts:"t"},{e:"e.functional.harmonic",fs:"r",ts:"l"},
+  {e:"e.complex.harmonic",fs:"r",ts:"b"},{e:"e.harmonic.signals",fs:"b",ts:"t"},
+  {e:"e.linalg.signals",fs:"r",ts:"l"}]}
+];
+const KB_ROUTES=[
+{id:"r.hw",title:"路线一 · 硬件地基：从晶体管到处理器",desc:"沿“数字系统”这条地基向上：先用半导体器件理解 0/1 从哪来，再依次学数字逻辑、数据表示、计算机组成、RTL、指令集、汇编，最后进入体系结构与 FPGA / 嵌入式。",
+ nodes:["c.semiconductor","c.diglogic","c.data_rep","c.comp_org","c.rtl","c.isa","c.asm","c.arch","c.fpga"],
+ note:"这条线对应的框架图是“数字系统与计算机系统的层级关系”：器件级 → 电路级 → 逻辑级 → 功能模块级 → 系统级，课程链与层级是“层级对应”关系，不必严格按层级顺序学完再往上走。"},
+{id:"r.signal",title:"路线二 · 信息线：从数学到信号与系统",desc:"沿“信号与系统”这条地基向上：先补数学（微积分、线性代数、复变函数、实变与泛函），再学信号与系统、数字信号处理，然后按兴趣分向图像、语音、现代信号处理或 AI 交叉。",
+ nodes:["c.mathbase","c.signals","c.dsp","c.random_sig","c.mordsp","c.dip","c.speech","c.sig_ai","c.control","c.comm"],
+ note:"自动控制原理、通信原理都在这条线的延长线上。判断一门课属于这条线的标志是：它的核心工具是变换、频谱、系统响应与随机过程。"},
+{id:"r.algo",title:"路线三 · 算法主干",desc:"离散数学与数据结构打底，再学算法设计与分析、算法正确性、高级算法。它是 AI、编译器、数据库、网络等所有方向的共同前置。",
+ nodes:["c.discrete","c.ds","c.algodesign","c.complexity","c.algo_correct","c.adv_algo"],
+ note:"算法是一种“与硬件无关的描述方式”，但它的可行性最终受计算硬件约束——这正好是框架图里 算法 ↔ 硬件 的虚线所表达的意思。"},
+{id:"r.sw",title:"路线四 · 软件主干：从程序设计到系统软件",desc:"先会写程序（语言 + 数据结构 + 程序设计组织），再理解程序如何被翻译与运行：操作系统、编译器、虚拟机与运行时、工具链，最后是软件生命周期与程序分析。",
+ nodes:["c.cpp","c.ds","c.prog_org","c.os","c.compiler","c.vm","c.toolchain","c.plt","c.lifecycle","c.proganalysis"],
+ note:"这条线对应“软件 ↔ 硬件之桥”的上半段：程序经编译器 / 解释器变成机器指令，之后才落到 ISA 与 CPU 上。"},
+{id:"r.ai",title:"路线五 · AI 方向",desc:"先具备数学与算法基础，再学人工智能基础、机器学习、深度学习、AI 子领域与大模型，最后理解 AI 系统（训练系统 / 推理系统）与它依赖的计算硬件。",
+ nodes:["c.mathbase","c.algodesign","c.ai_foundation","c.ml","c.dl","c.ai_sub","c.llm","c.ai_sys","c.gpu_hw"],
+ note:"AI 方向最容易“只会调库、不懂底层”。框架图给的解法是沿着 算法与模型 → 软件与系统 → 计算硬件 三列各自至少走通一层。"},
+{id:"r.app",title:"路线六 · 系统与应用层",desc:"在软件主干之上进入数据库、网络、分布式、云计算、软件工程、测试、安全与各类计算机系统（通用 / 嵌入式 / 高性能 / 边缘 / 集成）。",
+ nodes:["c.db","c.dbsys","c.dataeng","c.net","c.netprog","c.dist","c.cloud","c.se","c.test","c.security","c.sys_general","c.sys_embed","c.sys_hpc","c.sys_edge","c.sys_integrated"],
+ note:"应用层的课程多数不是彼此的严格先修，而是共享同一批前置知识（操作系统、网络、数据结构），可以按项目需要横向穿插学习。"},
+{id:"r.cross",title:"路线七 · 三线交叉：一条程序是如何跑起来的",desc:"用一条线把算法、软件、硬件三条线串起来看：算法如何被写成程序，程序如何被编译器翻译成机器指令，机器指令如何由 ISA 定义、由 CPU 实现、最终由数字逻辑与电路执行。",
+ nodes:["c.algodesign","c.cpp","c.compiler","c.isa","c.comp_org","c.diglogic","c.semiconductor"],
+ note:"这条路线是“横向浏览”的示范：同一门课可以同时出现在多条路线里，因为知识本身是网状的，本页用关系而不是目录来表达它。"}
+];
+const KB_VIEWS={
+ heroLead:"这是一张以“知识关系”为核心的计算机工科知识地图：计算机科学由硬件、软件、算法三根支柱构成，AI 与三者交叉，它们协同工作形成计算机系统并支撑各种应用。整张地图的结构来自框架图——数字系统与信号与系统是最底层的两条地基，数学是它们共同的地下室。每个板块、课程、知识点都有唯一 id 与明确归属；课程详情会显示它的前置知识、后续知识与关联课程；图中的每条箭头都对应一条带类型的关系记录（组成 / 层级 / 先修 / 实现 / 应用 / 交叉 / 对比），而不是把所有线都当成“先修”。",
+ howTo:[
+  {q:"① 它属于哪个板块？",a:"先判断这门课 / 这个概念属于硬件、软件、算法，还是数学与信号这两条地基。归属决定了它的“上下位”。"},
+  {q:"② 它属于哪个层次？",a:"同一件事在不同层次有不同说法：晶体管、门电路、模块、系统、ISA、机器指令、程序、算法，各自处在不同层级。先定位层次，再看同一层里的左右邻。"},
+  {q:"③ 它和谁有关系、是哪种关系？",a:"是“组成”（A 由 B 构成）、“层级”（处在相邻层）、“先修”（学习顺序）、“实现”（B 把 A 变成可运行 / 可制造的形式）、“应用”（A 被用到 B 中）、“交叉”（互相借用方法）还是“对比”（容易混淆、需要区分）？"},
+  {q:"④ 它依赖什么、又支撑谁？",a:"往上问“学它之前需要什么”，往下问“它被谁用到”。这就是本页课程详情里的前置 / 后续 / 关联三个列表。"}],
+ homePath:["数学与离散基础","数字系统（硬件地基）","计算机组成与指令集","汇编与底层程序","操作系统 / 编译器 / 运行时","数据结构与算法","程序设计","数据库 / 网络 / 分布式","AI 与应用方向"],
+ routeLead:"下面几条路线不是唯一的正确顺序，而是几条被框架图支持的“主干道”：先走通一条，再用关系横向补其他线。每条路线都可以对照进度自检。",
+ routeNote:"重要：路线表达的是“学习顺序的简化示意”，而框架图里的箭头分不同关系类型——层级对应、组成、实现等箭头并不等于先修顺序。"};
+/* KB-DATA-END */
+
+/* ---------------- 常量与工具 ---------------- */
+const R_TYPE={
+  compose:{name:'组成',color:'#2563eb',dash:false,desc:'A 由 B 组成 / A 包含 B'},
+  layer:{name:'层级',color:'#0891b2',dash:false,desc:'A 与 B 处于相邻层级（位置关系，不表达因果）'},
+  prereq:{name:'先修',color:'#16a34a',dash:false,desc:'学 B 之前应先学 A（学习顺序）'},
+  impl:{name:'实现',color:'#7c3aed',dash:false,desc:'B 把 A 变成可运行 / 可制造的形式（翻译、执行、承载）'},
+  apply:{name:'应用',color:'#ea8c00',dash:false,desc:'A 的方法被用到 B 中 / A 服务于 B'},
+  cross:{name:'交叉',color:'#0d9488',dash:true,desc:'A 与 B 相互借用方法、互相支撑（交叉应用）'},
+  contrast:{name:'对比',color:'#94a3b8',dash:true,desc:'A 与 B 职责不同、常被混淆，需要区分'}
+};
+const ORIGIN={orig:{name:'原图表达',cls:'o-orig'},infer:{name:'合理推断',cls:'o-infer'},add:{name:'新增补充',cls:'o-add'}};
+const TYPE_NAME={module:'知识板块',course:'课程',topic:'知识点',domain:'学科总节点'};
+const TONE={
+  purple:{fill:'#efe9ff',stroke:'#a98bf0',bar:'#8b5cf6'},blue:{fill:'#e2edff',stroke:'#7ba6f0',bar:'#3b82f6'},
+  green:{fill:'#e2f7e9',stroke:'#7fc79b',bar:'#22c55e'},orange:{fill:'#ffeede',stroke:'#f0b47a',bar:'#f97316'},
+  teal:{fill:'#dcf7f3',stroke:'#6fc9bb',bar:'#14b8a6'},pink:{fill:'#fde7f1',stroke:'#f0a0c4',bar:'#ec4899'},
+  gray:{fill:'#f1f5f9',stroke:'#b6c2d3',bar:'#94a3b8'},yellow:{fill:'#fdf3d4',stroke:'#e0c06a',bar:'#eab308'}
+};
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+          set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+/* ---------------- 知识库：索引、合并、自检 ---------------- */
+const KB={nodes:[],edges:[],frames:[],routes:[],views:{},byId:{},edgeById:{},custom:{nodes:[],edges:[]},errors:[],warns:[]};
+function buildKB(){
+  const builtin=[].concat(KB_MODULES,KB_COURSES,KB_TOPICS,KB_EXTRA);
+  const custom=KB.custom&&Array.isArray(KB.custom.nodes)?KB.custom.nodes:[];
+  const customE=KB.custom&&Array.isArray(KB.custom.edges)?KB.custom.edges:[];
+  KB.nodes=builtin.concat(custom);
+  KB.edges=[].concat(KB_EDGES,customE);
+  KB.frames=KB_FRAMES;KB.routes=KB_ROUTES;KB.views=KB_VIEWS||{};
+  KB.byId={};KB.edgeById={};
+  KB.nodes.forEach(n=>{if(n&&n.id)KB.byId[n.id]=n});
+  KB.edges.forEach(e=>{if(e&&e.id)KB.edgeById[e.id]=e});
+  validateKB();
+}
+function validateKB(){
+  const errors=[],warns=[],seen=new Set();
+  KB.nodes.forEach(n=>{
+    if(!n||!n.id){errors.push('存在缺少 id 的节点：'+JSON.stringify(n).slice(0,70));return}
+    if(seen.has(n.id))errors.push('节点 id 重复：'+n.id);else seen.add(n.id);
+    if(!n.title)warns.push(n.id+' 缺少 title');
+    if(!TYPE_NAME[n.type])warns.push(n.id+' 的 type 不在 module/course/topic/domain 之内：'+n.type);
+    if(n.parent&&!KB.byId[n.parent])errors.push(n.id+' 的 parent 不存在：'+n.parent);
+  });
+  const eseen=new Set();
+  KB.edges.forEach(e=>{
+    if(!e||!e.id){errors.push('存在缺少 id 的关系');return}
+    if(eseen.has(e.id))errors.push('关系 id 重复：'+e.id);else eseen.add(e.id);
+    if(!KB.byId[e.from])errors.push(e.id+' 的起点不存在：'+e.from);
+    if(!KB.byId[e.to])errors.push(e.id+' 的终点不存在：'+e.to);
+    if(!R_TYPE[e.type])errors.push(e.id+' 的关系类型未知：'+e.type);
+  });
+  KB.frames.forEach(f=>{
+    (f.nodes||[]).forEach(n=>{if(!KB.byId[n.kb])errors.push('框架图 '+f.id+' 中的节点未定义：'+n.kb)});
+    (f.links||[]).forEach(l=>{if(!KB.edgeById[l.e])errors.push('框架图 '+f.id+' 引用了不存在的关系：'+l.e)});
+  });
+  KB.errors=errors;KB.warns=warns;
+  if(errors.length)console.warn('知识库自检发现问题：',errors);
+}
+function nodeById(id){return KB.byId[id]||null}
+function edgeById(id){return KB.edgeById[id]||null}
+function nodesOfType(t){return KB.nodes.filter(n=>n.type===t)}
+function childrenOf(id){return KB.nodes.filter(n=>n.parent===id)}
+function moduleOf(n){
+  let cur=n,guard=0;
+  while(cur&&cur.type!=='module'&&cur.parent&&guard++<20)cur=nodeById(cur.parent);
+  return cur&&cur.type==='module'?cur:null;
+}
+function courseOf(n){
+  let cur=n,guard=0;
+  while(cur&&cur.type!=='course'&&cur.parent&&guard++<20)cur=nodeById(cur.parent);
+  return cur&&cur.type==='course'?cur:null;
+}
+function edgesOf(id,types){
+  return KB.edges.filter(e=>(e.from===id||e.to===id)&&(!types||types.indexOf(e.type)>=0));
+}
+function edgesBetween(a,b){return KB.edges.filter(e=>(e.from===a&&e.to===b)||(e.from===b&&e.to===a))}
+function frameHasNode(f,id){return (f.nodes||[]).some(n=>n.kb===id)}
+function framesOfNode(id){return KB.frames.filter(f=>frameHasNode(f,id))}
+function originTag(o){const m=ORIGIN[o]||ORIGIN.add;return '<span class="origin '+m.cls+'">'+m.name+'</span>'}
+function typeBadge(t){return '<span class="badge t-'+t+'">'+(TYPE_NAME[t]||t)+'</span>'}
+function rTypeTag(t){const r=R_TYPE[t]||R_TYPE.apply;return '<span class="rtype" style="background:'+r.color+'">'+r.name+'</span>'}
+function coveredModules(){return new Set(KB.nodes.map(n=>moduleOf(n)).filter(Boolean).map(m=>m.id))}
+
+const PKEY='cskb.progress',NKEY='cskb.notes',CKEY='cskb.custom';
+let progress=LS.get(PKEY,{}),notes=LS.get(NKEY,{});
+KB.custom=LS.get(CKEY,{nodes:[],edges:[]});
+function isDone(id){return !!progress[id]}
+function setDone(id,v){if(v)progress[id]=1;else delete progress[id];LS.set(PKEY,progress);renderTree();}
+function progressOfNodes(list){
+  if(!list.length)return 0;
+  return Math.round(100*list.filter(n=>isDone(n.id)).length/list.length);
+}
+let lastQuery='';
+function hl(text){
+  const s=esc(text==null?'':text);
+  if(!lastQuery)return s;
+  try{return s.replace(new RegExp(lastQuery.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'),m=>'<mark>'+m+'</mark>')}catch(e){return s}
+}
+
+/* ---------------- 通用小片段 ---------------- */
+function crumbs(list){
+  return '<div class="crumb">'+list.map((x,i)=>{
+    const sep=i?'<span>›</span>':'';
+    return sep+(x.href?'<a href="'+x.href+'">'+esc(x.title)+'</a>':'<span>'+esc(x.title)+'</span>');
+  }).join('')+'</div>';
+}
+function relRow(e,direction){
+  const other=direction==='out'?nodeById(e.to):nodeById(e.from);
+  if(!other)return '';
+  const omod=moduleOf(other);
+  const r=R_TYPE[e.type]||R_TYPE.apply;
+  const label=(direction==='out'?'→ ':'← ')+other.title;
+  const arrow=direction==='out'?
+    (rTypeTag(e.type)+' <span class="subtle">'+esc(e.label||r.name)+'</span>'):
+    ('<span class="subtle">'+esc(e.label||r.name)+'</span> '+rTypeTag(e.type));
+  return '<div class="rel-row"><div class="side"><a class="chip" href="#/node/'+other.id+'">'+esc(label)+'</a>'+
+   '<small>'+esc(TYPE_NAME[other.type]||'')+(omod?' · '+esc(omod.title):'')+'</small></div>'+
+   '<div style="text-align:center">'+arrow+'</div>'+
+   '<div><p class="rel-note">'+esc(e.note||R_TYPE[e.type].desc)+'</p><p style="margin:3px 0 0">'+originTag(e.origin)+'</p></div></div>';
+}
+function relSection(title,hint,edges,dir){
+  return '<div class="section-title"><h3>'+esc(title)+'</h3><span class="subtle">'+esc(hint)+'</span></div>'+
+    (edges.length?edges.map(e=>relRow(e,dir)).join(''):'<p class="subtle">暂无记录。</p>');
+}
+function nodeChips(list,opts){
+  if(!list.length)return '<p class="subtle">暂无。</p>';
+  return '<div>'+list.map(n=>{
+    const t=TYPE_NAME[n.type]||'';
+    return '<a class="chip'+(isDone(n.id)?' done':'')+'" href="#/node/'+n.id+'" title="'+esc((t)+'：'+n.title)+'">'+
+      esc(n.title)+(isDone(n.id)?' ✓':'')+'</a>';
+  }).join('')+'</div>';
+}
+function pct(a,b){return b?Math.round(100*a/b):0}
+
+/* ---------------- 路由 ---------------- */
+const view=$('#view');
+function go(hash){
+  if(location.hash===hash)route();
+  else location.hash=hash;
+}
+function route(){
+  const raw=location.hash.replace(/^#\/?/,'');
+  const parts=raw.split('/');
+  const name=parts[0]||'home',arg=parts[1]?decodeURIComponent(parts[1]):'';
+  window.scrollTo({top:0});
+  switch(name){
+    case 'home':renderHome();break;
+    case 'frames':arg?renderFrame(arg):renderFrames();break;
+    case 'node':renderNode(arg);break;
+    case 'relations':renderRelations(arg);break;
+    case 'route':renderRoute();break;
+    case 'progress':renderProgress();break;
+    case 'data':renderData();break;
+    default:renderHome();
+  }
+  markTree();
+}
+function notFound(id){
+  view.innerHTML='<section class="content-card"><h2>没有找到这个节点</h2><p class="lead">id：'+esc(id)+
+  '。可能链接来自已被删除的自定义内容。</p><p><button class="btn primary" onclick="go(\'#/home\')">返回总览</button> '+
+  '<button class="btn" onclick="go(\'#/relations\')">查看全部关系</button></p></section>';
+}
+
+/* ---------------- 首页 ---------------- */
+function renderHome(){
+  const mods=nodesOfType('module'),courses=nodesOfType('course'),topics=nodesOfType('topic');
+  const mainFrames=KB.frames.filter(f=>f.tier==='main'),vs=KB.views;
+  view.innerHTML=`
+  <section class="hero">
+    <div class="eyebrow">A knowledge-relation map, not a course list</div>
+    <h1>计算机工科知识地图</h1>
+    <p>${esc(vs.heroLead||'')}</p>
+    <div class="hero-tags"><span class="tag">四大框架图驱动</span><span class="tag">区块 · 课程 · 知识点双向联动</span>
+    <span class="tag">关系分类型：组成 / 层级 / 先修 / 实现 / 应用 / 交叉 / 对比</span><span class="tag">可继续用 AI 扩充</span></div>
+  </section>
+  <div class="stats">
+    <div class="stat"><b>${mods.length} 个</b><span>知识板块（含 2 大基础层）</span></div>
+    <div class="stat"><b>${courses.length} 门</b><span>课程（可点开看前后关系）</span></div>
+    <div class="stat"><b>${topics.length} 个</b><span>知识点</span></div>
+    <div class="stat"><b>${KB.edges.length} 条</b><span>带类型的知识关系</span></div>
+  </div>
+
+  <section class="content-card">
+    <div class="kicker">TWO FOUNDATIONS · 两个地基</div>
+    <h2>最底层：数字系统 与 信号与系统</h2>
+    <p class="lead">整张地图有两条地基：<b>数字系统</b>回答“计算在物理上如何被实现”，<b>信号与系统</b>回答“信息如何被数学地描述与处理”。
+    算法、软件、AI 与各种应用都长在这两条地基之上；数学基础则是两条地基共同的地下室。</p>
+    <div class="grid2">
+      ${['m.digital','m.signal'].map(id=>{const m=nodeById(id);if(!m)return '';
+        const cs=childrenOf(id);
+        return `<div class="mini"><h3>${esc(m.title)}</h3><p>${esc(m.summary||'').slice(0,150)}…</p>
+        <div>${nodeChips(cs.slice(0,7))}</div>
+        <p style="margin-top:9px"><button class="btn tiny" onclick="go('#/node/${m.id}')">进入板块</button>
+        ${framesOfNode(m.id).map(f=>` <button class="btn tiny" onclick="go('#/frames/${f.id}')">在${esc(f.tier==='main'?'框架图':'补充图')}中查看</button>`).join('')}</p></div>`}).join('')}
+    </div>
+    <div class="note">数学基础（高等数学、线性代数、概率统计、复变函数、实变函数与泛函分析）是信号与系统一路的先修；离散数学与逻辑则是数字逻辑、算法与编译器的先修。图中这两条线的箭头类型是<b>先修关系</b>，而不是组成关系。</div>
+  </section>
+
+  <section class="content-card">
+    <div class="kicker">FOUR FRAMEWORK PANELS · 四大框架模块</div>
+    <h2>框架图 → 网页结构</h2>
+    <p class="lead">下面四张图就是本网页的结构基准。点击任意模块进入交互图：图中每个方框都能点开详情，每条箭头都能点开看它属于哪一类关系、具体表示什么。</p>
+    <div class="grid2">
+      ${mainFrames.map(f=>`<div class="mini"><h4>${esc(f.title)}</h4><p>${esc(f.caption||'')}</p>
+      <p>${(f.nodes||[]).length} 个节点 · ${(f.links||[]).length} 条关系</p>
+      <p><button class="btn tiny primary" onclick="go('#/frames/${f.id}')">打开交互图</button></p></div>`).join('')}
+    </div>
+    <p style="margin-top:12px"><button class="btn" onclick="go('#/frames')">查看全部框架图（含补充图）</button></p>
+  </section>
+
+  <section class="content-card">
+    <div class="kicker">HOW TO USE</div>
+    <h2>先学会“定位”，再学具体知识</h2>
+    <p class="lead">碰到一个新概念时，不必急着背定义。先回答下面四个问题，通常就不会把不同层次的概念混在一起。</p>
+    <div class="grid2">${(vs.howTo||[]).map(x=>`<div class="mini"><h3>${esc(x.q)}</h3><p>${esc(x.a)}</p></div>`).join('')}</div>
+    <div class="note">重要说明：这是一套便于学习和查找的知识框架，不是唯一的官方分类。计算机知识相互交叉，同一个概念可以同时出现在不同地图中；同一个知识点在本页只创建一次，通过关系连接到多个板块。</div>
+    <h3>计算机核心知识总览</h3>
+    <div class="path">${(vs.homePath||[]).map((s,i)=>(i?'<i>→</i>':'')+'<span>'+esc(s)+'</span>').join('')}</div>
+    <p>这条路径是学习顺序的简化示意，不代表所有专业方向都必须严格按顺序学习。硬件、网络、数据库和人工智能等分支会在不同阶段交叉出现。</p>
+    <h3>四层导航怎么用</h3>
+    <div class="grid3">
+      <div class="mini"><h4>① 图中点方框</h4><p>从框架图点进某个板块或课程，看它在图上的上下位与左右邻。</p></div>
+      <div class="mini"><h4>② 课程看前后知识</h4><p>课程详情列出前置知识、后续知识与关联课程，可横向探索。</p></div>
+      <div class="mini"><h4>③ 知识点跳关联</h4><p>知识点详情给出所属课程、前序后继与相关课程，便于查漏补缺。</p></div>
+    </div>
+    <p style="margin-top:14px">
+      <button class="btn" onclick="go('#/route')">学习路线</button>
+      <button class="btn" onclick="go('#/relations')">关系浏览器</button>
+      <button class="btn" onclick="go('#/progress')">学习进度</button>
+      <button class="btn" onclick="go('#/data')">用 AI 扩充内容</button>
+    </p>
+    <div class="note warning">学习提醒：目录中的内容是知识地图与入门解释，不是完整教材。遇到不熟悉的词，可以用顶部搜索定位，或先回到总览确认它属于哪个板块。</div>
+  </section>
+  <div class="footer">计算机工科知识地图 · 以知识关系为核心 · 当前载入 ${KB.nodes.length} 个节点 / ${KB.edges.length} 条关系</div>`;
+}
+
+/* ---------------- 框架图 ---------------- */
+function renderFrames(cur){
+  const main=KB.frames.filter(f=>f.tier==='main'),extra=KB.frames.filter(f=>f.tier!=='main');
+  view.innerHTML=`<section class="content-card" style="margin-top:0">
+    <div class="kicker">FRAMEWORK PANELS</div><h2>框架图</h2>
+    <p class="lead">四张主框架图是本页的结构基准；补充图来自其他资料，用来说明主图内部被简化的部分。点开任意一张即可交互。</p>
+    <div class="grid2">${main.concat(extra).map(f=>`
+      <div class="mini"><h4>${esc(f.title)}</h4>
+      <p class="subtle">${esc(f.source||'')} · ${originTag(f.origin)}</p>
+      <p>${esc(f.caption||'')}</p>
+      <p class="subtle">${(f.nodes||[]).length} 个节点 · ${(f.links||[]).length} 条关系</p>
+      <p><button class="btn tiny primary" onclick="go('#/frames/${f.id}')">打开</button></p></div>`).join('')}</div>
+  </section><div class="footer">共 ${KB.frames.length} 张图（主框架图 ${main.length} 张）</div>`;
+}
+function anchorOf(n,side){
+  if(side==='t')return [n.x+n.w/2,n.y];
+  if(side==='b')return [n.x+n.w/2,n.y+n.h];
+  if(side==='l')return [n.x,n.y+n.h/2];
+  return [n.x+n.w,n.y+n.h/2];
+}
+function orthoPath(a,b,fs,ts,wp){
+  const p=anchorOf(a,fs||'b'),q=anchorOf(b,ts||'t');
+  let pts=[p];
+  if(wp&&wp.length){pts=pts.concat(wp);}
+  else{
+    const v1=(fs==='t'||fs==='b'||!fs),v2=(ts==='t'||ts==='b'||!ts);
+    if(v1&&v2){const my=(p[1]+q[1])/2;pts.push([p[0],my],[q[0],my]);}
+    else if(!v1&&!v2){const mx=(p[0]+q[0])/2;pts.push([mx,p[1]],[mx,q[1]]);}
+    else if(v1){pts.push([p[0],q[1]]);}
+    else{pts.push([q[0],p[1]]);}
+  }
+  pts.push(q);
+  const out=[pts[0]];
+  for(let i=1;i<pts.length;i++){
+    const A=out[out.length-1],B=pts[i];
+    if(Math.abs(A[0]-B[0])>0.6||Math.abs(A[1]-B[1])>0.6)out.push(B);
+  }
+  const d='M'+out.map(pt=>pt[0].toFixed(1)+' '+pt[1].toFixed(1)).join(' L ');
+  const mi=Math.max(0,Math.floor((out.length-1)/2));
+  const mid=[(out[mi][0]+out[Math.min(mi+1,out.length-1)][0])/2,(out[mi][1]+out[Math.min(mi+1,out.length-1)][1])/2];
+  return {d:d,mid:mid};
+}
+function wrapText(str,max){
+  const s=String(str||''),lines=[];
+  const parts=s.split('·');
+  let cur='';
+  parts.forEach(p=>{
+    const next=cur?cur+'·'+p:p;
+    if(next.length>max&&cur){lines.push(cur);cur=p;}
+    else cur=next;
+  });
+  if(cur)lines.push(cur);
+  return lines.slice(0,3);
+}
+function frameSVG(f){
+  const W=f.w||1000,H=f.h||620;
+  const fn={};/* 同一课程可在图内出现多次：优先用 key 定位，缺省用 kb（首个同 kb 节点） */
+  (f.nodes||[]).forEach(n=>{if(n.key)fn[n.key]=n;if(!(n.kb in fn))fn[n.kb]=n;});
+  let s='<svg class="fsvg" viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="'+esc(f.title)+'">';
+  s+='<defs>';
+  Object.keys(R_TYPE).forEach(k=>{
+    s+='<marker id="arw-'+k+'" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="'+R_TYPE[k].color+'"/></marker>';
+  });
+  s+='</defs>';
+  (f.links||[]).forEach(l=>{
+    const e=edgeById(l.e);if(!e)return;
+    const a=fn[l.from||e.from],b=fn[l.to||e.to];if(!a||!b)return;
+    const r=R_TYPE[e.type]||R_TYPE.apply;
+    const g=orthoPath(a,b,l.fs,l.ts,l.wp);
+    const dash=(l.dash!==undefined?l.dash:r.dash)?' stroke-dasharray="7 5"':'';
+    s+='<g class="fedge" data-edge="'+e.id+'"><title>'+esc(r.name+'：'+(e.label||r.name)+' — '+(e.note||r.desc))+'</title>'+
+      '<path d="'+g.d+'" stroke="'+r.color+'"'+dash+' marker-end="url(#arw-'+e.type+')"'+(l.bidir||e.bidir?' marker-start="url(#arw-'+e.type+')"':'')+'/>'+
+      (l.hideLabel?'':'<text class="felab" fill="'+r.color+'" x="'+g.mid[0].toFixed(1)+'" y="'+(g.mid[1]-4).toFixed(1)+'" text-anchor="middle">'+esc(l.label||e.label||r.name)+'</text>')+
+      '</g>';
+  });
+  (f.nodes||[]).forEach(n=>{
+    const node=nodeById(n.kb);
+    const t=TONE[n.tone||'blue']||TONE.blue;
+    const cx=n.x+n.w/2;
+    const tl=wrapText(n.label||(node?node.title:''),Math.max(4,Math.floor(n.w/15)));
+    const sl=n.sub?wrapText(n.sub,Math.max(6,Math.floor(n.w/13))).slice(0,2):[];
+    const totalH=tl.length*19+sl.length*15;
+    let ty=n.y+(n.h-totalH)/2+16;
+    s+='<g class="fnode" data-kb="'+esc(n.kb)+'" tabindex="0">'+
+       '<title>'+esc((node?node.title:n.kb)+' ｜ '+(TYPE_NAME[node?node.type:'']||'节点')+(node&&node.summary?' — '+String(node.summary).slice(0,120):''))+'</title>'+
+       '<rect x="'+n.x+'" y="'+n.y+'" width="'+n.w+'" height="'+n.h+'" rx="11" fill="'+t.fill+'" stroke="'+t.stroke+'"/>'+
+       '<rect x="'+n.x+'" y="'+(n.y+9)+'" width="5" height="'+(n.h-18)+'" rx="2.5" fill="'+t.bar+'"/>';
+    tl.forEach((line,i)=>{s+='<text class="ft" x="'+cx+'" y="'+ty.toFixed(1)+'" text-anchor="middle">'+esc(line)+'</text>';ty+=19});
+    sl.forEach(line=>{s+='<text class="fs" x="'+cx+'" y="'+ty.toFixed(1)+'" text-anchor="middle">'+esc(line)+'</text>';ty+=15});
+    s+='</g>';
+  });
+  return s+'</svg>';
+}
+function renderFrame(id){
+  const f=KB.frames.find(x=>x.id===id);
+  if(!f)return notFound(id);
+  const pills=KB.frames.map(x=>'<button class="'+(x.id===id?'on':'')+'" onclick="go(\'#/frames/'+x.id+'\')">'+(x.tier==='main'?'':'补充 · ')+esc(x.title)+'</button>').join('');
+  const usedTypes={};(f.links||[]).forEach(l=>{const e=edgeById(l.e);if(e)usedTypes[e.type]=(usedTypes[e.type]||0)+1});
+  const nlist=(f.nodes||[]).map(n=>nodeById(n.kb)).filter(Boolean);
+  const elist=(f.links||[]).map(l=>edgeById(l.e)).filter(Boolean);
+  view.innerHTML=`<section class="content-card" style="margin-top:0">
+    ${crumbs([{title:'总览',href:'#/home'},{title:'框架图',href:'#/frames'},{title:f.title}])}
+    <div class="kicker">${f.tier==='main'?'主框架图':'补充图'} · ${esc(f.source||'')}</div>
+    <h2>${esc(f.title)}</h2>
+    <p class="lead">${esc(f.caption||'')}</p>
+    <p>${originTag(f.origin)} <span class="subtle">图中方框点击进入节点详情，箭头点击查看关系类型与具体含义。</span></p>
+    <div class="frame-tabs">${pills}</div>
+    <div id="frameBox">${frameSVG(f)}</div>
+    <div class="legend">${Object.keys(usedTypes).map(k=>`<span><i style="border-top-color:${R_TYPE[k].color}" class="${R_TYPE[k].dash?'dash':''}"></i>${R_TYPE[k].name}（${usedTypes[k]}）</span>`).join('')}
+      <span class="subtle">虚线＝交叉 / 对比等弱约束关系；箭头方向＝关系的方向</span></div>
+    <div id="frameInfo" class="note">点一条箭头，这里会显示它属于哪一类关系、具体表示什么。</div>
+    <h3>本图中的节点（${nlist.length}）</h3>
+    <p>${nodeChips(nlist)}</p>
+    <h3>本图中的关系（${elist.length}）</h3>
+    <table><thead><tr><th>起点</th><th>关系</th><th>终点</th><th>图中的含义</th><th>来源</th></tr></thead><tbody>
+    ${elist.map(e=>{const a=nodeById(e.from),b=nodeById(e.to);if(!a||!b)return '';
+      return '<tr><td><a href="#/node/'+a.id+'">'+esc(a.title)+'</a></td><td>'+rTypeTag(e.type)+'<br><span class="subtle">'+esc(e.label||'')+'</span></td>'+
+      '<td><a href="#/node/'+b.id+'">'+esc(b.title)+'</a></td><td>'+esc(e.note||'')+'</td><td>'+originTag(e.origin)+'</td></tr>'}).join('')}
+    </tbody></table>
+    <p><button class="btn" onclick="go('#/frames')">所有框架图</button> <button class="btn" onclick="go('#/relations')">关系浏览器</button>
+    ${(f.relatedModule&&nodeById(f.relatedModule))?` <button class="btn primary" onclick="go('#/node/${f.relatedModule}')">进入对应板块：${esc(nodeById(f.relatedModule).title)}</button>`:''}</p>
+  </section>`;
+  const box=$('#frameBox');
+  box.querySelectorAll('.fnode').forEach(g=>g.addEventListener('click',()=>go('#/node/'+g.dataset.kb)));
+  box.querySelectorAll('.fnode').forEach(g=>g.addEventListener('keydown',ev=>{if(ev.key==='Enter')go('#/node/'+g.dataset.kb)}));
+  box.querySelectorAll('.fedge').forEach(g=>g.addEventListener('click',()=>{
+    const e=edgeById(g.dataset.edge);if(!e)return;
+    const a=nodeById(e.from),b=nodeById(e.to);
+    $('#frameInfo').innerHTML='<b>'+esc(a.title)+'</b> '+rTypeTag(e.type)+' <b>'+esc(b.title)+'</b>'+
+      '<br>图中标注：<b>'+esc(e.label||R_TYPE[e.type].name)+'</b>'+'<br>含义：'+esc(e.note||R_TYPE[e.type].desc)+
+      '<br>来源：'+originTag(e.origin)+' <span class="subtle">（'+R_TYPE[e.type].name+'关系的判断标准：'+R_TYPE[e.type].desc+'）</span>'+
+      '<br><a href="#/node/'+a.id+'">查看起点</a> · <a href="#/node/'+b.id+'">查看终点</a>';
+  }));
+}
+
+/* ---------------- 板块 / 课程 / 知识点 / 总节点 ---------------- */
+function renderNode(id){
+  const n=nodeById(id);
+  if(!n)return notFound(id);
+  if(n.type==='module')return renderModule(n);
+  if(n.type==='course')return renderCourse(n);
+  if(n.type==='topic')return renderTopic(n);
+  return renderDomain(n);
+}
+function frameLinksOf(id){
+  const fs=framesOfNode(id);
+  if(!fs.length)return '<p class="subtle">该节点暂未出现在框架图面板中（也可能只是补充内容）。</p>';
+  return fs.map(f=>`<button class="btn tiny" onclick="go('#/frames/${f.id}')">${esc(f.tier==='main'?'框架图':'补充图')}：${esc(f.title)}</button>`).join(' ');
+}
+function locationCard(n){
+  const mod=moduleOf(n),course=(n.type==='topic'?courseOf(n):null);
+  const stages=KB.routes.filter(r=>(r.nodes||[]).indexOf(n.id)>=0);
+  return `<div class="mini"><h4>在全景图中的位置</h4>
+    <p class="kv"><b>所属板块：</b>${mod?'<a href="#/node/'+mod.id+'">'+esc(mod.title)+'</a>':'—'}${mod&&mod.band?' <span class="subtle">（'+esc(({base:'基础层',core:'核心层',upper:'应用与系统层',meta:'视角与规划'})[mod.band]||mod.band)+'）</span>':''}</p>
+    <p class="kv"><b>${n.type==='topic'?'所属课程':'节点类型'}：</b>${n.type==='topic'?(course?'<a href="#/node/'+course.id+'">'+esc(course.title)+'</a>':'—'):(TYPE_NAME[n.type]||'')}</p>
+    ${stages.length?'<p class="kv"><b>学习路线：</b>'+stages.map(s=>'<a href="#/route">'+esc(s.title)+'</a>').join('、')+'</p>':''}
+    <p class="kv"><b>出现在：</b></p><p>${frameLinksOf(n.id)}</p></div>`;
+}
+function renderModule(m){
+  const courses=childrenOf(m.id).filter(x=>x.type==='course');
+  const topics=childrenOf(m.id).filter(x=>x.type==='topic');
+  const cn=courses.concat(topics);
+  const down=edgesOf(m.id).filter(e=>e.type==='prereq');
+  const others=edgesOf(m.id).filter(e=>e.type!=='prereq');
+  view.innerHTML=`<section class="content-card" style="margin-top:0">
+    ${crumbs([{title:'总览',href:'#/home'},{title:m.title}])}
+    <div class="kicker">KNOWLEDGE DOMAIN · 知识板块</div>
+    <h2>${esc(m.title)} ${originTag(m.origin)}</h2>
+    <p class="lead">${hl(m.summary||'')}</p>
+    ${(m.points&&m.points.length)?'<div class="mini"><h4>本板块包含什么</h4><ul>'+m.points.map(p=>'<li>'+hl(p)+'</li>').join('')+'</ul></div>':''}
+    ${(m.tags&&m.tags.length)?'<p>'+m.tags.map(t=>'<span class="chip">#'+esc(t)+'</span>').join('')+'</p>':''}
+    <div class="grid2">
+      ${locationCard(m)}
+      <div class="mini"><h4>本板块学习进度</h4>
+        <p class="kv">已标记完成 <b>${cn.filter(n=>isDone(n.id)).length}</b> / ${cn.length}</p>
+        <div class="bar"><i style="width:${progressOfNodes(cn)}%"></i></div>
+        <p class="subtle">进度保存在本机浏览器中，可在「学习进度」页统一查看与重置。</p>
+        <p><button class="btn tiny" onclick="go('#/progress')">查看总进度</button></p></div>
+    </div>
+    <div class="section-title"><h3>包含课程（${courses.length}）</h3><span class="subtle">点击课程可查看前置 / 后续 / 关联课程</span></div>
+    <div class="grid2">${courses.map(c=>{const ts=childrenOf(c.id).filter(x=>x.type==='topic');
+      return `<div class="mini"><h4><a href="#/node/${c.id}">${esc(c.title)}</a> ${originTag(c.origin)}</h4>
+      <p>${esc(String(c.summary||'').slice(0,150))}${String(c.summary||'').length>150?'…':''}</p>
+      <p class="subtle">${ts.length} 个知识点 · 完成 ${ts.filter(t=>isDone(t.id)).length}</p>
+      <p>${ts.slice(0,6).map(t=>'<a class="chip" href="#/node/'+t.id+'">'+esc(t.title)+'</a>').join('')}${ts.length>6?' <span class="subtle">…</span>':''}</p></div>`}).join('')||'<p class="subtle">该板块暂无课程节点。</p>'}</div>
+    ${topics.length?'<div class="section-title"><h3>直接归属本板块的知识点</h3></div><p>'+nodeChips(topics)+'</p>':''}
+    ${relSection('先修 / 上游关系','这些知识应该在本板块之前建立',down.filter(e=>e.to===m.id),'in')}
+    ${relSection('服务于 / 后续去向','本板块支撑的板块与方向',down.filter(e=>e.from===m.id),'out')}
+    ${others.length?'<div class="section-title"><h3>交叉、组成、应用等其他关系</h3><span class="subtle">箭头含义按类型区分，不都是先修</span></div>'+
+      others.map(e=>relRow(e,e.from===m.id?'out':'in')).join(''):''}
+    <div class="note warning">学习提醒：板块页给出的是知识结构，不是完整教材。建议配合课程页的“前置知识”列表按顺序推进。</div>
+  </section>`;
+}
+function renderCourse(c){
+  const mod=moduleOf(c),topics=childrenOf(c.id).filter(x=>x.type==='topic');
+  const ins=edgesOf(c.id,'prereq').filter(e=>e.to===c.id);
+  const outs=edgesOf(c.id,'prereq').filter(e=>e.from===c.id);
+  const others=edgesOf(c.id).filter(e=>e.type!=='prereq');
+  view.innerHTML=`<section class="content-card" style="margin-top:0">
+    ${crumbs([{title:'总览',href:'#/home'},mod?{title:mod.title,href:'#/node/'+mod.id}:{title:'—'},{title:c.title}])}
+    <div class="kicker">COURSE · 课程</div>
+    <h2>${esc(c.title)} ${originTag(c.origin)}${c.short?' <span class="subtle">'+esc(c.short)+'</span>':''}</h2>
+    <p class="lead">${hl(c.summary||'')}</p>
+    <p><label class="chk"><input type="checkbox" id="doneBox" ${isDone(c.id)?'checked':''}> 标记这门课已学完（进度保存在本机）</label></p>
+    ${(c.points&&c.points.length)?'<div class="mini"><h4>课程要点</h4><ul>'+c.points.map(p=>'<li>'+hl(p)+'</li>').join('')+'</ul></div>':''}
+    ${c.source?'<p class="subtle">资料来源占位：'+esc(c.source)+'（可在此继续补充教材、课件与笔记）</p>':''}
+    <div class="grid2">${locationCard(c)}
+    <div class="mini"><h4>本课程的知识点（${topics.length}）</h4>
+      <div class="bar"><i style="width:${progressOfNodes(topics)}%"></i></div>
+      <div>${topics.map(t=>`<a class="chip${isDone(t.id)?' done':''}" href="#/node/${t.id}">${esc(t.title)}${isDone(t.id)?' ✓':''}</a>`).join('')||'<span class="subtle">暂无细化知识点。</span>'}</div></div></div>
+    <div class="grid3" style="margin-top:14px">
+      <div class="mini"><h4>前置知识</h4><p class="subtle">学本课程之前应建立</p>${ins.length?ins.map(e=>relRow(e,'in')).join(''):'<p class="subtle">暂无前置记录。</p>'}</div>
+      <div class="mini"><h4>后续知识</h4><p class="subtle">学完本课程可以继续</p>${outs.length?outs.map(e=>relRow(e,'out')).join(''):'<p class="subtle">暂无后续记录。</p>'}</div>
+      <div class="mini"><h4>关联课程 / 关联知识</h4><p class="subtle">交叉 / 应用 / 实现 / 组成 / 对比 / 层级</p>
+      ${others.length?others.map(e=>relRow(e,e.from===c.id?'out':'in')).join(''):'<p class="subtle">暂无。</p>'}</div>
+    </div>
+    <h3>我的笔记</h3>
+    <textarea class="ta" id="noteBox" placeholder="记录这门课的教材、进度、疑问，日后可连同这些笔记一起喂给 AI 扩充本站内容">${esc(notes[c.id]||'')}</textarea>
+    <p><button class="btn tiny" id="saveNote">保存笔记</button> <span class="subtle" id="noteMsg"></span></p>
+    <p><button class="btn" onclick="go('#/node/${mod?mod.id:'m.math'}')">返回所属板块</button> <button class="btn" onclick="go('#/relations')">关系浏览器</button></p>
+  </section>`;
+  wireDetail(c);
+}
+function renderTopic(t){
+  const mod=moduleOf(t),course=courseOf(t);
+  const ins=edgesOf(t.id,'prereq').filter(e=>e.to===t.id);
+  const outs=edgesOf(t.id,'prereq').filter(e=>e.from===t.id);
+  const others=edgesOf(t.id).filter(e=>e.type!=='prereq');
+  const sibs=course?childrenOf(course.id).filter(x=>x.id!==t.id):[];
+  view.innerHTML=`<section class="content-card" style="margin-top:0">
+    ${crumbs([{title:'总览',href:'#/home'},mod?{title:mod.title,href:'#/node/'+mod.id}:null,course?{title:course.title,href:'#/node/'+course.id}:null,{title:t.title}].filter(Boolean))}
+    <div class="kicker">KNOWLEDGE POINT · 知识点</div>
+    <h2>${esc(t.title)} ${originTag(t.origin)}</h2>
+    <p class="lead">${hl(t.summary||'')}</p>
+    <p><label class="chk"><input type="checkbox" id="doneBox" ${isDone(t.id)?'checked':''}> 标记这个知识点已掌握</label></p>
+    ${(t.points&&t.points.length)?'<div class="mini"><h4>要点</h4><ul>'+t.points.map(p=>'<li>'+hl(p)+'</li>').join('')+'</ul></div>':''}
+    <div class="grid2">${locationCard(t)}
+      <div class="mini"><h4>同课程的其他知识点</h4>${sibs.length?nodeChips(sibs):'<p class="subtle">暂无。</p>'}</div></div>
+    <div class="grid3" style="margin-top:14px">
+      <div class="mini"><h4>先学这些</h4>${ins.length?ins.map(e=>relRow(e,'in')).join(''):'<p class="subtle">暂无前置记录。</p>'}</div>
+      <div class="mini"><h4>再学这些</h4>${outs.length?outs.map(e=>relRow(e,'out')).join(''):'<p class="subtle">暂无后续记录。</p>'}</div>
+      <div class="mini"><h4>关联知识 / 课程</h4>${others.length?others.map(e=>relRow(e,e.from===t.id?'out':'in')).join(''):'<p class="subtle">暂无。</p>'}</div>
+    </div>
+    <h3>我的笔记</h3>
+    <textarea class="ta" id="noteBox" placeholder="记录这个概念的定义、例子、易错点">${esc(notes[t.id]||'')}</textarea>
+    <p><button class="btn tiny" id="saveNote">保存笔记</button> <span class="subtle" id="noteMsg"></span></p>
+    <p>${course?'<button class="btn" onclick="go(\'#/node/'+course.id+'\')">返回课程</button> ':''}<button class="btn" onclick="go('#/relations')">关系浏览器</button></p>
+  </section>`;
+  wireDetail(t);
+}
+function renderDomain(n){
+  const links=edgesOf(n.id);
+  view.innerHTML=`<section class="content-card" style="margin-top:0">
+    ${crumbs([{title:'总览',href:'#/home'},{title:n.title}])}
+    <div class="kicker">SUBJECT NODE · 学科总节点</div>
+    <h2>${esc(n.title)} ${originTag(n.origin)}</h2>
+    <p class="lead">${hl(n.summary||'')}</p>
+    <p>${nodeChips(childrenOf(n.id))}</p>
+    ${links.map(e=>relRow(e,e.from===n.id?'out':'in')).join('')||'<p class="subtle">暂无关系。</p>'}
+  </section>`;
+}
+function wireDetail(n){
+  const box=$('#doneBox');
+  if(box)box.addEventListener('change',()=>{setDone(n.id,box.checked)});
+  const save=$('#saveNote');
+  if(save)save.addEventListener('click',()=>{
+    const v=$('#noteBox').value;notes[n.id]=v;LS.set(NKEY,notes);
+    $('#noteMsg').textContent='已保存到本机浏览器';
+    setTimeout(()=>{const m=$('#noteMsg');if(m)m.textContent=''},2500);
+  });
+}
+
+/* ---------------- 关系浏览器 ---------------- */
+function renderRelations(typeFilter){
+  const active=typeFilter&&R_TYPE[typeFilter]?typeFilter:null;
+  const byType={};KB.edges.forEach(e=>{byType[e.type]=(byType[e.type]||0)+1});
+  const byOrigin={orig:0,infer:0,add:0};KB.edges.forEach(e=>{byOrigin[e.origin]=(byOrigin[e.origin]||0)+1});
+  const rows=KB.edges.filter(e=>!active||e.type===active);
+  view.innerHTML=`<section class="content-card" style="margin-top:0">
+    ${crumbs([{title:'总览',href:'#/home'},{title:'关系浏览器'}])}
+    <div class="kicker">RELATION EXPLORER</div><h2>关系浏览器</h2>
+    <p class="lead">本页把框架图里的箭头全部摊开成可检索的数据：每条关系都有类型、方向、图中标注、具体含义和来源标注。
+    “先修”只用于学习顺序；组成、层级、实现、应用、交叉、对比分别表示不同含义，不能互相替换。</p>
+    <div class="legend">${Object.keys(R_TYPE).map(k=>`<span><i style="border-top-color:${R_TYPE[k].color}" class="${R_TYPE[k].dash?'dash':''}"></i>
+      <a href="#/relations/${k}" style="text-decoration:none">${R_TYPE[k].name}</a> ${byType[k]||0} 条 <span class="subtle">— ${R_TYPE[k].desc}</span></span>`).join('')}</div>
+    <p><button class="btn ${active?'':'primary'}" onclick="go('#/relations')">全部（${KB.edges.length}）</button>
+    ${Object.keys(R_TYPE).map(k=>`<button class="btn tiny ${active===k?'primary':''}" onclick="go('#/relations/${k}')">${R_TYPE[k].name} ${byType[k]||0}</button>`).join(' ')}</p>
+    <p class="subtle">来源分布：原图表达 ${byOrigin.orig} 条 · 合理推断 ${byOrigin.infer} 条 · 新增补充 ${byOrigin.add} 条</p>
+    <table><thead><tr><th>起点</th><th>关系</th><th>终点</th><th>含义</th><th>来源</th></tr></thead><tbody>
+    ${rows.map(e=>{const a=nodeById(e.from),b=nodeById(e.to);if(!a||!b)return '';
+      return '<tr><td><a href="#/node/'+a.id+'">'+esc(a.title)+'</a><br><span class="subtle">'+esc(TYPE_NAME[a.type]||'')+'</span></td>'+
+      '<td>'+rTypeTag(e.type)+'<br><span class="subtle">'+esc(e.label||'')+'</span></td>'+
+      '<td><a href="#/node/'+b.id+'">'+esc(b.title)+'</a><br><span class="subtle">'+esc(TYPE_NAME[b.type]||'')+'</span></td>'+
+      '<td>'+esc(e.note||R_TYPE[e.type].desc)+'</td><td>'+originTag(e.origin)+'</td></tr>'}).join('')}
+    </tbody></table>
+  </section>`;
+}
+
+/* ---------------- 学习路线 ---------------- */
+function renderRoute(){
+  view.innerHTML=`<section class="content-card" style="margin-top:0">
+    ${crumbs([{title:'总览',href:'#/home'},{title:'学习路线'}])}
+    <div class="kicker">LEARNING ROUTE</div><h2>建议学习路线</h2>
+    <p class="lead">${esc(KB.views.routeLead||'')}</p>
+    ${KB.routes.map((r,i)=>{const ns=(r.nodes||[]).map(nodeById).filter(Boolean);
+      return `<div class="mini" style="margin-top:12px"><h4>${esc(r.title)}</h4>
+      <p>${esc(r.desc||'')}</p>
+      ${ns.length?'<p>'+nodeChips(ns)+'</p>':''}
+      ${r.note?'<p class="subtle">'+esc(r.note)+'</p>':''}</div>`}).join('')}
+    <div class="note">${esc(KB.views.routeNote||'')}</div>
+    <p><button class="btn" onclick="go('#/progress')">对照进度自检</button> <button class="btn" onclick="go('#/relations')">按关系横向探索</button></p>
+  </section>`;
+}
+
+/* ---------------- 学习进度 ---------------- */
+function renderProgress(){
+  const bands=[['base','基础层 · 地基'],['core','核心层 · 计算主干'],['upper','应用与系统层'],['meta','视角 · 规划']];
+  const all=KB.nodes.filter(n=>n.type==='course'||n.type==='topic');
+  const overall=progressOfNodes(all);
+  view.innerHTML=`<section class="content-card" style="margin-top:0">
+    ${crumbs([{title:'总览',href:'#/home'},{title:'学习进度'}])}
+    <div class="kicker">LEARNING PROGRESS</div><h2>学习进度</h2>
+    <p class="lead">进度记录保存在本机浏览器（localStorage），与目录树、课程页、知识点页的勾选实时同步。</p>
+    <p class="kv"><b>总体完成度：${overall}%</b>（${all.filter(n=>isDone(n.id)).length} / ${all.length} 个课程与知识点）</p>
+    <div class="bar"><i style="width:${overall}%"></i></div>
+    ${bands.map(([bid,bname])=>{
+      const mods=nodesOfType('module').filter(m=>(m.band||'core')===bid);
+      if(!mods.length)return '';
+      return '<h3>'+esc(bname)+'</h3>'+mods.map(m=>{
+        const items=childrenOf(m.id).filter(n=>n.type==='course'||n.type==='topic');
+        const sub=[];childrenOf(m.id).forEach(c=>{if(c.type==='course')sub.push(c);childrenOf(c.id).forEach(t=>{if(t.type==='topic')sub.push(t)})});
+        const list=sub.concat(items.filter(n=>n.type==='topic'));
+        const uniq=[];const seen=new Set();list.forEach(x=>{if(!seen.has(x.id)){seen.add(x.id);uniq.push(x)}});
+        const p=progressOfNodes(uniq);
+        return `<div class="mini" style="margin-top:10px"><h4><a href="#/node/${m.id}">${esc(m.title)}</a> <span class="subtle">${p}%</span></h4>
+        <div class="bar"><i style="width:${p}%"></i></div>
+        <p>${uniq.map(n=>`<label class="chk" style="margin:2px 12px 2px 0"><input type="checkbox" data-pid="${n.id}" ${isDone(n.id)?'checked':''}> <span>${esc(n.title)}</span></label>`).join('')}</p></div>`}).join('');
+    }).join('')}
+    <p style="margin-top:16px"><button class="btn" id="resetProgress">清空全部进度</button>
+    <span class="subtle">（只影响本机记录，不影响内容）</span></p>
+  </section>`;
+  $$('input[data-pid]',view).forEach(cb=>cb.addEventListener('change',()=>{
+    setDone(cb.dataset.pid,cb.checked);
+    const p=progressOfNodes(all);
+    const bar=$('.bar>i',view);if(bar)bar.style.width=p+'%';
+  }));
+  $('#resetProgress').addEventListener('click',()=>{
+    if(confirm('确定清空全部学习进度标记吗？')){progress={};LS.set(PKEY,progress);renderProgress();renderTree()}
+  });
+}
+
+/* ---------------- 数据管理：AI 扩充入口 ---------------- */
+function schemaText(){
+  return `【节点 node】
+{
+  "id": "c.xxx",            // 全局唯一、稳定不变，建议 前缀.助记名：module→m.xxx / course→c.xxx / topic→t.xxx
+  "type": "course",         // module 板块 | course 课程 | topic 知识点 | domain 学科总节点
+  "title": "课程名",
+  "short": "可选简称",
+  "parent": "m.xxx",        // 所属上级：course 填板块 id；topic 填课程 id 或板块 id
+  "band": "base",           // 仅 module：base 基础层 | core 核心层 | upper 应用层 | meta 视角规划
+  "summary": "一到多句说明，用 \\n\\n 分段",
+  "points": ["要点1","要点2"],   // 可选
+  "tags": ["信号","数学"],       // 可选
+  "origin": "add",          // orig 原图表达 | infer 合理推断 | add 新增补充
+  "source": "可选：教材/课件出处"
+}
+
+【关系 edge】
+{
+  "id": "e.xxx.yyy",        // 全局唯一
+  "from": "c.xxx", "to": "c.yyy",
+  "type": "prereq",         // compose 组成 | layer 层级 | prereq 先修 | impl 实现 | apply 应用 | cross 交叉 | contrast 对比
+  "label": "先修",           // 图上标注的原文，如 指导 / 调用·调度 / 交叉应用
+  "note": "这条关系具体表示什么，为什么成立",
+  "origin": "infer",
+  "bidir": false            // 可选：true 表示双向箭头
+}
+
+【可扩充的框架图 frame】（可选）
+{ "id":"f.xxx","title":"图名","tier":"extra","source":"出处","origin":"add","caption":"图说明","w":1000,"h":620,
+  "nodes":[{"kb":"c.xxx","label":"方框文字","sub":"小字","x":40,"y":40,"w":160,"h":54,"tone":"blue"}],
+  "links":[{"e":"e.xxx.yyy","from":"c.xxx","to":"c.yyy","fs":"b","ts":"t"}] }
+tone 可选：purple/blue/green/orange/teal/pink/gray/yellow；fs、ts 为出边/入边所在边：t 上 b 下 l 左 r 右`;
+}
+function promptTemplate(){
+  return `你是我的计算机工科知识地图的数据整理助手。下面附上我的课程资料/笔记。
+
+请把它整理成可直接导入网页的 JSON，格式严格如下：
+{"nodes":[…节点对象…],"edges":[…关系对象…]}
+
+字段规范：
+${schemaText()}
+
+要求：
+1. id 必须全局唯一，且不要与本页已有 id 冲突（已有 id 前缀：m. 板块、c. 课程、t. 知识点、e. 关系、f. 图）。
+2. 每条关系必须写清 type（组成/层级/先修/实现/应用/交叉/对比 之一）与 note（具体含义），
+   不要把普通关联一律写成先修；只有"学 B 之前应先学 A"才用 prereq。
+3. origin 用 "add"（新增补充）；若内容直接来自我给的框架图，用 "orig"；若是我资料里的合理外推，用 "infer"。
+4. 若新增内容属于某个已有课程，parent 填该已有课程 id；确实需要新课程时，parent 填它所属的已有板块 id。
+5. 只输出 JSON，不要输出解释文字。`;
+}
+function renderData(){
+  const custom=KB.custom||{nodes:[],edges:[]};
+  const dcount=KB.nodes.filter(n=>n.id&&(custom.nodes||[]).some(c=>c.id===n.id)).length;
+  view.innerHTML=`<section class="content-card" style="margin-top:0">
+    ${crumbs([{title:'总览',href:'#/home'},{title:'用 AI 扩充内容'}])}
+    <div class="kicker">DATA · 让网页持续长大</div>
+    <h2>用 AI 扩充本站内容</h2>
+    <p class="lead">网页的全部内容都来自上面这段 <b>KB-DATA</b> 数据区。以后拿到课程资料、讲义、笔记时，只要让 AI 按下面的规范产出 JSON，
+    在这里导入即可自动出现在目录、框架图和关系表里，不需要改任何代码。</p>
+    <div class="grid3">
+      <div class="mini"><h4>当前规模</h4><p class="kv">板块 ${nodesOfType('module').length} · 课程 ${nodesOfType('course').length} ·
+      知识点 ${nodesOfType('topic').length} · 关系 ${KB.edges.length}</p>
+      <p class="kv">自定义新增：节点 ${dcount} · 关系 ${(custom.edges||[]).length}</p></div>
+      <div class="mini"><h4>数据自检</h4><p class="subtle">检查 id 重复、悬空关系、框架图引用。</p>
+      <p><button class="btn tiny" id="runCheck">立即自检</button></p><div id="checkOut" class="subtle"></div></div>
+      <div class="mini"><h4>导入 / 导出</h4>
+      <p><button class="btn tiny" id="expCopy">复制自定义内容</button>
+      <button class="btn tiny" id="expDown">下载自定义内容</button></p>
+      <p><button class="btn tiny" id="expAll">导出全部（含自带内容）</button></p>
+      <p><button class="btn tiny" id="clearCustom">清空自定义内容</button></p></div>
+    </div>
+    <h3>① 复制提示词，连同资料一起发给 AI</h3>
+    <textarea class="ta" id="promptBox" style="min-height:180px">${esc(promptTemplate())}</textarea>
+    <p><button class="btn tiny" id="copyPrompt">复制提示词</button> <span class="subtle">把 AI 产出的 JSON 粘到下面即可。</span></p>
+    <h3>② 粘贴 AI 产出的 JSON 并导入</h3>
+    <textarea class="ta" id="importBox" placeholder='{"nodes":[…],"edges":[…]（也接受单个节点对象、或数组）'></textarea>
+    <p><button class="btn primary" id="doImport">校验并导入</button> <button class="btn" id="doImportNew">校验并另存为文件</button></p>
+    <div id="importOut"></div>
+    <h3>③ 字段规范（也请 AI 遵守）</h3>
+    <pre class="out">${esc(schemaText())}</pre>
+    <h3>④ 已导入的自定义内容</h3>
+    ${(custom.nodes||[]).length||(custom.edges||[]).length?
+      '<table><thead><tr><th>类型</th><th>id</th><th>名称 / 关系</th><th>操作</th></tr></thead><tbody>'+
+      (custom.nodes||[]).map(n=>`<tr><td>节点</td><td>${esc(n.id)}</td><td><a href="#/node/${esc(n.id)}">${esc(n.title||'')}</a></td>
+        <td><button class="btn tiny" data-del-node="${esc(n.id)}">删除</button></td></tr>`).join('')+
+      (custom.edges||[]).map(e=>`<tr><td>关系</td><td>${esc(e.id)}</td><td>${esc(e.from)} ${esc(e.type||'')} ${esc(e.to)}</td>
+        <td><button class="btn tiny" data-del-edge="${esc(e.id)}">删除</button></td></tr>`).join('')+
+      '</tbody></table>':'<p class="subtle">还没有导入过内容。</p>'}
+    <div class="note">说明：自定义内容保存在本机浏览器（localStorage），换电脑时用“导出全部”带走，再在另一台机器导入即可。
+    自带内容请直接编辑 HTML 里的 KB-DATA 数据区，或把“导出全部”的结果交给 AI 作为新基准。</div>
+  </section>`;
+  $('#copyPrompt').addEventListener('click',()=>copyText($('#promptBox').value,'已复制提示词'));
+  $('#runCheck').addEventListener('click',()=>{
+    validateKB();
+    const out=$('#checkOut');
+    out.innerHTML=KB.errors.length?('<b style="color:#b42318">发现 '+KB.errors.length+' 个问题：</b><br>'+KB.errors.map(esc).join('<br>'))
+      :'<b style="color:#1c7a45">通过：id 无重复，关系两端都存在，框架图引用有效。</b>'+
+       (KB.warns.length?'<br>提示：'+KB.warns.map(esc).join('<br>'):'');
+  });
+  $('#expCopy').addEventListener('click',()=>copyText(JSON.stringify({nodes:custom.nodes||[],edges:custom.edges||[]},null,2),'已复制'));
+  $('#expDown').addEventListener('click',()=>download('kb-custom.json',JSON.stringify({nodes:custom.nodes||[],edges:custom.edges||[]},null,2)));
+  $('#expAll').addEventListener('click',()=>download('kb-full.json',JSON.stringify({modules:KB_MODULES,courses:KB_COURSES,topics:KB_TOPICS,extra:KB_EXTRA,edges:KB.edges,frames:KB_FRAMES,routes:KB_ROUTES},null,2)));
+  $('#clearCustom').addEventListener('click',()=>{
+    if(confirm('清空全部自定义内容？（自带内容不受影响）')){
+      KB.custom={nodes:[],edges:[]};LS.set(CKEY,KB.custom);buildKB();renderData();renderTree();
+    }});
+  $$('[data-del-node]',view).forEach(b=>b.addEventListener('click',()=>{
+    KB.custom.nodes=(KB.custom.nodes||[]).filter(n=>n.id!==b.dataset.delNode);LS.set(CKEY,KB.custom);buildKB();renderData();renderTree();}));
+  $$('[data-del-edge]',view).forEach(b=>b.addEventListener('click',()=>{
+    KB.custom.edges=(KB.custom.edges||[]).filter(e=>e.id!==b.dataset.delEdge);LS.set(CKEY,KB.custom);buildKB();renderData();renderTree();}));
+  $('#doImport').addEventListener('click',()=>doImport(true));
+  $('#doImportNew').addEventListener('click',()=>doImport(false));
+}
+function parseImport(text){
+  const data=JSON.parse(text);
+  let nodes=[],edges=[];
+  const isNode=x=>x&&x.id&&(TYPE_NAME[x.type]||(x.title&&!x.from));
+  const isEdge=x=>x&&x.from&&x.to;
+  if(Array.isArray(data)){data.forEach(x=>{if(isEdge(x))edges.push(x);else if(isNode(x))nodes.push(x)})}
+  else{nodes=data.nodes||[];edges=data.edges||[]}
+  return {nodes:nodes.filter(isNode),edges:edges.filter(isEdge)};
+}
+function doImport(merge){
+  const out=$('#importOut');
+  let parsed;
+  try{parsed=parseImport($('#importBox').value.trim())}
+  catch(err){out.innerHTML='<div class="note warning">JSON 解析失败：'+esc(err.message)+'</div>';return}
+  const errs=[],okNodes=[],okEdges=[];
+  const custom=KB.custom||{nodes:[],edges:[]};
+  custom.nodes=custom.nodes||[];custom.edges=custom.edges||[];
+  const existingN=new Set(KB.nodes.map(n=>n.id)),existingE=new Set(KB.edges.map(e=>e.id));
+  parsed.nodes.forEach(n=>{
+    if(!n.id||!n.title)return errs.push('节点缺少 id 或 title：'+JSON.stringify(n).slice(0,60));
+    if(existingN.has(n.id))return errs.push('节点 id 已存在，跳过：'+n.id);
+    if(n.parent&&!existingN.has(n.parent)&&!parsed.nodes.some(x=>x.id===n.parent))errs.push('节点 '+n.id+' 的 parent 既不在本站也不在本次导入中：'+n.parent);
+    existingN.add(n.id);custom.nodes.push(n);okNodes.push(n.id);
+  });
+  parsed.edges.forEach(e=>{
+    if(!e.id||!e.from||!e.to)return errs.push('关系缺少 id/from/to：'+JSON.stringify(e).slice(0,60));
+    if(existingE.has(e.id))return errs.push('关系 id 已存在，跳过：'+e.id);
+    if(!existingN.has(e.from)||!existingN.has(e.to))return errs.push('关系 '+e.id+' 的端点不存在：'+e.from+' → '+e.to);
+    if(e.type&&!R_TYPE[e.type])errs.push('关系 '+e.id+' 的类型未知（将按"应用"处理）：'+e.type);
+    existingE.add(e.id);custom.edges.push(e);okEdges.push(e.id);
+  });
+  if(!merge){
+    download('kb-imported.json',JSON.stringify({nodes:custom.nodes,edges:custom.edges},null,2));
+    out.innerHTML='<div class="note">已按校验结果另存为文件（本次识别：节点 '+okNodes.length+' 个、关系 '+okEdges.length+' 条）。</div>'+errBox(errs);
+    return;
+  }
+  LS.set(CKEY,KB.custom);buildKB();
+  out.innerHTML='<div class="note">导入完成：新增节点 '+okNodes.length+' 个、关系 '+okEdges.length+' 条。'+
+    (KB.errors.length?'<br><b>注意：合并后自检发现 '+KB.errors.length+' 个问题，可点上方“立即自检”查看。</b>':'')+'</div>'+errBox(errs);
+  $('#importBox').value='';renderTree();
+}
+function errBox(errs){
+  return errs.length?'<div class="note warning"><b>有 '+errs.length+' 条未导入：</b><br>'+errs.map(esc).join('<br>')+'</div>':'';
+}
+function copyText(t,msg){
+  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(
+    ()=>alert(msg||'已复制'),
+    ()=>{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();
+         try{document.execCommand('copy');alert(msg||'已复制')}catch(e){alert('复制失败，请手动选择文本')}ta.remove()});
+}
+function download(name,text){
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([text],{type:'application/json'}));
+  a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+}
+
+/* ---------------- 侧边栏目录与搜索 ---------------- */
+function renderTree(){
+  const bands=[['base','基础层 · 全图地基'],['core','核心层 · 计算主干'],['upper','应用与系统层'],['meta','视角 · 规划 · 路线']];
+  const bandOf=m=>m.band||'core';
+  let html='';
+  bands.forEach(([bid,bname])=>{
+    const mods=nodesOfType('module').filter(m=>bandOf(m)===bid);
+    if(!mods.length)return;
+    html+='<div class="band"><div class="band-title">'+esc(bname)+'</div>';
+    mods.forEach(m=>{
+      const courses=childrenOf(m.id).filter(n=>n.type==='course');
+      const mtopics=childrenOf(m.id).filter(n=>n.type==='topic');
+      html+='<details data-node="'+m.id+'"><summary><a class="slink" href="#/node/'+m.id+'">'+esc(m.title)+(isDone(m.id)?' ✓':'')+'</a></summary><div class="children">';
+      courses.forEach(c=>{
+        const ts=childrenOf(c.id).filter(n=>n.type==='topic');
+        if(!ts.length){html+='<a class="slink" href="#/node/'+c.id+'">'+esc(c.title)+(isDone(c.id)?' ✓':'')+'</a>';return}
+        html+='<details data-node="'+c.id+'"><summary><a class="slink" href="#/node/'+c.id+'">'+esc(c.title)+(isDone(c.id)?' ✓':'')+'</a></summary><div class="children">'+
+          ts.map(t=>'<a class="leaf" href="#/node/'+t.id+'">'+esc(t.title)+(isDone(t.id)?' ✓':'')+'</a>').join('')+'</div></details>';
+      });
+      html+=mtopics.map(t=>'<a class="leaf" href="#/node/'+t.id+'">'+esc(t.title)+(isDone(t.id)?' ✓':'')+'</a>').join('');
+      html+='</div></details>';
+    });
+    html+='</div>';
+  });
+  html+='<div class="band"><div class="band-title">实用页面</div>'+
+    '<a class="leaf" href="#/relations">关系浏览器（'+KB.edges.length+' 条）</a>'+
+    '<a class="leaf" href="#/route">建议学习路线</a>'+
+    '<a class="leaf" href="#/progress">学习进度</a>'+
+    '<a class="leaf" href="#/data">用 AI 扩充内容</a></div>';
+  $('#tree').innerHTML=html;
+  $$('#tree a').forEach(a=>a.addEventListener('click',()=>{setTimeout(markTree,20)}));
+}
+function markTree(){
+  const raw=location.hash.replace(/^#\/?/,'').split('/');
+  const id=(raw[0]==='node')?raw[1]:'';
+  $$('#tree a').forEach(a=>{
+    const on=a.getAttribute('href')==='#/node/'+id;
+    a.classList.toggle('active',!!id&&on);
+    if(on){let d=a.closest('details');while(d){d.open=true;d=d.parentElement?d.parentElement.closest('details'):null}}
+  });
+  const map={'#/relations':'关系浏览器','#/route':'建议学习路线','#/progress':'学习进度','#/data':'用 AI 扩充内容'};
+  if(map[location.hash])$$('#tree a').forEach(a=>{if(a.getAttribute('href')===location.hash)a.classList.add('active')});
+}
+function renderQuick(){
+  const items=[['#/frames','框架图'],['#/relations','关系浏览器'],['#/route','学习路线'],['#/progress','学习进度'],['#/data','AI 扩充'],['#/home','回到总览']];
+  $('#quickNav').innerHTML=items.map(([h,t])=>'<button onclick="go(\''+h+'\')">'+esc(t)+'</button>').join('');
+}
+/* 搜索：同时定位板块 / 课程 / 知识点 / 关系 */
+function searchIndex(){
+  if(searchIndex.cache)return searchIndex.cache;
+  const idx=KB.nodes.map(n=>{
+    const mod=moduleOf(n),course=courseOf(n);
+    const text=[n.title,n.short,n.summary,(n.points||[]).join(' '),(n.tags||[]).join(' '),n.id].join(' ').toLowerCase();
+    return {node:n,text:text,where:[mod?mod.title:'',course&&course.id!==n.id?course.title:''].filter(Boolean).join(' › ')};
+  });
+  const eidx=KB.edges.map(e=>{
+    const a=nodeById(e.from),b=nodeById(e.to);
+    return {edge:e,text:[a?a.title:'',b?b.title:'',R_TYPE[e.type]?R_TYPE[e.type].name:'',e.label,e.note].join(' ').toLowerCase()};
+  });
+  searchIndex.cache={idx:idx,eidx:eidx};return searchIndex.cache;
+}
+function doSearch(q){
+  const box=$('#searchResults');
+  q=(q||'').trim();
+  lastQuery=q;
+  if(!q){box.classList.add('hide');box.innerHTML='';return}
+  const key=q.toLowerCase(),{idx,eidx}=searchIndex();
+  const nodes=idx.filter(x=>x.text.indexOf(key)>=0).slice(0,14);
+  const edges=eidx.filter(x=>x.text.indexOf(key)>=0).slice(0,6);
+  if(!nodes.length&&!edges.length){box.innerHTML='<div class="sr-group">没有匹配的节点或关系</div>';box.classList.remove('hide');return}
+  let h='';
+  if(nodes.length){
+    h+='<div class="sr-group">节点（板块 / 课程 / 知识点）</div>';
+    h+=nodes.map(x=>{
+      const n=x.node,mod=moduleOf(n),snippet=String(n.summary||'').slice(0,70);
+      return '<button class="sr-item" data-go="#/node/'+n.id+'"><b>'+hl(n.title)+'</b> '+typeBadge(n.type)+
+      '<small>'+esc(x.where?x.where+' · ':'')+hl(snippet)+'</small></button>'}).join('');
+  }
+  if(edges.length){
+    h+='<div class="sr-group">关系（箭头）</div>';
+    h+=edges.map(x=>{const e=x.edge,a=nodeById(e.from),b=nodeById(e.to);
+      return '<button class="sr-item" data-go="#/relations/'+e.type+'"><b>'+esc(a?a.title:'')+'</b> '+rTypeTag(e.type)+' <b>'+esc(b?b.title:'')+'</b>'+
+      '<small>'+hl(e.note||e.label||'')+'</small></button>'}).join('');
+  }
+  h+='<div class="sr-group">进入节点后，匹配的文字会高亮显示</div>';
+  box.innerHTML=h;box.classList.remove('hide');
+  $$('.sr-item',box).forEach(b=>b.addEventListener('click',()=>{
+    box.classList.add('hide');$('#search').blur();go(b.dataset.go);route();
+  }));
+}
+
+/* ---------------- 启动 ---------------- */
+function init(){
+  buildKB();renderQuick();renderTree();
+  const s=$('#search'),box=$('#searchResults');
+  s.addEventListener('input',e=>{searchIndex.cache=null;doSearch(e.target.value);
+    treeFilter(e.target.value)});
+  s.addEventListener('keydown',e=>{
+    if(e.key==='Enter'){const first=$('.sr-item',box);if(first){box.classList.add('hide');go(first.dataset.go);route()} }
+    if(e.key==='Escape'){box.classList.add('hide');s.value='';treeFilter('')}
+  });
+  document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))box.classList.add('hide')});
+  $('#expandAll').addEventListener('click',()=>$$('#tree details').forEach(d=>d.open=true));
+  $('#collapseAll').addEventListener('click',()=>$$('#tree details').forEach(d=>d.open=false));
+  $('#brand').addEventListener('click',()=>go('#/home'));
+  window.addEventListener('hashchange',route);
+  route();
+  if(KB.errors.length)console.warn('知识库自检：',KB.errors);
+}
+function treeFilter(q){
+  q=(q||'').trim().toLowerCase();
+  $$('#tree details').forEach(d=>{
+    const id=d.dataset.node,n=nodeById(id);
+    if(!n)return;
+    const kids=childrenOf(id);
+    const own=(String(n.title)+' '+String(n.summary||'')).toLowerCase();
+    const kidHit=kids.filter(k=>{
+      const sub=childrenOf(k.id);
+      if((String(k.title)+' '+String(k.summary||'')).toLowerCase().indexOf(q)>=0)return true;
+      return sub.some(s=>(String(s.title)+' '+String(s.summary||'')).toLowerCase().indexOf(q)>=0);
+    });
+    const hit=!q||own.indexOf(q)>=0||kidHit.length>0;
+    d.classList.toggle('hide',!hit);
+    if(q&&hit)d.open=true;
+    $$('a',d).forEach(a=>{
+      const href=a.getAttribute('href')||'';
+      if(href.indexOf('#/node/')!==0){return}
+      const nid=href.slice(7),node=nodeById(nid);
+      const txt=(String(node&&node.title||'')+' '+String(node&&node.summary||'')).toLowerCase();
+      a.classList.toggle('hide',!!q&&txt.indexOf(q)<0&&!kidHit.some(k=>k.id===nid));
+    });
+  });
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+</script>
+<script>
+(function(){
+  var out={};
+  function q(s){return document.querySelector(s)}
+  function qa(s){return Array.prototype.slice.call(document.querySelectorAll(s))}
+  function t(s){var e=q(s);return e?e.innerText.replace(/\s+/g,' ').trim():null}
+  /* 先等到页面真正就绪：优先等本路由的关键元素出现，最多等 2 秒（虚拟时间） */
+  var h=location.hash;
+  var anchor = h.indexOf('#/node/')===0 ? '#doneBox' : (h.indexOf('#/data')===0 ? '#runCheck' : '#view');
+  var tries=0;
+  (function waitReady(){
+    var el=anchor==='#view'?q('#view'):q(anchor);
+    var ok = anchor==='#view' ? (el && el.innerText.replace(/s+/g,'').length>200) : !!el;
+    if(ok || tries>80){ out.anchorWait=tries; out.anchorOK=!!ok; return go(); }
+    tries++; setTimeout(waitReady,25);
+  })();
+  function go(){
+  var steps=[];
+  if(h.indexOf('#/node/')===0){
+    steps.push(function(){var b=q('#doneBox');if(b){b.click();out.doneClicked=true}else out.missing='#doneBox'});
+    steps.push(function(){var n=q('#noteBox');
+      if(n){n.value='自动化检查写入的笔记';var sv=q('#saveNote');if(sv){sv.click();out.noteClicked=true;out.noteMsg=t('#noteMsg')}}
+      else out.missing2='#noteBox'});
+  }
+  if(h.indexOf('#/data')===0){ steps.push(function(){var b=q('#runCheck');if(b){b.click();out.checkClicked=true}}); }
+  steps.push(function(){
+    try{
+      var s=q('#search');
+      if(!s){ out.searchRan='no-input'; return }
+      s.value='傅里叶';
+      s.dispatchEvent(new Event('input',{bubbles:true}));
+      out.searchRan=true;
+    }catch(e){ out.searchErr=String(e.message) }
+  });
+  var i=0;
+  (function next(){
+    if(i<steps.length){ try{steps[i++]()}catch(e){ (out.stepErr=out.stepErr||[]).push(String(e.message)) } setTimeout(next,40); return }
+    out.hash=location.hash;
+    var full=qa('#view').length?q('#view').innerText.replace(/\s+/g,' ').trim():null;
+    out.textLen=document.body.innerText.replace(/\s+/g,'').length;
+    out.view=full?full.slice(0,4000):null;
+    out.counts={mini:qa('.mini').length,card:qa('.content-card').length,fnode:qa('.fnode').length,
+      fedge:qa('.fedge').length,ftitle:qa('#frameBox .ft').length,rows:qa('#view table tbody tr').length,
+      searchRes:qa('#searchResults .sr-item').length,tree:qa('#tree details').length,relRows:qa('#view .rel-row').length};
+    out.checkOut=t('#checkOut');
+    out.checkOutHTML=(q('#checkOut')?String(q('#checkOut').innerHTML).replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,150):null);
+    out.hasRunCheck=!!q('#runCheck');
+    out.searchResults=qa('#searchResults .sr-item').slice(0,4).map(function(a){return a.innerText.replace(/\s+/g,' ').slice(0,60)});
+    try{ localStorage.setItem('__probeT','1'); out.lsOK=localStorage.getItem('__probeT');
+         out.progRaw=localStorage.getItem('cskb.progress'); out.noteRaw=localStorage.getItem('cskb.notes');
+         out.progress=JSON.parse(localStorage.getItem('cskb.progress')||'null');
+         out.notes=JSON.parse(localStorage.getItem('cskb.notes')||'null'); }catch(e){ out.lsErr=String(e) }
+    out.errs=(window.__errs||[]).slice(0,8);
+    out.kbErr=(typeof KB!=='undefined'&&KB.errors)?KB.errors.slice(0,8):null;
+    out.kbWarn=(typeof KB!=='undefined'&&KB.warns)?KB.warns.slice(0,8):null;
+    var pre=document.createElement('pre');pre.id='PROBE';
+    var json=JSON.stringify(out);
+    var b64='';try{b64=btoa(unescape(encodeURIComponent(json)))}catch(e){b64='ERR:'+e.message}
+    pre.textContent='@@PROBE@@'+b64+'@@ENDPROBE@@';
+    document.body.appendChild(pre);
+  })();
+  }
+})();
+</script>
+</body>
+</html>
